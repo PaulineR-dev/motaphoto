@@ -6,3 +6,73 @@ Description: Thème WordPress personnalisé pour Nathalie MOTA
 Version: 1.0
 Text Domain: motaphoto
 */
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('../fonts/SpaceMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('../fonts/SpaceMono-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('../fonts/SpaceMono-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('../fonts/SpaceMono-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+.site-navigation .menu li a {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1;              
+    letter-spacing: 0;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+
+
+#logo_nmota {
+   width: 216px;
+   height: 14px;
+   top: 31px;
+   left: 146px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;            
+    padding: 26px 146px;                
+}
+
+.site-navigation .menu {
+    display: flex;
+    gap: 55px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-navigation .menu li a {
+    text-decoration: none;
+    color: #000; /*A revoir*/
+}
+
+
