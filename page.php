@@ -1,12 +1,8 @@
 <?php
 /**
- * The template for displaying all single posts
+ * The template pour afficher les pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package WordPress
- * @subpackage Twenty_Twenty_One
- * @since Twenty Twenty-One 1.0
+ * @package Motaphoto
  */
 
 get_header();
@@ -14,7 +10,8 @@ get_header();
 /* Start the Loop */
 while ( have_posts() ) :
 	the_post();
-	get_template_part( 'template-parts/content/content-page' );
+	 echo '<h2>' . get_the_title() . '</h2>';
+    the_content();
 
 	// If comments are open or there is at least one comment, load up the comment template.
 	if ( comments_open() || get_comments_number() ) {

@@ -35,7 +35,15 @@ Text Domain: motaphoto
     font-style: italic;
 }
 
-.site-navigation .menu li a {
+/*HEADER / FOOTER - MENUS*/
+.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-navigation .menu li {
     font-family: 'Space Mono', monospace;
     font-weight: 400;
     font-style: normal;
@@ -45,8 +53,18 @@ Text Domain: motaphoto
     vertical-align: middle;
     text-transform: uppercase;
 }
+.site-navigation .menu li a {
+    text-decoration: none;
+    color: #000; /*A revoir*/
+}
 
-
+/*Header*/
+.header-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;            
+    padding: 26px 146px;                
+}
 
 #logo_nmota {
    width: 216px;
@@ -55,24 +73,158 @@ Text Domain: motaphoto
    left: 146px;
 }
 
-.header-container {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;            
-    padding: 26px 146px;                
-}
-
-.site-navigation .menu {
-    display: flex;
+#menu-motaphoto_menu {
     gap: 55px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
-.site-navigation .menu li a {
-    text-decoration: none;
-    color: #000; /*A revoir*/
+/*Footer*/
+.footer-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;            
+    padding-top: 10px;
+    border-top: 1px solid #000;
 }
+
+#menu-motaphoto_footer_menu {
+    gap: 75px;
+}
+
+/*Menu burger*/
+.menu-toggle,
+.menu-btn {
+  display: none; /* Caché en desktop */
+}
+
+/* Version mobile */
+@media (max-width: 768px) {
+   
+    /*Menu principal caché par défaut*/
+  .site-header .site-navigation .menu {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #E00000;
+    pointer-events: none;
+    opacity: 0;
+    gap: 20px;
+  }
+
+  /* Affichage du menu burger quand activé */
+  .menu-toggle:checked ~ .site-navigation .menu {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /*Input checkbox invisible*/
+  .menu-toggle {
+    position: absolute;   
+    opacity: 0;           
+    width: 0;             
+    height: 0;            
+    pointer-events: none; 
+    appearance: none;     /* Supprime le style natif (Firefox/iOS) */
+  }
+
+  .menu-toggle:checked ~ .site-navigation .menu li a {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 44px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+
+
+  /* Bouton burger */
+  .menu-toggle,
+  .menu-btn {
+    display: block;
+  }
+
+  .menu-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 1000;
+    width: 27px;
+    height: 19px;
+    cursor: pointer;
+    margin-right: 30px;
+  }
+
+  .menu-btn span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    background: #000;
+    border-radius: 1px;
+    left: 0;
+  }
+
+  /* Position initiale des éléments de la croix du menu*/
+  .menu-btn span:nth-child(1) { top: 10px; }
+  .menu-btn span:nth-child(2) { top: 18px; }
+  .menu-btn span:nth-child(3) { top: 26px; }
+
+  /* Animation croix du menu burger */
+  .menu-toggle:checked ~ .menu-btn span:nth-child(1) {
+    transform: rotate(40deg);
+    top: 18px;
+  }
+  .menu-toggle:checked ~ .menu-btn span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle:checked ~ .menu-btn span:nth-child(3) {
+    transform: rotate(-40deg);
+    top: 18px;
+  }
+
+  #menu-motaphoto_menu {
+    gap: 42px;
+  }
+
+  #logo_nmota {
+    position: static;     
+    margin-top: 7px;
+    margin-left: 20px;       
+    width: 138px;        
+    height: auto;
+    align-self: flex-start; 
+  }
+
+  .header-container {
+    padding: 16px;        
+    justify-content: space-between; 
+  }
+
+  .footer-container #menu-motaphoto_footer_menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 25px;
+  }
+
+ /*Possibilité de cliquer sur les liens du menu du footer*/
+.menu-toggle:checked ~ .site-navigation .menu {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+}
+
 
 
