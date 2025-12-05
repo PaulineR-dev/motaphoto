@@ -35,7 +35,15 @@ Text Domain: motaphoto
     font-style: italic;
 }
 
-/*HEADER / FOOTER - MENUS*/
+@font-face {
+  font-family: 'Poppins';
+  src: url('assets/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+/* HEADER et FOOTER dont MENUS */
 .menu {
     display: flex;
     list-style: none;
@@ -53,6 +61,11 @@ Text Domain: motaphoto
     vertical-align: middle;
     text-transform: uppercase;
 }
+
+.site-navigation .menu li:hover {
+    font-weight: 700;
+}
+
 .site-navigation .menu li a {
     text-decoration: none;
     color: #000; /*A revoir*/
@@ -96,14 +109,110 @@ Text Domain: motaphoto
   display: none; /* Caché en desktop */
 }
 
-/* Version mobile */
+
+
+/* MODALE */
+.modale {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modale-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 25px;
+  border: 4px solid #000;
+  width: 541px;
+  height: 600px;
+  padding-top: 124px;
+  overflow: hidden;
+}
+
+.contact-header {
+  position: relative;
+}
+
+.contact-header img {
+  position: absolute;
+  left: -26px;
+  top: -114px;
+}
+
+
+/* Bouton "Envoyer" du formulaire */
+.wpcf7-form-control.wpcf7-submit.has-spinner {
+  display: block;             
+  margin: 20px auto;          
+  padding: 12px 24px;         
+  background-color: #ccc;      
+  color: #000;                 
+  border: none;                
+  border-radius: 2px;          
+  font-family: 'Space Mono', monospace;
+  font-weight: 400; 
+  font-size: 12px; 
+  cursor: pointer;
+  transition: background-color 1s ease, color 1s ease;
+  width: 100%;
+  height: 50px;
+}
+
+.wpcf7-form-control.wpcf7-submit.has-spinner:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Police d'écriture appliquée aux labels du formulaire de contact */
+.wpcf7 form label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+#wpcf7-f28-o1 > form > p:nth-child(2) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(3) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(4) > label > span > input {
+  width: 100% ;
+  height: 40px;
+  margin-top: 6px;
+}
+
+#wpcf7-f28-o1 > form > p:nth-child(5) > label > span > textarea {
+  width: 100% ;
+  height: 210px;
+  margin-top: 6px;
+}
+
+#wpcf7-f28-o1 {
+  width: 263px ;
+  margin: 0 auto;
+}
+
+/* Messages d'erreur ne provoquant pas de dépassement de la modale */
+span.wpcf7-form-control-wrap {
+  position: relative;
+}
+
+.wpcf7-not-valid-tip {
+  position: absolute;
+  top: 14px;        
+  left: 5px;
+}
+
+/* Version mobile HEADER, FOOTER dont menus et modale */
 @media (max-width: 768px) {
    
-    /*Menu principal caché par défaut*/
+  /* Menu principal caché par défaut */
   .site-header .site-navigation .menu {
     position: fixed;
     top: 64px;
     left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -113,23 +222,27 @@ Text Domain: motaphoto
     pointer-events: none;
     opacity: 0;
     gap: 20px;
+  /* Animation */
+    transform: translateX(100%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
   }
-
+    
   /* Affichage du menu burger quand activé */
   .menu-toggle:checked ~ .site-navigation .menu {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
+    transform: translateX(0); /* Revient en place */
   }
 
-  /*Input checkbox invisible*/
+  /* Input checkbox invisible */
   .menu-toggle {
     position: absolute;   
     opacity: 0;           
     width: 0;             
     height: 0;            
     pointer-events: none; 
-    appearance: none;     /* Supprime le style natif (Firefox/iOS) */
+    appearance: none;
   }
 
   .menu-toggle:checked ~ .site-navigation .menu li a {
@@ -144,7 +257,6 @@ Text Domain: motaphoto
     text-transform: uppercase;
     color: #FFFFFF;
   }
-
 
   /* Bouton burger */
   .menu-toggle,
@@ -173,7 +285,7 @@ Text Domain: motaphoto
     left: 0;
   }
 
-  /* Position initiale des éléments de la croix du menu*/
+  /* Position initiale des éléments de la croix du menu */
   .menu-btn span:nth-child(1) { top: 10px; }
   .menu-btn span:nth-child(2) { top: 18px; }
   .menu-btn span:nth-child(3) { top: 26px; }
@@ -218,13 +330,43 @@ Text Domain: motaphoto
     margin-top: 25px;
   }
 
- /*Possibilité de cliquer sur les liens du menu du footer*/
-.menu-toggle:checked ~ .site-navigation .menu {
+ /* Possibilité de cliquer sur les liens du menu du footer */
+  .menu-toggle:checked ~ .site-navigation .menu {
   pointer-events: auto;
   opacity: 1;
+  }
+
+  .modale {
+    transform: scale(0.75); /* Réduire proportionnellement */
+    transform-origin: center; 
+    background-color: rgba(0,0,0,0.9);
+  }
+
+  .modale * {
+    font-size: 0.75rem; /* Texte plus petit - A REVOIR*/
+  }
+
+  #contact-modale {
+  display: none;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: none;
+  will-change: opacity, transform;
+  }
+
+  /* Etat normal : transitions actives */
+  .site-header .site-navigation .menu {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  /* Etat spécial : pas de transition */
+  .no-transition .site-header .site-navigation .menu {
+    transition: none !important;
+  }
+
+  .modale-content {
+    width: 90%;          
+    margin: 20px;       
+    max-height: calc(100% - 40px);
+  }
 }
-
-}
-
-
-

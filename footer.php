@@ -17,6 +17,8 @@
         </div>
     </footer>
 
+    <?php get_template_part('templates_part/modale-contact'); ?>
+
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
