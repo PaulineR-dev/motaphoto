@@ -176,18 +176,25 @@ Text Domain: motaphoto
 
 #wpcf7-f28-o1 > form > p:nth-child(2) > label > span > input,
 #wpcf7-f28-o1 > form > p:nth-child(3) > label > span > input,
-#wpcf7-f28-o1 > form > p:nth-child(4) > label > span > input {
+#wpcf7-f28-o1 > form > p:nth-child(4) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(5) > label > span > textarea {
   width: 100% ;
-  height: 40px;
   margin-top: 6px;
+  border-radius: 12px;
+  border: solid 1px #B8BBC2;
+}
+
+#wpcf7-f28-o1 > form > p:nth-child(2) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(3) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(4) > label > span > input {
+  height: 40px;
 }
 
 #wpcf7-f28-o1 > form > p:nth-child(5) > label > span > textarea {
-  width: 100% ;
   height: 210px;
-  margin-top: 6px;
 }
 
+/* Fomulaire */
 #wpcf7-f28-o1 {
   width: 263px ;
   margin: 0 auto;
@@ -225,6 +232,11 @@ span.wpcf7-form-control-wrap {
   /* Animation */
     transform: translateX(100%);
     transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  .modale {
+    background-color: rgba(0,0,0,0.9);
+    opacity: 0;
   }
     
   /* Affichage du menu burger quand activé */
@@ -332,31 +344,8 @@ span.wpcf7-form-control-wrap {
 
  /* Possibilité de cliquer sur les liens du menu du footer */
   .menu-toggle:checked ~ .site-navigation .menu {
-  pointer-events: auto;
-  opacity: 1;
-  }
-
-  .modale {
-    transform: scale(0.75); /* Réduire proportionnellement */
-    transform-origin: center; 
-    background-color: rgba(0,0,0,0.9);
-  }
-
-  .modale * {
-    font-size: 0.75rem; /* Texte plus petit - A REVOIR*/
-  }
-
-  #contact-modale {
-  display: none;
-  opacity: 0;
-  transform: translateX(100%);
-  transition: none;
-  will-change: opacity, transform;
-  }
-
-  /* Etat normal : transitions actives */
-  .site-header .site-navigation .menu {
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    pointer-events: auto;
+    opacity: 1;
   }
 
   /* Etat spécial : pas de transition */

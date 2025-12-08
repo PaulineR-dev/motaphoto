@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   const modale = document.getElementById('contact-modale');
   const contactLink = document.querySelector('.modale-contact');
-  const menuToggle  = document.querySelector('.menu-toggle'); 
-  const body        = document.body;
+  const menuToggle = document.querySelector('.menu-toggle'); 
+  const body = document.body;
 
   // Vérifie si en version mobile
   function isMobile() {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Fade desktop
-  function fadeIn(element, duration = 1000) {
+  function fadeIn(element, duration = 200) {
     element.style.display = 'flex';
     element.style.opacity = 0;
     element.style.transform = 'none'; // Permet le reset
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     requestAnimationFrame(animatefadeIn);
   }
 
-  function fadeOut(element, duration = 1000) {
+  function fadeOut(element, duration = 200) {
     let start = null;
 
     function animatefadeOut(ts) {
@@ -36,14 +36,14 @@ document.addEventListener('DOMContentLoaded', function () {
         requestAnimationFrame(animatefadeOut);
       } else {
         element.style.display = 'none';
-        element.style.transform = 'none'
+        element.style.transform = 'none';
       }
     }
     requestAnimationFrame(animatefadeOut);
   }
 
   // Fade in et out + slide (mobile)
-  function fadeSlideIn(element, duration = 1000) {
+  function fadeSlideIn(element, duration = 200) {
     element.style.display = 'flex';
     element.style.opacity = 0;
     element.style.transform = 'translateX(100%)';
@@ -53,12 +53,14 @@ document.addEventListener('DOMContentLoaded', function () {
       const progress = Math.min((ts - start) / duration, 1);
       element.style.opacity = progress;
       element.style.transform = `translateX(${100 - 100 * progress}%)`;
+      console.log(duration)
+
       if (progress < 1) requestAnimationFrame(animatefadeSlideIn);
     }
     requestAnimationFrame(animatefadeSlideIn);
   }
 
-  function fadeSlideOut(element, duration = 1000) {
+  function fadeSlideOut(element, duration = 200) {
     let start = null;
     function animatefadeSlideOut(ts) {
       if (!start) start = ts;
@@ -78,19 +80,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Ouvre la modale au clic sur "Contact"
   if (contactLink && modale) {
+
     contactLink.addEventListener('click', function (e) {
       e.preventDefault();
-
       if (isMobile()) {
-        fadeSlideIn(modale, 1000);
+
+        fadeSlideIn(modale, 200);
         if (menuToggle) {
-          // Ferme le burger instantanément
+          // Ferme le burger instantanément sans animation
           body.classList.add('no-transition');
           menuToggle.checked = false;
+          // Retire la classe juste après pour rétablir les transitions normales
           setTimeout(() => body.classList.remove('no-transition'), 50);
         }
       } else {
-        fadeIn(modale, 1000);
+        fadeIn(modale, 200);
       }
     });
   }
@@ -99,9 +103,9 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('click', function (e) {
     if (modale && e.target === modale) {
       if (isMobile()) {
-        fadeSlideOut(modale, 1000);
+        fadeSlideOut(modale, 200);
       } else {
-        fadeOut(modale, 1000);
+        fadeOut(modale, 200);
       }
     }
   });
