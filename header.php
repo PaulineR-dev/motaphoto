@@ -32,6 +32,19 @@
     		?>
 		</nav>
 	</div>
+
+
+<!-- Overlay mobile qui coulisse par-dessus -->
+<div id="mobile-header-overlay" class="mobile-header-overlay">
+  <img class="overlay-logo" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo alternatif">
+  <button class="overlay-close" aria-label="Fermer">
+	<span></span>
+    <span></span>
+  </button>
+</div>
+
+
+
 </header>
 
 	<div id="content" class="site-content">
