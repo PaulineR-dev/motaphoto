@@ -12,82 +12,65 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     return window.matchMedia("(max-width: 768px)").matches;
   }
 
-  // Animations pour version DESKTOP
-  // Animation d'apparition Fade in en desktop
-  function fadeIn(element, duration = 200) {
+  // ANIMATIONS POUR VERSION DESKTOP
+  // Animation d'apparition Fade in (desktop)
+  function fadeIn(element, duration = 300) {
     element.style.display = 'flex';
-    element.style.opacity = 0;
-    element.style.transform = 'none'; // Reset les transformations
-    let startfadeIn = null;
-
-    // Fonction appelée à chaque frame
-    function animateFadeIn(ts) {
-      if (!startfadeIn) startfadeIn = ts; // Initialisation du temps de départ
-      const progress = (ts - startfadeIn) / duration; // Calcul la progression de 0 jusqu'à 1
-      element.style.opacity = Math.min(progress, 1); // Augmente l'opacité progressivement
-      if (progress < 1) requestAnimationFrame(animateFadeIn); // Continue animation tant que pas terminé
-    }
-    requestAnimationFrame(animateFadeIn); // Lance l'animation
+    element.animate([
+      { opacity: 0, transform: 'none' }, // Départ : invisible
+      { opacity: 1, transform: 'none' } // Arrivée : visible
+    ], {
+      duration: duration,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
   }
 
-  // Animation de disparition Fade out en desktop
-  function fadeOut(element, duration = 200) {
-    let startfadeOut = null;
+  // Fade out (desktop)
+  function fadeOut(element, duration = 300) {
+    const animation = element.animate([
+      { opacity: 1, transform: 'none' }, // Départ : visible
+      { opacity: 0, transform: 'none' } // Arrivée : invisible
+    ], {
+      duration: duration,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
 
-    function animateFadeOut(ts) {
-      if (!startfadeOut) startfadeOut = ts; // Initialisation du temps de départ
-      const progress = (ts - startfadeOut) / duration; // Calcul la progression de 0 jusqu'à 1
-      element.style.opacity = Math.max(1 - progress, 0); // Diminue l'opacité progressivement
-      if (progress < 1) { // Continue animation tant que pas terminé
-        requestAnimationFrame(animateFadeOut);
-      } else {
-        element.style.display = 'none'; // Cache l'élément une fois terminé
-        element.style.transform = 'none'; // Reset les transformations
-      }
-    }
-    requestAnimationFrame(animateFadeOut); // Lance l'animation
+    animation.onfinish = () => {
+      element.style.display = 'none';
+    };
   }
 
-  // Animation pour version MOBILE
+  // ANIMATIONS VERSION MOBILE
   // Animation d'apparition de droite à gauche pour le menu mobile
-  function fadeSlideIn(element, duration = 200) {
-    element.style.display = 'flex';
-    element.style.opacity = 0;
-    element.style.transform = 'translateX(100%)';
-    let startfadeSlideIn = null; // Variable pour stocker le temps de départ
-
-    // Fonction interne appelée à chaque frame par requestAnimationFrame
-    function animateFadeSlideIn(ts) {
-      if (!startfadeSlideIn) startfadeSlideIn = ts; // Initialise le temps de départ à la première frame
-      const progress = Math.min((ts - startfadeSlideIn) / duration, 1); // Calcule la progression de l'animation (entre 0 et 1)
-      element.style.opacity = progress; // Augmente l'opacité progressivement (de 0 à 1)
-      element.style.transform = `translateX(${100 - 100 * progress}%)`; // Déplace l'élément de 100% (hors écran) vers 0% (à sa place)
-
-      if (progress < 1) requestAnimationFrame(animateFadeSlideIn); // Continue tant que l'animation n'est pas terminée
-    }
-    requestAnimationFrame(animateFadeSlideIn); // Lance la première frame de l'animation
+  function fadeSlideIn(element, duration = 300) {
+    element.style.display = 'flex'; // Rend visible
+    element.animate([
+      { transform: 'translateX(100%)', opacity: 0 }, // Départ : hors écran, invisible
+      { transform: 'translateX(0)', opacity: 1 } // Arrivée : en place, visible
+    ], {
+      duration: duration, // Durée de 300ms comme requis par la maquette Figma
+      easing: 'ease-out', // Courbe d'animation comme requis sur Figma : démarre vite et ralentit progressivement
+      fill: 'forwards' // Conserve l'état final
+    });
   }
 
   // Animation de disparition de gauche à droite pour le menu mobile
-  function fadeSlideOut(element, duration = 200) {
-    let startfadeSlideOut = null; // Variable pour stocker le temps de départ
+  function fadeSlideOut(element, duration = 300) {
+    const animation = element.animate([
+      { transform: 'translateX(0)', opacity: 1 }, // Départ : en place, visible
+      { transform: 'translateX(100%)', opacity: 0 } // Arrivée : hors écran, invisible
+    ], {
+      duration: duration,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
 
-    // Fonction interne appelée à chaque frame
-    function animateFadeSlideOut(ts) {
-      if (!startfadeSlideOut) startfadeSlideOut = ts;  // Initialise le temps de départ
-      const progress = Math.min((ts - startfadeSlideOut) / duration, 1); // Calcule la progression
-      
-      element.style.opacity = 1 - progress; // Diminue l'opacité progressivement (de 1 à 0)
-      element.style.transform = `translateX(${100 * progress}%)`; // Déplace l'élément de 0% (sa place) vers 100% (hors écran à droite)
-      if (progress < 1) {
-        requestAnimationFrame(animateFadeSlideOut); // Continue tant que pas terminé
-      } else {
-        element.style.display = 'none'; // Cache l'élément une fois fini
-        element.style.transform = 'translateX(100%)'; // Reset hors écran
-        element.style.opacity = 0; // Reset transparent
-      }
-    }
-    requestAnimationFrame(animateFadeSlideOut); // Lance la première frame de l'animation
+    // Quand l'animation est terminée, on cache l'élément
+    animation.onfinish = () => {
+      element.style.display = 'none';
+    };
   }
 
   // Gestion des événements
@@ -102,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       if (isMobile()) {
 
         // Sur mobile : ouverture de la modale avec animation "slide in"
-        fadeSlideIn(modale, 200);
+        fadeSlideIn(modale, 300);
         // Vérifie si le menu burger existe
         if (menuToggle) {
           // Ferme le menu burger instantanément sans animation
@@ -113,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
         }
       } else {
         // Sinon (donc desktop) : ouverture de la modale avec l'animation fade in
-        fadeIn(modale, 200);
+        fadeIn(modale, 300);
       }
     });
   }
@@ -122,44 +105,65 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   window.addEventListener('click', function (event) {
     if (modale && event.target === modale) { // Vérifie que le clic s'effectue bien sur l'overlay
       if (isMobile()) {
-        fadeSlideOut(modale, 200); // Animation mobile : slide out
+        fadeSlideOut(modale, 300); // Animation mobile : slide out
       } else {
-        fadeOut(modale, 200); // Animation desktop : fade out
+        fadeOut(modale, 300); // Animation desktop : fade out
       }
     }
   });
 
-// Menu qui se superpose et qui coulisse en mobile
-  function showMenuOverlay() {
-    mobileHeaderOverlay.classList.add('open'); // Ajout de la classe .open
+  // Menu qui se superpose et qui coulisse en mobile
+  function showMenuOverlay(element, duration = 300) {
+    if (!element) return;
+    element.style.display = 'flex';
+    element.animate([
+      { transform: 'translateX(100%)', opacity: 0, backgroundColor: 'transparent' }, 
+      { transform: 'translateX(0)', opacity: 1, backgroundColor: '#fff' }
+    ], {
+      duration: duration,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
   }
 
-  function hideMenuOverlay() {
-    mobileHeaderOverlay.classList.remove('open'); // Retire la classe .open
+  // Cache l'overlay mobile avec coulissement et retour transparent
+  function hideMenuOverlay(element, duration = 300) {
+    if (!element) return;
+      const animation = element.animate([
+        { transform: 'translateX(0)', opacity: 1, backgroundColor: '#fff' },
+        { transform: 'translateX(100%)', opacity: 0, backgroundColor: 'transparent' }
+    ], {
+      duration: duration,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
+
+    animation.onfinish = () => {
+      element.style.display = 'none';
+    };
   }
 
   // Ouvrir/fermer via le burger
   menuToggle.addEventListener('change', () => {
-    // Quand état du burger via checkbox change
-    if (menuToggle.checked) { // Si coché
-      showMenuOverlay();
+    if (menuToggle.checked) {
+      showMenuOverlay(mobileHeaderOverlay);
     } else {
-      hideMenuOverlay();
+      hideMenuOverlay(mobileHeaderOverlay);
     }
   });
 
   // Fermer via la croix
   closeBtn.addEventListener('click', () => {
-    menuToggle.checked = false; // Décoche le burger
-    hideMenuOverlay(); // Cache l'overlay
-    menuToggle.focus(); // Remet le focus sur le burger
+    menuToggle.checked = false;
+    hideMenuOverlay(mobileHeaderOverlay);
+    menuToggle.focus();
   });
 
   // Referme si on passe en desktop
   window.addEventListener('resize', () => {
     if (window.matchMedia("(min-width: 769px)").matches) {
-      hideMenuOverlay(); // Cache l'overlay si desktop
-      menuToggle.checked = false; // Vérifie burger décoché
+      hideMenuOverlay(mobileHeaderOverlay);
+      menuToggle.checked = false;
     }
   });
 });

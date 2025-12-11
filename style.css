@@ -8,31 +8,31 @@ Text Domain: motaphoto
 */
 
 @font-face {
-    font-family: 'SpaceMono';
-    src: url('../fonts/SpaceMono-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'SpaceMono';
+  src: url('../fonts/SpaceMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'SpaceMono';
-    src: url('../fonts/SpaceMono-Italic.ttf') format('truetype');
-    font-weight: 400;
-    font-style: italic;
+  font-family: 'SpaceMono';
+  src: url('../fonts/SpaceMono-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
 }
 
 @font-face {
-    font-family: 'SpaceMono';
-    src: url('../fonts/SpaceMono-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
+  font-family: 'SpaceMono';
+  src: url('../fonts/SpaceMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'SpaceMono';
-    src: url('../fonts/SpaceMono-BoldItalic.ttf') format('truetype');
-    font-weight: 700;
-    font-style: italic;
+  font-family: 'SpaceMono';
+  src: url('../fonts/SpaceMono-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
 }
 
 @font-face {
@@ -45,62 +45,61 @@ Text Domain: motaphoto
 
 /* HEADER et FOOTER dont MENUS */
 .menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .site-navigation .menu li {
-    font-family: 'Space Mono', monospace;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    line-height: 1;              
-    letter-spacing: 0;
-    vertical-align: middle;
-    text-transform: uppercase;
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
 }
 
 .site-navigation .menu li:hover {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .site-navigation .menu li a {
-    text-decoration: none;
-    color: #000; /*A revoir*/
+  text-decoration: none;
+  color: #000000;
 }
 
 /*Header*/
 .header-container {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;            
-    padding: 26px 146px;                
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  padding: 0px 146px; 
+  height: 80px;               
 }
 
 #logo_nmota {
-   width: 216px;
-   height: 14px;
-   top: 31px;
-   left: 146px;
+  width: 216px;
+  height: 14px;
+  top: 31px;
+  left: 146px;
 }
 
 #menu-motaphoto_menu {
-    gap: 55px;
+  gap: 55px;
+  /* height: 24px; */
 }
 
 /*Footer*/
 .footer-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;            
-    padding-top: 10px;
-    border-top: 1px solid #000;
+  display: flex;
+  justify-content: center; 
+  align-items: center;            
+  padding-top: 10px;
+  border-top: 1px solid #000;
 }
 
 #menu-motaphoto_footer_menu {
-    gap: 75px;
+  gap: 75px;
+  height: 24px;
 }
 
 /*Menu burger*/
@@ -108,7 +107,6 @@ Text Domain: motaphoto
 .menu-btn {
   display: none; /* Caché en desktop */
 }
-
 
 
 /* MODALE */
@@ -211,6 +209,12 @@ span.wpcf7-form-control-wrap {
   left: 5px;
 }
 
+@media (min-width: 769px) {
+  #menu-motaphoto_menu {
+    height: 24px;
+  }
+} 
+
 /* Version mobile HEADER, FOOTER dont menus et modale */
 @media (max-width: 768px) {
    
@@ -231,7 +235,7 @@ span.wpcf7-form-control-wrap {
     gap: 20px;
   /* Animation */
     transform: translateX(100%);
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
   .modale {
@@ -302,19 +306,6 @@ span.wpcf7-form-control-wrap {
   .menu-btn span:nth-child(2) { top: 18px; }
   .menu-btn span:nth-child(3) { top: 26px; }
 
-  /* Animation croix du menu burger */
-  /* .menu-toggle:checked ~ .menu-btn span:nth-child(1) {
-    transform: rotate(40deg);
-    top: 18px;
-  }
-  .menu-toggle:checked ~ .menu-btn span:nth-child(2) {
-    opacity: 0;
-  }
-  .menu-toggle:checked ~ .menu-btn span:nth-child(3) {
-    transform: rotate(-40deg);
-    top: 18px;
-  } */
-
   #menu-motaphoto_menu {
     gap: 42px;
   }
@@ -324,7 +315,7 @@ span.wpcf7-form-control-wrap {
     margin-top: 7px;
     margin-left: 20px;       
     width: 138px;        
-    height: auto;
+    height: 9px;
     align-self: flex-start; 
   }
 
@@ -338,11 +329,11 @@ span.wpcf7-form-control-wrap {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
-    margin-top: 25px;
+    gap: 24px;
+    margin-top: 44px;
   }
 
- /* Possibilité de cliquer sur les liens du menu du footer */
+  /* Possibilité de cliquer sur les liens du menu du footer */
   .menu-toggle:checked ~ .site-navigation .menu {
     pointer-events: auto;
     opacity: 1;
@@ -369,8 +360,6 @@ span.wpcf7-form-control-wrap {
 }
 }
 
-
-/* Visible uniquement en mobile */
 /* Overlay mobile */
 .mobile-header-overlay {
   position: fixed;
@@ -394,6 +383,7 @@ span.wpcf7-form-control-wrap {
 .mobile-header-overlay.open {
   opacity: 1;
   transform: translateX(0);
+  transition: transform 0.4s ease-out;
   background: #fff;
 }
 
@@ -401,9 +391,9 @@ span.wpcf7-form-control-wrap {
 .mobile-header-overlay .overlay-logo {
   position: static;
   margin-top: 31px;
-  margin-left: 55px;
+  margin-left: 60px;
   width: 138px;
-  height: auto;
+  height: 9px;
   align-self: flex-start;
   display: block;
 }
@@ -413,8 +403,8 @@ span.wpcf7-form-control-wrap {
   position: relative;
   margin-top: 0px;
   margin-right: 35px;
-  width: 25px;
-  height: 27px;
+  width: 27px;
+  height: 19px;
   background: none;
   border: none;
   cursor: pointer;
