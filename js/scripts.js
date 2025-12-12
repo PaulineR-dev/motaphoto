@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () { // Chargement du script après que tout le DOM soit chargé
   // Récupération des éléments nécessaires
-  const contactModale = document.getElementById('contact-modale');
+  const contactModale = document.querySelector('.modale');
   const contactLink = document.querySelector('.modale-contact');
   const menuToggle = document.querySelector('.menu-toggle'); 
   const mobileHeaderOverlay = document.getElementById('mobile-header-overlay');

@@ -49,6 +49,7 @@ Text Domain: motaphoto
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 24px;
 }
 
 .site-navigation .menu li {
@@ -85,7 +86,6 @@ Text Domain: motaphoto
 
 #menu-motaphoto_menu {
   gap: 55px;
-  /* height: 24px; */
 }
 
 /*Footer*/
@@ -99,7 +99,6 @@ Text Domain: motaphoto
 
 #menu-motaphoto_footer_menu {
   gap: 75px;
-  height: 24px;
 }
 
 /*Menu burger*/
@@ -209,11 +208,6 @@ span.wpcf7-form-control-wrap {
   left: 5px;
 }
 
-@media (min-width: 769px) {
-  #menu-motaphoto_menu {
-    height: 24px;
-  }
-} 
 
 /* Version mobile HEADER, FOOTER dont menus et modale */
 @media (max-width: 768px) {
@@ -239,8 +233,9 @@ span.wpcf7-form-control-wrap {
   }
 
   .modale {
+    display: none;
     background-color: rgba(0,0,0,0.9);
-    opacity: 0;
+    /* opacity: 0; Déjà géré en JS*/
   }
     
   /* Affichage du menu burger quand activé */
@@ -361,13 +356,15 @@ span.wpcf7-form-control-wrap {
 }
 
 /* Overlay mobile */
-.mobile-header-overlay {
+#mobile-header-overlay {
+/* .mobile-header-overlay { */
   position: fixed;
   top: 0;
   right: 0;
   height: 64px;
   width: 100%;
-  display: flex;
+  /* display: flex; */
+  display: none;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
