@@ -86,6 +86,7 @@ Text Domain: motaphoto
 
 #menu-motaphoto_menu {
   gap: 55px;
+  display: flex;
 }
 
 /*Footer*/
@@ -212,6 +213,11 @@ span.wpcf7-form-control-wrap {
 /* Version mobile HEADER, FOOTER dont menus et modale */
 @media (max-width: 768px) {
    
+
+.header-container {
+  position: relative;
+}
+
   /* Menu principal caché par défaut */
   .site-header .site-navigation .menu {
     position: fixed;
@@ -227,15 +233,12 @@ span.wpcf7-form-control-wrap {
     pointer-events: none;
     opacity: 0;
     gap: 20px;
-  /* Animation */
-    transform: translateX(100%);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateX(100%); 
   }
 
   .modale {
     display: none;
     background-color: rgba(0,0,0,0.9);
-    /* opacity: 0; Déjà géré en JS*/
   }
     
   /* Affichage du menu burger quand activé */
@@ -277,8 +280,8 @@ span.wpcf7-form-control-wrap {
 
   .menu-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 6px;
+    right: 15px;
     z-index: 1000;
     width: 27px;
     height: 19px;
@@ -334,7 +337,7 @@ span.wpcf7-form-control-wrap {
     opacity: 1;
   }
 
-  /* Etat spécial quand clic sur Contact en mobile : pas de transition */
+  /* Etat spécial quand clic sur Contact en mobile : pas de transition -> à revoir */
   .no-transition .site-header .site-navigation .menu {
     transition: none !important;
   }
@@ -357,30 +360,25 @@ span.wpcf7-form-control-wrap {
 
 /* Overlay mobile */
 #mobile-header-overlay {
-/* .mobile-header-overlay { */
   position: fixed;
   top: 0;
   right: 0;
   height: 64px;
   width: 100%;
-  /* display: flex; */
   display: none;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
   background: transparent;
   z-index: 1001;
-/* Animation */
   opacity: 0;
-  transform: translateX(100%);
-  transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.4s ease;
+  transform: translateX(100%); 
 }
 
 /* État ouvert */
 .mobile-header-overlay.open {
   opacity: 1;
   transform: translateX(0);
-  transition: transform 0.4s ease-out;
   background: #fff;
 }
 

@@ -15,9 +15,12 @@
                 ?>
             </nav>
         </div>
+
+        <?php get_template_part('templates_part/modale-contact'); ?>
+        
     </footer>
 
-    <?php get_template_part('templates_part/modale-contact'); ?>
+
 
 </div><!-- #page -->
 

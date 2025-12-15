@@ -6,18 +6,17 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   const mobileHeaderOverlay = document.getElementById('mobile-header-overlay');
   const closeBtn = document.querySelector('.overlay-close');
   const menuHeader = document.getElementById('menu-motaphoto_menu');
-  // const body = document.body;
 
   // Vérifie si on est en version mobile ou pas
-  function ecranMobile() {
+  function isMobileScreen() {
     return window.matchMedia("(max-width: 768px)").matches;
   }
 
 
   // ANIMATIONS POUR VERSION DESKTOP
-
-  // Animation d'apparition Fade in (desktop)
-  function fadeInContact() {
+  // MODALE DESKTOP
+  // Animation d'apparition Fade in de la modale (desktop)
+  function fadeInContactModale() {
     contactModale.style.display = 'flex';
     contactModale.animate([
       { opacity: 0, transform: 'none' },
@@ -29,9 +28,9 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     });
   }
 
-  // Animation de disparition Fade out (desktop)
-  function fadeOutContact() {
-    const animationFadeOutContact  = contactModale.animate([
+  // Animation de disparition Fade out de la modale (desktop)
+  function fadeOutContactModale() {
+    const animationFadeOutContactModale  = contactModale.animate([
       { opacity: 1, transform: 'none' },
       { opacity: 0, transform: 'none' }
     ], {
@@ -40,16 +39,48 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       fill: 'forwards'
     });
 
-    animationFadeOutContact.onfinish = () => {
+    animationFadeOutContactModale.onfinish = () => {
       contactModale.style.display = 'none';
     };
   }
 
 
   // ANIMATIONS POUR VERSION MOBILE
+  // MENU
 
-  // Animation d'apparition de droite à gauche pour le menu mobile
-  function showMenuMobile() {
+  // Animation ouverture du menu burger (liste des liens)
+  function openBurgerMenu() {
+    menuHeader.style.display = 'flex';
+    menuHeader.style.pointerEvents = 'auto';
+    menuHeader.animate([
+      { transform: 'translateX(100%)', opacity: 0 },
+      { transform: 'translateX(0)', opacity: 1 }
+    ], {
+      duration: 300,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
+  }
+
+  function closeBurgerMenu() { 
+    const animationcloseBurgerMenu = menuHeader.animate([
+      { transform: 'translateX(0)', opacity: 1 },
+      { transform: 'translateX(100%)', opacity: 0 }
+    ], {
+      duration: 300,
+      easing: 'ease-out',
+      fill: 'forwards'
+    });
+
+  animationcloseBurgerMenu.onfinish = () => {
+    menuHeader.style.pointerEvents = 'none';
+    menuHeader.style.display = 'none';
+  };
+}
+
+  // MENU OVERLAY (barre haute du menu avec logo et croix)
+  // Animation d'apparition de droite à gauche pour le MENU OVERLAY (mobile))
+  function openMenuMobileOverlay() {
     if (!mobileHeaderOverlay) return;
     mobileHeaderOverlay.style.display = 'flex';
     mobileHeaderOverlay.animate([
@@ -62,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     });
   }
 
-  // Animation de disparition de gauche à droite pour le menu mobile
-  function hideMenuMobile() {
+  // Animation de disparition de gauche à droite pour le MENU OVERLAY (mobile)
+  function closeMenuMobileOverlay() {
     if (!mobileHeaderOverlay) return;
     const animationHideMenuMobile = mobileHeaderOverlay.animate([
       { transform: 'translateX(0)', opacity: 1, backgroundColor: '#fff' },
@@ -79,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     };
   }
 
-  // Animation d'apparition de droite à gauche pour la modale Contact (mobile)
-  function fadeSlideInContact() {
+  // Animation d'apparition de droite à gauche pour la MODALE Contact (mobile)
+  function slideInContactModale() {
     contactModale.style.display = 'flex';
     contactModale.animate([
       { transform: 'translateX(100%)', opacity: 0 },
@@ -92,9 +123,9 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     });
   }
 
-  // Animation de disparition de gauche à droite pour la modale Contact (mobile)
-  function fadeSlideOutContact() {
-    const animationfadeSlideOutContact = contactModale.animate([
+  // Animation de disparition de gauche à droite pour la MODALE Contact (mobile)
+  function slideOutContactModale() {
+    const animationSlideOutContact = contactModale.animate([
       { transform: 'translateX(0)', opacity: 1 },
       { transform: 'translateX(100%)', opacity: 0 }
     ], {
@@ -103,42 +134,43 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       fill: 'forwards'
     });
 
-    animationfadeSlideOutContact.onfinish = () => {
+    animationSlideOutContact.onfinish = () => {
       contactModale.style.display = 'none';
     };
   }
 
 
   // GESTION DES EVENEMENTS
-
-  // Ouverture de la modale au clic sur "Contact"
+  // Ouverture de la MODALE au clic sur "Contact"
   contactLink.addEventListener('click', function (eventClicContact) {
-    eventClicContact.preventDefault();
+  eventClicContact.preventDefault();
 
-    if (ecranMobile()) {
-      fadeSlideInContact();
-        menuHeader.style.transition = 'none'; // Désactive les transitions du menu
-        menuToggle.checked = false; // Ferme le menu burger
-        mobileHeaderOverlay.style.display = 'none'; // Cache le menu overlay mobile sans transition
-      // Réactive les transitions après un court délai
+    if (isMobileScreen()) {
+      slideInContactModale();
+ 
+      menuHeader.style.display = 'none';
+      menuHeader.style.pointerEvents = 'none';
+
+      mobileHeaderOverlay.style.display = 'none';
+      menuToggle.checked = false;
+
+      // Désactive les transitions du menu temporairement
+      menuHeader.style.transition = 'none';
       setTimeout(() => {
-        menuHeader.style.transition = ''; // Retour aux transitions CSS normales
+        menuHeader.style.transition = '';
       }, 50);
-
     } else {
-      fadeInContact(); // Desktop
+      fadeInContactModale(); // Desktop
     }
   });
-
-  // }
 
   // Fermeture de la modale en cliquant sur l’overlay
   window.addEventListener('click', function (event) {
     if (contactModale && event.target === contactModale) {
-      if (ecranMobile()) {
-        fadeSlideOutContact();
+      if (isMobileScreen()) {
+        slideOutContactModale();
       } else {
-        fadeOutContact();
+        fadeOutContactModale();
       }
     }
   });
@@ -146,23 +178,43 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   // Ouverture et fermeture du menu burger
   menuToggle.addEventListener('change', () => {
     if (menuToggle.checked) {
-      showMenuMobile();
+      openMenuMobileOverlay();
+      openBurgerMenu()
     } else {
-      hideMenuMobile();
+      closeMenuMobileOverlay();
+      closeBurgerMenu();
     }
   });
 
   // Fermeture du menu burger au clic sur la croix
   closeBtn.addEventListener('click', () => {
     menuToggle.checked = false;
-    hideMenuMobile();
+    closeMenuMobileOverlay();
+    closeBurgerMenu();
   });
 
-  // Fermeture du menu burger si passe en desktop
+  // Passage mobile à desktop
+  function resetMenuForDesktop() {
+    // Supprime les styles posés en mobile
+    menuHeader.style.display = '';
+    menuHeader.style.pointerEvents = '';
+    menuHeader.style.opacity = '';
+    menuHeader.style.transform = '';
+    // Ferme aussi l’overlay mobile sans animation
+    if (mobileHeaderOverlay) {
+      mobileHeaderOverlay.style.display = '';
+      mobileHeaderOverlay.style.opacity = '';
+      mobileHeaderOverlay.style.transform = '';
+    }
+
+    // Décoche le toggle
+    menuToggle.checked = false;
+  }
+
+  // Resize si version desktop
   window.addEventListener('resize', () => {
     if (window.matchMedia("(min-width: 769px)").matches) {
-      hideMenuMobile();
-      menuToggle.checked = false;
+      resetMenuForDesktop(); // Pas d’animation, juste reset menu quand passe de mobile à desktop
     }
   });
 });
