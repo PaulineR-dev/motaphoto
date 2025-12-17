@@ -9,7 +9,7 @@ add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
 function motaphoto_enqueue_scripts() {
     wp_enqueue_script('motaphoto-scripts', // identifiant interne
         get_template_directory_uri() . '/js/scripts.js',
-        array(), // Dépendances (ex: ['jquery'] si besoin)
+        array('jquery'), // Dépendances (ex: ['jquery'] si besoin)
         '1.0',   // Version
         true     // True = charger dans le footer
     );

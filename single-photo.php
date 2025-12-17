@@ -3,49 +3,70 @@
 <main class="single-photo">
 <?php while ( have_posts() ) : the_post(); ?>
 
+
+<div class="container-columns">
     <!-- Partie principale single-photo -->
     <section class="photo-main">
-        <?php the_content(); ?>
-        <h1><?php the_title(); ?></h1>
 
-        <ul class="photo-infos">
-			<!-- Référence et type : champs/custom fields gérés par SCF -->
-			<!-- Catégorie et format : taxonomies gérées par CPT UI -->
-            <li>Référence : <?php the_field('reference'); ?></li> 
-            <li>Catégorie :
-        		<?php
-        		$categories = get_the_terms(get_the_ID(), 'categorie');
-        			if ($categories && ! is_wp_error($categories)) {
-            			foreach ($categories as $categorie) {
-                		echo esc_html($categorie->name) . ' ';
-            		}
-        		}
-        		?>
-    		</li>
-            <li>Format :
-        		<?php
-        		$formats = get_the_terms(get_the_ID(), 'format');
-        			if ($formats && ! is_wp_error($formats)) {
-            		foreach ($formats as $format) {
-                		echo esc_html($format->name) . ' ';
-            		}
+	<div class="container-singlephoto">
+		<div id="info-singlephoto">
+        	<h1><?php the_title(); ?></h1>
+
+        	<ul class="photo-infos">
+				<!-- Référence et type : champs/custom fields gérés par SCF -->
+				<!-- Catégorie et format : taxonomies gérées par CPT UI -->
+            	<li>Référence : <?php the_field('reference'); ?></li> 
+            	<li>Catégorie :
+        			<?php
+        			$categories = get_the_terms(get_the_ID(), 'categorie');
+        				if ($categories && ! is_wp_error($categories)) {
+            				foreach ($categories as $categorie) {
+                			echo esc_html($categorie->name) . ' ';
+            			}
         			}
-        		?>
-            <li>Type : <?php the_field('type'); ?></li>
+        			?>
+    			</li>
+            	<li>Format :
+        			<?php
+        			$formats = get_the_terms(get_the_ID(), 'format');
+        				if ($formats && ! is_wp_error($formats)) {
+            			foreach ($formats as $format) {
+                			echo esc_html($format->name) . ' ';
+            			}
+        				}
+        			?>
+            	<li>Type : <?php the_field('type'); ?></li>
+				<li>Année : <?php echo get_the_date('Y'); ?></li> 
+				<!-- get_the_date('Y') renvoie uniquement l'année -->
+        	</ul>
+		</div>
 
-			<li>Année : <?php echo get_the_date('Y'); ?></li> 
-			<!-- get_the_date('Y') renvoie uniquement l'année -->
-        </ul>
-    
+		<div id="imgage-singlephoto">
+        	<?php the_content(); ?>
+		</div>	
+
+
+	</div>
     </section>
 
     <!-- Partie "Cette photo vous intéresse ?" -->
     <section class="photo-contact">
-        <h2>Cette photo vous intéresse ?</h2>
-        <button id="contact-button" data-ref-photo="<?php the_field('reference'); ?>">
-            Contact
-        </button>
+		<div>
+        	<h2>Cette photo vous intéresse ?</h2>
+		</div>
+    	<div>
+			<button id="contact-button-photo" data-ref-photo="<?php the_field('reference'); ?>">
+        	Contact
+    		</button>
+		</div>
 		<!-- Petite photo (Réception) -->
+	</section>
+
+
+				
+
+
+		
 		</div>
     </section>
 
@@ -55,6 +76,9 @@
 		<!-- Images de bas de page de la partie vous aimerez aussi -->
         
     </section>
+
+					</div> 
+					<!-- Container columns -->
 
 <?php endwhile; ?>
 </main>

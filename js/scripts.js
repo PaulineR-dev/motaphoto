@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
 
     animationFadeOutContactModale.onfinish = () => {
       contactModale.style.display = 'none';
+      resetRefPhoto();
     };
   }
 
@@ -136,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
 
     animationSlideOutContact.onfinish = () => {
       contactModale.style.display = 'none';
+      resetRefPhoto();
     };
   }
 
@@ -163,6 +165,38 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       fadeInContactModale(); // Desktop
     }
   });
+
+
+
+  // Fonction commune aux différents boutons de contact
+  function openContactModale() {
+    if (isMobileScreen()) {
+      slideInContactModale();
+      menuHeader.style.display = 'none';
+      menuHeader.style.pointerEvents = 'none';
+      mobileHeaderOverlay.style.display = 'none';
+      menuToggle.checked = false;
+    } else {
+      fadeInContactModale();
+  }}
+
+  // Réinitialisation du champ Référence photo
+  function resetRefPhoto() {
+    jQuery('.modale').find('input[name="ref_photo"]').val('');
+  }
+
+  // Ouverture via bouton Photo avec préremplissage champ Référence photo
+  jQuery(function () {
+    jQuery('#contact-button-photo').on('click', function (e) {
+    e.preventDefault();
+    openContactModale();
+    const refPhoto = jQuery(this).attr('data-ref-photo');
+    jQuery('.modale').find('input[name="ref_photo"]').val(refPhoto);
+    });
+  });
+
+
+
 
   // Fermeture de la modale en cliquant sur l’overlay
   window.addEventListener('click', function (event) {
@@ -206,7 +240,6 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       mobileHeaderOverlay.style.opacity = '';
       mobileHeaderOverlay.style.transform = '';
     }
-
     // Décoche le toggle
     menuToggle.checked = false;
   }
@@ -218,3 +251,6 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     }
   });
 });
+
+
+
