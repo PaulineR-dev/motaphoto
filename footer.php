@@ -16,7 +16,7 @@
             </nav>
         </div>
 
-        <?php get_template_part('templates_part/modale-contact'); ?>
+        <?php get_template_part('template_parts/modale-contact'); ?>
         
     </footer>
 

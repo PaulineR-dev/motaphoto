@@ -8,7 +8,7 @@
 
 		<!-- Bloc gauche 50% de largeur : infos -->
 		<div id="infophoto-singlephoto">
-        	<h1><?php the_title(); ?></h1>
+        	<h2><?php the_title(); ?></h2>
         	<ul class="photo-infos">
 				<!-- Référence et type : champs/custom fields gérés par SCF -->
 				<!-- Catégorie et format : taxonomies gérées par CPT UI -->
@@ -49,7 +49,7 @@
 	 <div id="interactions-singlephoto">
 		<!-- À gauche : contact -->
 		<div class="contact-left">
-        	<h2>Cette photo vous intéresse ?</h2>
+        	<p>Cette photo vous intéresse ?</p>
 			<button id="contact-button-photo" data-ref-photo="<?php the_field('reference'); ?>">
         	Contact
     		</button>
@@ -83,14 +83,9 @@
 		</div>
 	</div>
 
-
-    <!-- Partie "Vous aimerez aussi" -->
-    <section class="autres-photos">
-        <h2>VOUS AIMEREZ AUSSI</h2>
-		<!-- Images de bas de page de la partie vous aimerez aussi -->
-    </section>
-
-					
+	<!-- Partie "Vous aimerez aussi" -->
+	<?php get_template_part('template_parts/photo_block'); ?>
+		
 
 <?php endwhile; ?>
 </main>
