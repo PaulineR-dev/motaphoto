@@ -1,4 +1,4 @@
-<h3>VOUS AIMEREZ AUSSI</h3>
+<h3 id="text-aimerezaussi">VOUS AIMEREZ AUSSI</h3>
 
 <?php
 // template_parts/photo_block.php
@@ -37,20 +37,22 @@ if ($terms && ! is_wp_error($terms)) {
                     <?php if (has_post_thumbnail()) {
                         the_post_thumbnail('medium', [
                           'style' => 'width:100%; height:100%; object-fit:cover;'
-                            // Revoir style : en cours
+                            // Revoir style : EN COURS
                         ]);
                     } ?>
                     <div class="photo-overlay">
                         <!-- Overlay en cours -->
-                        <a href="<?php the_permalink(); ?>" class="icon-eye" title="Infos">
-                            <span class="dashicons dashicons-visibility"></span>
+                        <a href="<?php the_permalink(); ?>" id="icon-eye" title="Infos">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/icon_eye.png" alt="Icône oeil" >
                         </a>
-                        <a href="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>" 
-                           class="icon-fullscreen" 
-                           data-lightbox="gallery" 
-                           title="Voir en plein écran">
-                            <span class="dashicons dashicons-fullscreen-alt"></span>
+
+                       <a href="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>" 
+                            id="icon-fullscreen" 
+                            data-lightbox="gallery" 
+                            title="Voir en plein écran">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/Icon_fullscreen.png" alt="Plein écran">
                         </a>
+
                     </div>
                 </div>
             </article>

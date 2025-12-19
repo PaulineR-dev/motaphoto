@@ -6,6 +6,7 @@
 
 	<div class="container-singlephoto">
 
+	<div class="infoimg-top">
 		<!-- Bloc gauche 50% de largeur : infos -->
 		<div id="infophoto-singlephoto">
         	<h2><?php the_title(); ?></h2>
@@ -39,17 +40,16 @@
 		</div>
 
 		<!-- Bloc droite 50% de largeur : photo -->
-		<div id="imgage-singlephoto">
+		<div id="image-singlephoto">
         	<?php the_content(); ?>
 		</div>	
 
-	</div>
-
-    <!-- Bloc bas regroupant les interactions-->
-	 <div id="interactions-singlephoto">
+					</div>
+<!-- Bloc bas regroupant les interactions-->
+	<div class="interactions-singlephoto">
 		<!-- À gauche : contact -->
 		<div class="contact-left">
-        	<p>Cette photo vous intéresse ?</p>
+        	<p id="question">Cette photo vous intéresse ?</p>
 			<button id="contact-button-photo" data-ref-photo="<?php the_field('reference'); ?>">
         	Contact
     		</button>
@@ -64,7 +64,7 @@
     		<div class="photo-navigation">
         		<?php if ($prev_post): ?>
             		<a class="nav-photo prev" href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>">
-                	← Photo précédente
+                	←
             		</a>
             		<div class="nav-thumbnail prev-thumb">
                 	<?php echo get_the_post_thumbnail($prev_post->ID, 'thumbnail'); ?>
@@ -73,7 +73,7 @@
 
         		<?php if ($next_post): ?>
             		<a class="nav-photo next" href="<?php echo esc_url(get_permalink($next_post->ID)); ?>">
-            		Photo suivante →
+            		 →
             		</a>
             		<div class="nav-thumbnail next-thumb">
                 	<?php echo get_the_post_thumbnail($next_post->ID, 'thumbnail'); ?>
@@ -83,9 +83,13 @@
 		</div>
 	</div>
 
+
+
+    
+
 	<!-- Partie "Vous aimerez aussi" -->
 	<?php get_template_part('template_parts/photo_block'); ?>
-		
+			</div>
 
 <?php endwhile; ?>
 </main>

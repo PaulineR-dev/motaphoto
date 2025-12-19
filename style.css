@@ -9,28 +9,28 @@ Text Domain: motaphoto
 
 @font-face {
   font-family: 'SpaceMono';
-  src: url('../fonts/SpaceMono-Regular.ttf') format('truetype');
+  src: url('assets/fonts/SpaceMono-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SpaceMono';
-  src: url('../fonts/SpaceMono-Italic.ttf') format('truetype');
+  src: url('assets/fonts/SpaceMono-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'SpaceMono';
-  src: url('../fonts/SpaceMono-Bold.ttf') format('truetype');
+  src: url('assets/fonts/SpaceMono-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SpaceMono';
-  src: url('../fonts/SpaceMono-BoldItalic.ttf') format('truetype');
+  src: url('assets/fonts/SpaceMono-BoldItalic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
 }
@@ -41,6 +41,14 @@ Text Domain: motaphoto
   font-weight: 500;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('assets/fonts/Poppins-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 
 
 /* HEADER et FOOTER dont MENUS */
@@ -337,7 +345,7 @@ span.wpcf7-form-control-wrap {
     opacity: 1;
   }
 
-  /* Etat spécial quand clic sur Contact en mobile : pas de transition -> à revoir */
+  /* Etat spécial quand clic sur Contact en mobile : pas de transition -> EN COURS A REVOIR */
   .no-transition .site-header .site-navigation .menu {
     transition: none !important;
   }
@@ -430,58 +438,78 @@ span.wpcf7-form-control-wrap {
 }
 
 
-
-
-
 /* SINGLE-PHOTO */
 /* Partie haute de la single-photo */
-.container-singlephoto {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 21px;
-  flex-wrap: wrap; /* Permet de repasser en colonne sur mobile */
+.single-photo { 
+  min-height: calc(100vh - 80px - 80px); /* header + footer : EN COURS REVOIR ICI LES TAILLES exactes des 2 */ 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-start; 
 }
 
-/* Bloc infos à gauche */
+.container-singlephoto {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: stretch; Pour que les 2 colonnes prennent la même hauteur */
+  /* gap: 21px; */
+  /* flex : 1; Pour occuper tout l’espace vertical disponible */
+  max-width: 1148px;
+  margin: 0 auto;
+}
+
+.infoimg-top { 
+  display: flex; 
+  flex-direction: row; 
+  gap: 21px; }
+
+/* Bloc de gauche avec les informations */
 #infophoto-singlephoto {
-  order: 1;
-  max-width: 564px;
-  flex: 1 1 40vw; /* Largeur flexible basée sur viewport */
+  flex: 1 1 50%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   border-bottom: 1px solid #000; 
   padding-bottom: 1rem; 
   margin-bottom: 1rem;
 }
 
-/* Bloc photo à droite */
-#imgage-singlephoto {
-  order: 2;
-  max-width: 563px;
-  flex: 1 1 40vw;
+/* Bloc de droite avec la photo */
+#image-singlephoto {
+  flex: 1 1 50%;
+  max-width: 50%;
+  /* display: flex;
+  align-items: flex-end; image alignée en bas */
 }
 
-/* Image contenue dans the_content() */
-#imgage-singlephoto img {
+#image-singlephoto img {
   width: 100%;
   height: auto;
   max-width: 563px;
-  max-height: 80vh; /* Limitation en hauteur selon viewport */
+  /* max-height: 80vh; */
   object-fit: contain; /* Adaptation de l’image au conteneur sans déformation */
-  display: block;
+  /* display: block; */
 }
 
-#interactions-singlephoto {
-  height: 118px; /* Comme demandé */ 
-  border-bottom: 1px solid #000; 
-  max-width: 1148px; 
+.interactions-singlephoto {
+  height: 118px; /* Comme demandé dans les spécifications fonctionnelles */ 
   display: flex; 
   justify-content: space-between; 
-  align-items: center; 
-  gap: 21px; 
-  flex-wrap: wrap; 
+  align-items: center;
+  max-width: 1148px;
+  width: 100%;
+  margin: 0 auto;
   margin-bottom: 1rem;
+  border-bottom: 1px solid #000; 
+  gap: 21px; 
+  /* padding: 0 10px; */
 }
 
+.contact-left {
+  display: flex;
+  margin-top: -1rem;
+}
 
 /* Partie contact de la single-photo */
 .photo-contact {
@@ -502,121 +530,186 @@ span.wpcf7-form-control-wrap {
 #contact-button-photo {
   width: 272px;
   height: 50px;
-
-  transform: rotate(0deg);   /* angle */
-  opacity: 1;
-
-  display: flex;
+  /* transform: rotate(0deg);   angle */
+  /* opacity: 1; */
+  /* display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-
+  gap: 10px; */
+  border: 0;
   border-radius: 2px;
-
   padding-top: 8px;
   padding-right: 15px;
   padding-bottom: 8px;
   padding-left: 15px;
-
   background: #D8D8D8;
-
-  /* Ombre */
   box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.05);
-
-  /* Animation instantanée (pas de transition) */
-  transition: none;
+  animation-duration: 0ms;
+  transition: background-color 1s ease, color 1s ease;
 }
 
-
-
-
-
-
-
+#contact-button-photo:hover {
+  background-color: #000;
+  color: #fff;
+}
 
 .photo-navigation {
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Liens à droite */
-  gap: 1rem;
+  align-items: flex-end;
+  gap: 3rem;
+  margin-top: 50px;
 }
 
 .nav-thumbnail {
-  display: none;
-  position: absolute;
-  right: 100%;
-  top: 0;
+    display: none;
+    position: absolute;
+    top: -80px;
+    left: -6px;
+    z-index: 10;
 }
 
 .nav-photo:hover + .nav-thumbnail {
+    display: block;
+}
+
+.nav-right {
+  flex: 1 1 50%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.nav-thumbnail img {
+    width: 87px;
+    height: 71px;
+    object-fit: cover;
+}
+
+.nav-photo.prev:hover ~ .nav-thumbnail-wrapper .prev-thumb {
   display: block;
 }
 
+.nav-photo.next:hover ~ .nav-thumbnail-wrapper .next-thumb {
+  display: block;
+}
 
+.contact-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
 
+.contact-left p {
+  margin: 0;
+}
 
+#contact-button-photo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'SpaceMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+
+.related-photos {
+  width: 100vw;
+  max-width: 1148px;
+  margin-bottom: 105px;
+}
 
 .related-photos .photo-grid {
   display: flex;
   justify-content: space-between;
-  max-width: 1148px;
 }
 
-.related-photos .photo-block {
-  width: 564px;
-  height: 495px;
+/* .related-photos .photo-block {
+  flex: 1 1 50%;
+  position: relative;
+} */
+
+.related-photos .photo-thumb {
+  width: 50vw; /* 50% de la largeur de l’écran */
+  /* height: 40vh; */
+  overflow: hidden;
+}
+
+.related-photos .photo-thumb img {
+  /* width: 100%;
+  height: 100%; */
+  object-fit: cover;
+}
+
+.photo-thumb {
   position: relative;
   overflow: hidden;
 }
 
-.related-photos .photo-block img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.related-photos .photo-overlay {
+/* Overlay noir invisible par défaut */
+.photo-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  pointer-events: none;
+  display: flex; 
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  opacity: 0;
   transition: opacity 0.3s ease;
-  background: rgba(0,0,0,0.4); /* Léger voile au survol : à revoir selon maquette */
 }
 
-.related-photos .photo-block:hover .photo-overlay {
+/* Apparition du voile noir au survol */
+.photo-thumb:hover .photo-overlay {
   opacity: 1;
+  pointer-events: auto;
 }
 
-.related-photos .photo-overlay a {
-  color: #fff;
-  font-size: 32px;
+/* Icône oeil centrée */
+#icon-eye {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
+/* Icône fullscreen en haut à droite */
+#icon-fullscreen {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+
+
+
 
 
 h2 {
   font-family: "Space Mono", monospace;
-  font-weight: 400; 
+  font-weight: 400;
   font-style: italic;
   font-size: 66px;
   line-height: 58px;
   letter-spacing: 0;
   vertical-align: middle;
   text-transform: uppercase;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-
-h3 {
-   font-family: "Space Mono", monospace;
+#text-aimerezaussi {
+  font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: normal;
   font-size: 18px;
@@ -624,19 +717,20 @@ h3 {
   letter-spacing: 0.1em;
   vertical-align: middle;
   text-transform: uppercase;
+  margin-top: 60px;
+  margin-bottom: 50px;
 }
 
 p {
-  font-family: "Poppins", sans-serif;
+ font-family: 'Poppins', sans-serif;
   font-weight: 300;
   font-style: normal;
   font-size: 14px;
-  line-height: 1;
+  line-height: 100%;
   letter-spacing: 0;
-  text-align: right;
   vertical-align: middle;
+  margin-bottom: 10px;
 }
-
 
 ul.photo-infos {
   list-style: none;
