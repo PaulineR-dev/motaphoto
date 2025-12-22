@@ -546,6 +546,7 @@ span.wpcf7-form-control-wrap {
   box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.05);
   animation-duration: 0ms;
   transition: background-color 1s ease, color 1s ease;
+  cursor: pointer;
 }
 
 #contact-button-photo:hover {
@@ -638,7 +639,7 @@ span.wpcf7-form-control-wrap {
 } */
 
 .related-photos .photo-thumb {
-  width: 50vw; /* 50% de la largeur de l’écran */
+  /* width: 50vw; 50% de la largeur de l’écran */
   /* height: 40vh; */
   overflow: hidden;
 }
@@ -652,6 +653,8 @@ span.wpcf7-form-control-wrap {
 .photo-thumb {
   position: relative;
   overflow: hidden;
+  width:564px; 
+  height:495px
 }
 
 /* Overlay noir invisible par défaut */
@@ -744,4 +747,12 @@ ul.photo-infos {
   vertical-align: middle;
   text-transform: uppercase;
   line-height: 2.5;
+}
+
+
+.photo-thumb-img {
+  object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
 }

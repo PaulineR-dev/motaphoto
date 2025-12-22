@@ -180,22 +180,22 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       fadeInContactModale();
   }}
 
-  // Réinitialisation du champ Référence photo
+  // Réinitialisation du champ Référence photo : sélectionne la modale, trouve le champ de la ref. photo et vide la valeur
   function resetRefPhoto() {
     jQuery('.modale').find('input[name="ref_photo"]').val('');
   }
 
-  // Ouverture via bouton Photo avec préremplissage champ Référence photo
+  // Ouverture via bouton Photo avec préremplissage automatique du champ Référence photo
   jQuery(function () {
+    // Ecoute le clic sur le bouton contact du single-photo
     jQuery('#contact-button-photo').on('click', function (e) {
     e.preventDefault();
     openContactModale();
-    const refPhoto = jQuery(this).attr('data-ref-photo');
-    jQuery('.modale').find('input[name="ref_photo"]').val(refPhoto);
+    const refPhoto = jQuery(this).attr('data-ref-photo'); // Récupère la référence de la photo 
+    // Et injecte cette référence dans le champ du formulaire de la modale
+    jQuery('.modale').find('input[name="ref_photo"]').val(refPhoto); // Sélectionne la modale, trouve le input[name="ref_photo"] et remplit avec la référence
     });
   });
-
-
 
 
   // Fermeture de la modale en cliquant sur l’overlay
