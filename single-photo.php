@@ -6,6 +6,11 @@
 
 	<div class="container-singlephoto">
 
+
+
+		<div class="tailleecran">
+
+
 	<div class="infoimg-top">
 		<!-- Bloc gauche 50% de largeur : infos -->
 		<div id="infophoto-singlephoto">
@@ -81,6 +86,16 @@
         		<?php endif; ?>
     		</div>
 		</div>
+
+
+
+				</div>
+
+
+
+
+
+
 	</div>
 
 

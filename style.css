@@ -441,7 +441,7 @@ span.wpcf7-form-control-wrap {
 /* SINGLE-PHOTO */
 /* Partie haute de la single-photo */
 .single-photo { 
-  min-height: calc(100vh - 80px - 80px); /* header + footer : EN COURS REVOIR ICI LES TAILLES exactes des 2 */ 
+  /* min-height: calc(100vh - 80px - 80px); header + footer : EN COURS REVOIR ICI LES TAILLES exactes des 2  */
   display: flex; 
   flex-direction: column; 
   justify-content: flex-start; 
@@ -490,6 +490,7 @@ span.wpcf7-form-control-wrap {
   /* max-height: 80vh; */
   object-fit: contain; /* Adaptation de l’image au conteneur sans déformation */
   /* display: block; */
+  /* height: calc(100vh - 118px); */
 }
 
 .interactions-singlephoto {
@@ -755,4 +756,34 @@ ul.photo-infos {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+
+.tailleecran {
+  height: calc(100vh - 118px);
+  display: flex;
+  flex-direction: column;
+}
+
+.infoimg-top {
+  flex: 1; /* prend tout l’espace restant */
+  align-items: flex-end;
+}
+
+.interactions-singlephoto {
+  height: 118px; /* fixe */
+  flex-shrink: 0; /* ne se compresse jamais */
+}
+
+
+.infoimg-top {
+  display: flex;
+  height: calc(100vh - 118px);
+}
+
+
+#image-singlephoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
 }
