@@ -225,7 +225,7 @@ span.wpcf7-form-control-wrap {
 /* Version mobile HEADER, FOOTER dont menus et modale */
 @media (max-width: 768px) {
    
-
+/* Single-photo */
 .infoimg-top {
     flex-direction: column-reverse;
 }
@@ -233,6 +233,14 @@ span.wpcf7-form-control-wrap {
 .related-photos .photo-grid {
     flex-direction: column;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -869,4 +877,169 @@ ul.photo-infos {
   text-stroke: 3px #FFF;
 }
 
+
+@media (max-width: 768px) {
+
+  /* --- ORDRE DES BLOCS --- */
+  .infoimg-top {
+    flex-direction: column; /* image en haut, infos en dessous */
+    order: 1;
+    width: 100%;
+  }
+
+  #image-singlephoto {
+    order: 1;
+    width: calc(100% - 20px);
+    margin: 0 auto 20px auto;
+  }
+
+  #image-singlephoto img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  #infophoto-singlephoto {
+    order: 2;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+  }
+
+  /* --- INTERACTIONS --- */
+  .interactions-singlephoto {
+    order: 3;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(100% - 20px);
+    margin: 20px auto;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+  }
+
+  .contact-left {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  #contact-button-photo {
+    width: 100%;
+  }
+
+  /* Navigation supprimée ou placée en dessous - A REVOIR */
+  .nav-right {
+    width: 100%;
+    margin-top: 20px;
+    align-items: flex-start;
+  }
+
+  /* --- VOUS AIMEREZ AUSSI --- */
+  .related-photos {
+    order: 4;
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .related-photos .photo-grid {
+    flex-direction: column;
+    gap: 20px;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+  }
+
+  .photo-thumb {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .photo-thumb img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Neutralise toutes les largeurs limitées */
+  .container-singlephoto,
+  .infoimg-top,
+  #infophoto-singlephoto,
+  #image-singlephoto {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Supprime les hauteurs forcées */
+  .infoimg-top,
+  .tailleecran {
+    height: auto;
+    /* gap: 0px; */
+  }
+
+  /* L'image prend toute la largeur */
+  #image-singlephoto img {
+    /* width: 75%; Supprimé au profit de vw tailleecran*/
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Les infos prennent toute la largeur */
+  #infophoto-singlephoto {
+    border-bottom: 1px solid #000;
+    /* padding: 20px 10px; */
+    margin-top: -42px;
+    padding-bottom: 35px;
+  }
+
+  #titre-singlephoto {
+    /* margin-left: 20px; */
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 46px;
+    line-height: 48px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  ul.photo-infos {
+    /* margin-left: 20px; */
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    /* line-height: 1; 100% = 1 */
+    letter-spacing: 0.1em; /* 10% = 0.1em */
+    text-transform: uppercase;
+  }
+
+  .infoimg-top, .tailleecran {
+    height: auto;
+    gap: 20px;
+    width: 70vw;
+    margin: 0 auto;
+  }
+
+  .interactions-singlephoto {
+    width: 100%;
+  }
+
+  .contact-left {
+    gap: 25px;
+  }
+
+  .photo-navigation {
+    display: none;
+  }
+}
 

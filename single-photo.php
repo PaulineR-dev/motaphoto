@@ -14,7 +14,7 @@
 	<div class="infoimg-top">
 		<!-- Bloc gauche 50% de largeur : infos -->
 		<div id="infophoto-singlephoto">
-        	<h2><?php the_title(); ?></h2>
+        	<h2 id="titre-singlephoto"><?php the_title(); ?></h2>
         	<ul class="photo-infos">
 				<!-- Référence et type : champs/custom fields gérés par SCF -->
 				<!-- Catégorie et format : taxonomies gérées par CPT UI -->
