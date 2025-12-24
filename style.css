@@ -981,12 +981,10 @@ ul.photo-infos {
   .infoimg-top,
   .tailleecran {
     height: auto;
-    /* gap: 0px; */
   }
 
   /* L'image prend toute la largeur */
   #image-singlephoto img {
-    /* width: 75%; Supprimé au profit de vw tailleecran*/
     height: auto;
     object-fit: contain;
     display: block;
@@ -996,13 +994,11 @@ ul.photo-infos {
   /* Les infos prennent toute la largeur */
   #infophoto-singlephoto {
     border-bottom: 1px solid #000;
-    /* padding: 20px 10px; */
-    margin-top: -42px;
+    margin-top: -50px;
     padding-bottom: 35px;
   }
 
   #titre-singlephoto {
-    /* margin-left: 20px; */
     font-family: "Space Mono", monospace;
     font-weight: 400;
     font-style: italic;
@@ -1013,13 +1009,11 @@ ul.photo-infos {
   }
 
   ul.photo-infos {
-    /* margin-left: 20px; */
     font-family: "Space Mono", monospace;
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
-    /* line-height: 1; 100% = 1 */
-    letter-spacing: 0.1em; /* 10% = 0.1em */
+    letter-spacing: 0.1em; 
     text-transform: uppercase;
   }
 
@@ -1041,5 +1035,51 @@ ul.photo-infos {
   .photo-navigation {
     display: none;
   }
+
+
+  #text-aimerezaussi {
+    margin: 0 auto;
 }
+
+  .related-photos {
+    order: 4;
+    width: 90vw;
+    /* margin-top: 40px; */
+    margin: 0 auto;
+  }
+
+  /* Conteneur principal */
+  .related-photos {
+    width: 85vw !important;
+    margin: 25px auto 30px auto;
+    padding: 0;
+ 
+  }
+
+  /* Grille en colonne */
+  .related-photos .photo-grid {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Chaque vignette */
+  .photo-thumb {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  /* Image réduite en hauteur */
+  .photo-thumb img {
+    width: 100%;
+    height: auto;
+    max-height: 278px;
+    object-fit: cover; 
+    display: block;
+  }
+}
+
+
 
