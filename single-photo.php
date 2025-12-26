@@ -103,7 +103,7 @@
     
 
 	<!-- Partie "Vous aimerez aussi" -->
-	<?php get_template_part('template_parts/photo_block'); ?>
+	<?php get_template_part('template-parts/photo-block'); ?>
 			</div>
 
 <?php endwhile; ?>

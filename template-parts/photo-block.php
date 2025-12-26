@@ -1,7 +1,7 @@
 <h3 id="text-aimerezaussi">VOUS AIMEREZ AUSSI</h3>
 
 <?php
-// template_parts/photo_block.php
+// template_parts/photo-block.php
 
 // Récupère l'ID de la photo actuelle affichée
 $current_id = get_the_ID();
@@ -36,7 +36,7 @@ if ($terms && ! is_wp_error($terms)) {
         echo '<div class="photo-grid">';
 
         // Boucle pour parcourir chaque photo trouvée
-        while ($related->have_posts()) {
+        while ($related->have_posts()) { 
             $related->the_post(); // Prépare données globales WP
             ?>
 
@@ -62,16 +62,21 @@ if ($terms && ! is_wp_error($terms)) {
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/icon_eye.png" alt="Icône oeil" >
                         </a>
 
-                        <!-- Icône plein écran permettant d'afficher la lightbox A VENIR -->
-                        <!-- Plein écran mais EN COURS EN ATTENDANT LIGHTBOX -->
-                        <a href="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>" 
-                            id="icon-fullscreen" 
-                            data-lightbox="gallery" 
-                            title="Voir en plein écran">
+                        <!-- Icône plein écran permettant d'afficher la lightbox -->
+                        <a href="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>"
+                           id="icon-fullscreen"
+                           class="icon-fullscreen"
+                           data-title="<?php the_title_attribute(); ?>"
+                           title="Voir en plein écran">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/Icon_fullscreen.png" alt="Plein écran">
                         </a>
                     </div>
+
                 </div>
+
+
+                 <!-- Test d'ouverture de lightbox  -->
+                <button id="open-lightbox">Ouvrir la lightbox</button>
             </article>
          <?php
         } // Fin de la boucle

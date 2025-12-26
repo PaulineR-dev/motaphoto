@@ -16,7 +16,9 @@
             </nav>
         </div>
 
-        <?php get_template_part('template_parts/modale-contact'); ?>
+        <?php get_template_part('template-parts/modale-contact'); ?>
+        <?php get_template_part('template-parts/modale-lightbox'); ?>
+
         
     </footer>
 

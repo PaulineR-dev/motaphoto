@@ -734,13 +734,11 @@ span.wpcf7-form-control-wrap {
 }
 
 /* Icône fullscreen en haut à droite */
-#icon-fullscreen {
+.icon-fullscreen img {
   position: absolute;
   top: 10px;
   right: 10px;
 }
-
-
 
 
 
@@ -1083,3 +1081,34 @@ ul.photo-infos {
 
 
 
+
+
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox.is-open {
+  display: flex;
+}
+
+.lightbox__content {
+  background: #fff;
+  padding: 20px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  border-radius: 8px;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

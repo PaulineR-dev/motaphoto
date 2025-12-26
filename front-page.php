@@ -2,7 +2,7 @@
 get_header();
 
 // Appel du Hero
-get_template_part('template_parts/hero-header');
+get_template_part('template-parts/hero-header');
 ?>
 
 <main class="site-main">

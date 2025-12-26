@@ -26,3 +26,17 @@ function motaphoto_register_menus() {
     );
 }
 add_action( 'after_setup_theme', 'motaphoto_register_menus' );
+
+
+
+// Charger la lightbox séparément
+function motaphoto_enqueue_lightbox() {
+    wp_enqueue_script(
+        'motaphoto-lightbox', // Identifiant interne
+        get_template_directory_uri() . '/js/modale-lightbox.js',
+        array(), // Dépendances
+        '1.0',   // Version
+        true     // Charger dans le footer
+    );
+}
+add_action('wp_enqueue_scripts', 'motaphoto_enqueue_lightbox');
