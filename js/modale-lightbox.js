@@ -1,65 +1,48 @@
-console.log('modale-lightbox.js chargé'); // Vérifie que le script est bien chargé
+const lightbox = document.getElementById('lightbox');
+const img = document.querySelector('.lightbox__image');
+const ref = document.querySelector('.lightbox__ref');
+const cat = document.querySelector('.lightbox__cat');
 
-class Lightbox {
-  constructor(selector) {
-    console.log('Lightbox: constructeur appelé avec selector =', selector);
+let photos = [];
+let currentIndex = 0;
 
-    this.element = document.querySelector(selector);
-    console.log('Lightbox: element trouvé =', this.element);
+// Récupération des données depuis les icônes fullscreen
+document.querySelectorAll('.icon-fullscreen').forEach((icon, index) => {
 
-    this.inner = this.element.querySelector('.lightbox__inner');
-    console.log('Lightbox: inner trouvé =', this.inner);
-
-    this.closeBtn = this.element.querySelector('.lightbox__close');
-    console.log('Lightbox: closeBtn trouvé =', this.closeBtn);
-
-    this.close = this.close.bind(this);
-
-    this.closeBtn.addEventListener('click', () => {
-      console.log('Lightbox: bouton fermer cliqué');
-      this.close();
+    photos.push({
+        url: icon.dataset.image,
+        ref: icon.dataset.ref,
+        cat: icon.dataset.cat
     });
 
-    this.element.addEventListener('click', (e) => {
-      console.log('Lightbox: clic sur l’overlay', e.target);
-      if (e.target === this.element) {
-        console.log('Lightbox: fermeture via overlay');
-        this.close();
-      }
+    icon.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        openLightbox(index);
     });
-  }
+});
 
-  open(content) {
-    console.log('Lightbox: open() appelé avec content =', content);
+function openLightbox(index) {
+    currentIndex = index;
 
-    this.inner.innerHTML = content;
-    console.log('Lightbox: contenu injecté');
+    img.src = photos[index].url;
+    ref.textContent = "Référence : " + photos[index].ref;
+    cat.textContent = "Catégorie : " + photos[index].cat;
 
-    this.element.classList.remove('hidden');
-    this.element.classList.add('is-open');
-    console.log('Lightbox: classes appliquées (is-open)');
-  }
-
-  close() {
-    console.log('Lightbox: close() appelé');
-
-    this.element.classList.remove('is-open');
-    this.element.classList.add('hidden');
-    console.log('Lightbox: classes appliquées (hidden)');
-
-    this.inner.innerHTML = '';
-    console.log('Lightbox: contenu vidé');
-  }
+    lightbox.classList.remove('hidden');
 }
 
-console.log('Instanciation de la lightbox…');
-const lightbox = new Lightbox('#lightbox');
-console.log('Lightbox instanciée =', lightbox);
+// Navigation
+document.querySelector('.lightbox__prev').addEventListener('click', () => {
+    if (currentIndex > 0) openLightbox(currentIndex - 1);
+});
 
-const btn = document.querySelector('#open-lightbox');
-console.log('Bouton open-lightbox trouvé =', btn);
+document.querySelector('.lightbox__next').addEventListener('click', () => {
+    if (currentIndex < photos.length - 1) openLightbox(currentIndex + 1);
+});
 
-btn.addEventListener('click', () => {
-  console.log('Bouton open-lightbox cliqué');
-  lightbox.open('<p>test</p>');
+// Fermeture
+document.querySelector('.lightbox__close').addEventListener('click', () => {
+    lightbox.classList.add('hidden');
 });

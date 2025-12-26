@@ -63,11 +63,16 @@ if ($terms && ! is_wp_error($terms)) {
                         </a>
 
                         <!-- Icône plein écran permettant d'afficher la lightbox -->
-                        <a href="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>"
-                           id="icon-fullscreen"
-                           class="icon-fullscreen"
-                           data-title="<?php the_title_attribute(); ?>"
-                           title="Voir en plein écran">
+                        <a href="#"
+                            class="icon-fullscreen"
+                            data-image="<?php echo esc_url(wp_get_attachment_url(get_post_thumbnail_id())); ?>"
+                            data-ref="<?php the_field('reference'); ?>"
+                            data-cat="<?php 
+                               $cats = get_the_terms(get_the_ID(), 'categorie');
+                                if ($cats) echo esc_html($cats[0]->name);
+                            ?>"
+                            data-index="<?php echo $related->current_post; ?>"
+                            title="Voir en plein écran">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/Icon_fullscreen.png" alt="Plein écran">
                         </a>
                     </div>
@@ -75,8 +80,7 @@ if ($terms && ! is_wp_error($terms)) {
                 </div>
 
 
-                 <!-- Test d'ouverture de lightbox  -->
-                <button id="open-lightbox">Ouvrir la lightbox</button>
+                 
             </article>
          <?php
         } // Fin de la boucle

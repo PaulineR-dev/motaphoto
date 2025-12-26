@@ -2,14 +2,19 @@
     <div class="lightbox__overlay"></div>
 
     <div class="lightbox__content">
+
         <button class="lightbox__close" type="button">Fermer</button>
-        <button class="lightbox__prev" type="button">Précédent</button>
-        <button class="lightbox__next" type="button">Suivant</button>
+        <button class="lightbox__prev" type="button">←</button>
 
-        <div class="lightbox__inner"></div>
-
-        <div class="lightbox__info">
-            <span class="lightbox__title"></span>
+        <div class="lightbox__inner">
+            <img class="lightbox__image" src="" alt="">
+            <div class="lightbox__bottom">
+                <span class="lightbox__ref"></span>
+                <span class="lightbox__cat"></span>
+            </div>
         </div>
+
+        <button class="lightbox__next" type="button">→</button>
+
     </div>
 </div>
