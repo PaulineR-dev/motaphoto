@@ -1,48 +1,68 @@
-const lightbox = document.getElementById('lightbox');
-const img = document.querySelector('.lightbox__image');
-const ref = document.querySelector('.lightbox__ref');
-const cat = document.querySelector('.lightbox__cat');
+document.addEventListener('DOMContentLoaded', function () {
 
-let photos = [];
-let currentIndex = 0;
+    // Sélection des éléments principaux de la lightbox
+    const lightbox = document.getElementById('lightbox');
+    const imageLightbox = document.querySelector('.lightbox__image');
+    const refLightbox = document.querySelector('.lightbox__ref');
+    const catLightbox = document.querySelector('.lightbox__cat');
+    const closeBtnLightbox = document.querySelector('.lightbox__close');
+    const prevBtnLightbox = document.querySelector('.lightbox__prev');
+    const nextBtnLightbox = document.querySelector('.lightbox__next');
 
-// Récupération des données depuis les icônes fullscreen
-document.querySelectorAll('.icon-fullscreen').forEach((icon, index) => {
+    // Tableau contenant toutes les photos
+    let photosLightbox = [];
+    let currentIndexLightbox = 0; // Index de la photo affichée actuellement dans le tableau
 
-    photos.push({
-        url: icon.dataset.image,
-        ref: icon.dataset.ref,
-        cat: icon.dataset.cat
+    // Sélectionne toutes les icônes fullscreen présentes dans la page -> en cours de MODIFICATION CAR DOIT ETRE PAR RAPPORT AUX CATEGORIES
+    document.querySelectorAll('.icon-fullscreen').forEach((icon, index) => {
+
+        // Ajout de chaque photo dans le tableau avec son URL, sa ref et sa catégorie
+        photosLightbox.push({
+            url: icon.dataset.image, // data-image=""
+            ref: icon.dataset.ref, // data-ref=""
+            cat: icon.dataset.cat // data-cat=""
+        });
+
+        // Clic sur l'event fullscreen pour ouvrir la lightbox
+        icon.addEventListener('click', function (event) {
+            event.preventDefault();
+            openLightbox(index); 
+        });
     });
 
-    icon.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    // Fonction d'ouverture de la lightbox et affichage de l'index de la photo ouverte
+    function openLightbox(index) {
+        currentIndexLightbox = index; 
 
-        openLightbox(index);
+        imageLightbox.src = photosLightbox[index].url; 
+        refLightbox.textContent = "Référence : " + photosLightbox[index].ref;
+        catLightbox.textContent = "Catégorie : " + photosLightbox[index].cat;
+
+        lightbox.classList.remove('hidden'); // Pour en css, est retiré display: none
+    }
+
+    // Navigation vers la photo précédente
+    prevBtnLightbox.addEventListener('click', () => {
+        // Tant que pas à la première image (index > 0)
+        if (currentIndexLightbox > 0) {
+            // Alors ouverture de la photo précédente
+            openLightbox(currentIndexLightbox - 1);
+        }
     });
-});
 
-function openLightbox(index) {
-    currentIndex = index;
+    // Navigation vers la photo suivante
+    nextBtnLightbox.addEventListener('click', () => {
+        // Tant que pas à la dernière photo
+        if (currentIndexLightbox < photosLightbox.length - 1) {
+            // Alors ouverture de la photo suivante
+            openLightbox(currentIndexLightbox + 1);
+        }
+    });
 
-    img.src = photos[index].url;
-    ref.textContent = "Référence : " + photos[index].ref;
-    cat.textContent = "Catégorie : " + photos[index].cat;
+    // Fermeture via la croix
+    closeBtnLightbox.addEventListener('click', () => {
+        // Remet la classe css hidden donc display: none
+        lightbox.classList.add('hidden');
+    });
 
-    lightbox.classList.remove('hidden');
-}
-
-// Navigation
-document.querySelector('.lightbox__prev').addEventListener('click', () => {
-    if (currentIndex > 0) openLightbox(currentIndex - 1);
-});
-
-document.querySelector('.lightbox__next').addEventListener('click', () => {
-    if (currentIndex < photos.length - 1) openLightbox(currentIndex + 1);
-});
-
-// Fermeture
-document.querySelector('.lightbox__close').addEventListener('click', () => {
-    lightbox.classList.add('hidden');
 });

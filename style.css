@@ -835,7 +835,6 @@ ul.photo-infos {
 
  /*Hero header */
 .hero {
-  width: 100%;
   max-height: 962px;
   height: 100vh;
   background-size: cover;
@@ -843,6 +842,12 @@ ul.photo-infos {
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
+  width: 100vw; 
+  position: relative; 
+  left: 50%; 
+  right: 50%; 
+  margin-left: -50vw; 
+  margin-right: -50vw;
 }
 
 
@@ -1086,32 +1091,41 @@ ul.photo-infos {
 .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8); /* Fond noir transparent 80% */
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 30;
 }
 
 .lightbox.hidden {
     display: none;
 }
 
+.lightbox__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 10; 
+}
+
+/* Contenu avec images, flèches et croix de fermeture */
 .lightbox__content {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 40px; /* Entre l'image et les flèches */
+    gap: 40px;
+    z-index: 20;
 }
 
 .lightbox__image {
     max-width: 100vw;
-    max-height: calc(100vh - 80px); /* Espace réservé pour les infos */
+    max-height: calc(100vh - 80px); /* Espace pour les infos */
     height: auto;
     object-fit: contain;
 }
 
-/* Navigation */
+/* Flèches de navigation */
 .lightbox__prev,
 .lightbox__next {
     background: none;
@@ -1120,21 +1134,21 @@ ul.photo-infos {
     color: white;
     cursor: pointer;
     user-select: none;
+    z-index: 30; 
 }
 
-/* Bouton fermer : à revoir car pas dans la maquette */
 .lightbox__close {
     position: absolute;
-    top: -50px;
-    right: 0;
+    top: 20px;
+    right: 20px;
+    z-index: 40; 
     background: none;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size: 32px;
     cursor: pointer;
 }
 
-/* Informations en bas de l’image */
 .lightbox__bottom {
     display: flex;
     justify-content: space-between;
@@ -1143,3 +1157,8 @@ ul.photo-infos {
     margin-top: 15px;
     font-size: 16px;
 }
+
+.hidden { 
+    display: none; 
+}
+

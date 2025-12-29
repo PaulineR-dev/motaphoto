@@ -1,5 +1,5 @@
 <?php
-// Récupération de l'image choisie via Secure Custom Fields
+// Récupération de l'ID de l'image définie dans le champ personnalisé "hero_header" SCF sur la page en cours 
 $hero_image_id = get_post_meta(get_queried_object_id(), 'hero_header', true);
 
 // Si l'administrateur a choisi une image

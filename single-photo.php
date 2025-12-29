@@ -62,29 +62,34 @@
 
 		<!-- À droite : navigation vers les autres photos -->
     	<div class="nav-right">
-    		<?php
-    			$prev_post = get_previous_post();
-    			$next_post = get_next_post();
-    		?>
-    		<div class="photo-navigation">
-        		<?php if ($prev_post): ?>
-            		<a class="nav-photo prev" href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>">
-                	←
-            		</a>
-            		<div class="nav-thumbnail prev-thumb">
-                	<?php echo get_the_post_thumbnail($prev_post->ID, 'thumbnail'); ?>
-            		</div>
-        		<?php endif; ?>
+<?php
+    $prev_post = get_previous_post();
+    $next_post = get_next_post();
+?>
+<div class="photo-navigation">
+    <?php if ($prev_post): ?>
+        <a class="nav-photo prev" href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>">
+            <img 
+                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Line1.png' ); ?>" 
+                alt="Photo précédente">
+        </a>
+        <div class="nav-thumbnail prev-thumb">
+            <?php echo get_the_post_thumbnail($prev_post->ID, 'thumbnail'); ?>
+        </div>
+    <?php endif; ?>
 
-        		<?php if ($next_post): ?>
-            		<a class="nav-photo next" href="<?php echo esc_url(get_permalink($next_post->ID)); ?>">
-            		 →
-            		</a>
-            		<div class="nav-thumbnail next-thumb">
-                	<?php echo get_the_post_thumbnail($next_post->ID, 'thumbnail'); ?>
-            		</div>
-        		<?php endif; ?>
-    		</div>
+    <?php if ($next_post): ?>
+        <a class="nav-photo next" href="<?php echo esc_url(get_permalink($next_post->ID)); ?>">
+            <img 
+                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Line2.png' ); ?>" 
+                alt="Photo suivante">
+        </a>
+        <div class="nav-thumbnail next-thumb">
+            <?php echo get_the_post_thumbnail($next_post->ID, 'thumbnail'); ?>
+        </div>
+    <?php endif; ?>
+</div>
+
 		</div>
 
 

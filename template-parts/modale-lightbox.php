@@ -3,7 +3,7 @@
 
     <div class="lightbox__content">
 
-        <button class="lightbox__close" type="button">Fermer</button>
+        <button class="lightbox__close" type="button">X</button>
         <button class="lightbox__prev" type="button">←</button>
 
         <div class="lightbox__inner">
