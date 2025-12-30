@@ -62,11 +62,13 @@
 
 		<!-- À droite : navigation vers les autres photos -->
     	<div class="nav-right">
-<?php
-    $prev_post = get_previous_post();
-    $next_post = get_next_post();
-?>
-<div class="photo-navigation">
+
+	<?php
+    	$prev_post = get_previous_post();
+    	$next_post = get_next_post();
+	?>
+
+	<div class="photo-navigation">
     <?php if ($prev_post): ?>
         <a class="nav-photo prev" href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>">
             <img 
@@ -96,9 +98,50 @@
 
 <?php endwhile; ?>
 
-<!-- Partie "Vous aimerez aussi" -->
-<h3 id="text-aimerezaussi">VOUS AIMEREZ AUSSI</h3>
-<?php get_template_part('template-parts/photo-block'); ?>
+	<!-- Partie "Vous aimerez aussi" -->
+	<h3 class="related-title">VOUS AIMEREZ AUSSI</h3>
+
+	<div class="related-photos">
+    	<div class="photo-grid">
+
+        <?php
+        	$current_id = get_the_ID(); // Récupération de l'ID de la photo affichée
+        	$terms = get_the_terms($current_id, 'categorie'); // Récupération de la catégorie de la photo affichée
+
+        	if ($terms && ! is_wp_error($terms)) { // Vérification : si pas d'erreur et si la photo a au moins une catégorie
+
+            	$term_id = $terms[0]->term_id; // Récupération de l'ID de premier terme de "catégorie"
+
+            	$args = [ // Arguments pour la requête WP_QUERY
+                	'post_type'      => 'photo', // Cible uniquement les contenus CPT "photo"
+                	'posts_per_page' => 2, // 2 photos affichées dans la partie "photos apparentées"
+                	'post__not_in'   => [$current_id], // Exclusion de la photo actuelle pour éviter de l'afficher en doublon
+                	'tax_query'      => [ // Filtre appliqué par la catégorie sur la photo actuelle
+                    	[
+                        'taxonomy' => 'categorie', // Utilisation de la taxonomie "catégorie"
+                        'field'    => 'term_id', // Identification des termes par leur ID
+                        'terms'    => $term_id, // Indique l'ID du terme (catégorie) à inclure dans la requête
+                    	],
+                	],
+            	];
+
+            $related = new WP_Query($args); // Création d'une nouvelle requête Wordpress avec les arguments définis
+
+            if ($related->have_posts()) : // Vérification : si la requête a trouvé au moins une photo
+                while ($related->have_posts()) : // Boucle sur chaque photo qui correspond à la requête
+                    $related->the_post();
+
+                    get_template_part('template-parts/photo-block');
+
+                endwhile;
+                wp_reset_postdata(); // Remet les données de la boucle globale dans leur état initial
+            endif;
+        }
+        ?>
+
+    </div>
+</div>
+
 
 </main>
 

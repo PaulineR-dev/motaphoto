@@ -167,7 +167,6 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   });
 
 
-
   // Fonction commune aux différents boutons de contact
   function openContactModale() {
     if (isMobileScreen()) {
@@ -254,3 +253,102 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const chargerPlusbtn = document.getElementById("load-more-photos");
+  const photosGrid = document.querySelector(".photo-grid");
+  const filterCategorie = document.getElementById("filter-categorie");
+  const filterFormat = document.getElementById("filter-format");
+  const filterOrder = document.getElementById("sort-date");
+
+  // Récupération de la page actuelle depuis le bouton
+  let currentOpenedPage = parseInt(chargerPlusbtn.dataset.currentPage);
+  // Nombre total de pages (récupéré depuis le bouton)
+  let maxPages = parseInt(chargerPlusbtn.dataset.maxPages);
+  
+  // Empêche de lancer plusieurs requêtes AJAX en même temps
+  let loadingAjax = false;
+
+  // Fonction qui récupère les valeurs des filtres
+  function getFilters() {
+    return {
+      categorie: filterCategorie.value,
+      format: filterFormat.value,
+      order: filterOrder.value
+    };
+  }
+
+  // Fonction qui charge les photos via AJAX avec nextPage pour le numéro de page à chager, append true pour ajout des photos et si false remplacement de la grille
+  function loadPhotos(nextPage, append = true) {
+  if (loadingAjax) return;// Si éventuelllement une requête est déjà en cours : ne fait rien
+
+  // Indique requête en cours à l'exécution de la fonction
+  loadingAjax = true;
+        
+  // Récupération des valeurs des filtres
+  const filters = getFilters();
+
+  // Ensemble des données à envoyer à WordPress
+  const formData = new FormData();
+  formData.append("action", "load_more_photos");
+  formData.append("nonce", motaphotoInfinite.nonce);
+  formData.append("page", nextPage);
+  formData.append("categorie", filters.categorie);
+  formData.append("format", filters.format);
+  formData.append("order", filters.order);
+
+  // Envoi de la requête AJAX
+  fetch(motaphotoInfinite.ajax_url, {
+    method: "POST",
+    body: formData
+  })
+    .then(res => res.text()) // Récupération de la réponse traduite en HTML
+    .then(html => {
+      // Créateur d'un conteneur temporaire pour traiter le HTML reçu
+      const temp = document.createElement("div");
+      temp.innerHTML = html;
+
+      // Récupération de la balise contenant le nombre total de pages
+      const meta = temp.querySelector(".ajax-meta");
+
+      // Si WordPress renvoie un nombre de pages, on le met à jour
+      if (meta) {
+        maxPages = parseInt(meta.dataset.maxPages);
+        meta.remove(); // On retire cette balise du HTML
+      }
+
+      // Ajoute ou remplace les photos en fonction de si bouton cliqué pour charger plus ou si filtre(s) activé(s)
+    if (append) {
+      photosGrid.insertAdjacentHTML("beforeend", temp.innerHTML);
+    } else {
+      photosGrid.innerHTML = temp.innerHTML;
+    }
+
+      // Mise à jour de la page actuelle
+      currentOpenedPage = nextPage;
+
+      // Si on est à la dernière page alors le bouton est caché
+      chargerPlusbtn.style.display = (currentOpenedPage >= maxPages) ? "none" : "block";
+    })
+    
+      .finally(() => {
+        // Indication de fin de requête pour en permettre éventuellement une autre
+        loadingAjax = false;
+      });
+  }
+
+  // Quand clic sur le bouton "Charger plus"
+  chargerPlusbtn.addEventListener("click", () => {
+    loadPhotos(currentOpenedPage + 1, true); // Charge la page suivante (true)
+  });
+    
+  // Fonction appelée quand un filtre change
+  function onFilterChange() {
+    loadPhotos(1, false); // Rechargement depuis la page 1 et remplacement de la grille (false)
+  }
+
+  // Écoute les changements sur les filtres
+  filterCategorie.addEventListener("change", onFilterChange);
+  filterFormat.addEventListener("change", onFilterChange);
+  filterOrder.addEventListener("change", onFilterChange);
+
+});
