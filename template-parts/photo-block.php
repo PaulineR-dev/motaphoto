@@ -2,7 +2,7 @@
     <div class="photo-thumb">
 
         <?php if (has_post_thumbnail()) : ?>
-            <?php the_post_thumbnail('medium', ['class' => 'photo-thumb-img']); ?>
+            <?php the_post_thumbnail('large', ['class' => 'photo-thumb-img']); ?>
         <?php endif; ?>
 
         <div class="photo-overlay">
