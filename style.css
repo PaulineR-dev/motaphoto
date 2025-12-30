@@ -803,7 +803,7 @@ ul.photo-infos {
 
 
 .tailleecran {
-  height: calc(100vh - 118px);
+  /* height: calc(100vh - 118px); */
   display: flex;
   flex-direction: column;
 }
@@ -821,7 +821,7 @@ ul.photo-infos {
 
 .infoimg-top {
   display: flex;
-  height: calc(100vh - 118px);
+  min-height: calc(100vh - 218px);
 }
 
 
@@ -981,10 +981,10 @@ ul.photo-infos {
   }
 
   /* Supprime les hauteurs forcées */
-  .infoimg-top,
+  /* .infoimg-top,
   .tailleecran {
     height: auto;
-  }
+  } */
 
   /* L'image prend toute la largeur */
   #image-singlephoto img {
@@ -1021,7 +1021,7 @@ ul.photo-infos {
   }
 
   .infoimg-top, .tailleecran {
-    height: auto;
+    /* height: auto; */
     gap: 20px;
     width: 70vw;
     margin: 0 auto;
@@ -1162,3 +1162,61 @@ ul.photo-infos {
     display: none; 
 }
 
+
+
+/* Affichage sur la page d'accueil  */
+
+.related-photos {
+    width: 100vw;
+    max-width: 1148px;
+    margin-bottom: 105px;
+    margin-top: 110px;
+    justify-content: center;
+    display: flex;
+    /* gap: 20px; */
+}
+
+/* --- PAGE D'ACCUEIL : affichage en flex --- */
+
+.photo-list .photo-grid {
+    display: flex;
+    flex-wrap: wrap;          /* permet de passer à la ligne */
+    justify-content: center;  /* centre les éléments */
+    gap: 20px;                /* espace entre les photos */
+}
+
+/* Chaque photo doit prendre 50% - 20px pour faire 2 par ligne */
+.photo-list .photo-block {
+    flex: 0 1 calc(50% - 20px);
+    display: flex;
+    justify-content: center;
+}
+
+/* Les vignettes doivent s'adapter */
+/* .photo-list .photo-thumb {
+    /* width: 100%; */
+    /* height: auto;
+} */ */
+
+.photo-list .photo-thumb img {
+    /* width: 100%; */
+    /* height: auto; */
+    object-fit: cover;
+}
+
+
+.tailleecran {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoimg-top {
+  flex: 1;              /* prend tout l’espace dispo */
+  display: flex;
+  gap: 21px;
+}
+
+.interactions-singlephoto {
+  height: 118px;       
+  flex-shrink: 0;       /* ne se compresse pas */
+}

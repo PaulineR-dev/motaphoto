@@ -88,30 +88,18 @@
             <?php echo get_the_post_thumbnail($next_post->ID, 'thumbnail'); ?>
         </div>
     <?php endif; ?>
-</div>
+        </div> <!-- .interactions-singlephoto -->
 
-		</div>
+    </div> <!-- .tailleecran -->
 
-
-
-				</div>
-
-
-
-
-
-
-	</div>
-
-
-
-    
-
-	<!-- Partie "Vous aimerez aussi" -->
-	<?php get_template_part('template-parts/photo-block'); ?>
-			</div>
+</div> <!-- .container-singlephoto -->
 
 <?php endwhile; ?>
+
+<!-- Partie "Vous aimerez aussi" -->
+<h3 id="text-aimerezaussi">VOUS AIMEREZ AUSSI</h3>
+<?php get_template_part('template-parts/photo-block'); ?>
+
 </main>
 
 <?php get_footer(); ?>

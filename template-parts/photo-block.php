@@ -1,5 +1,3 @@
-<h3 id="text-aimerezaussi">VOUS AIMEREZ AUSSI</h3>
-
 <?php
 // template_parts/photo-block.php
 
