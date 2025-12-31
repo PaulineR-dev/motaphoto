@@ -52,54 +52,67 @@
 					</div>
 <!-- Bloc bas regroupant les interactions-->
 	<div class="interactions-singlephoto">
-		<!-- À gauche : contact -->
-		<div class="contact-left">
-        	<p id="question">Cette photo vous intéresse ?</p>
-			<button id="contact-button-photo" data-ref-photo="<?php the_field('reference'); ?>">
-        	Contact
-    		</button>
-		</div>
 
-		<!-- À droite : navigation vers les autres photos -->
-    	<div class="nav-right">
+    <!-- À gauche : contact -->
+    <div class="contact-left">
+        <p id="question">Cette photo vous intéresse ?</p>
+        <button id="contact-button-photo" data-ref-photo="<?php the_field('reference'); ?>">
+            Contact
+        </button>
+    </div>
 
-	<?php
-    	$prev_post = get_previous_post();
-    	$next_post = get_next_post();
-	?>
+    <!-- À droite : navigation -->
+    <div class="nav-right">
 
-	<div class="photo-navigation">
-    <?php if ($prev_post): ?>
-        <a class="nav-photo prev" href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>">
-            <img 
-                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Line1.png' ); ?>" 
-                alt="Photo précédente">
-        </a>
-        <div class="nav-thumbnail prev-thumb">
-            <?php echo get_the_post_thumbnail($prev_post->ID, 'thumbnail'); ?>
-        </div>
-    <?php endif; ?>
 
-    <?php if ($next_post): ?>
-        <a class="nav-photo next" href="<?php echo esc_url(get_permalink($next_post->ID)); ?>">
-            <img 
-                src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Line2.png' ); ?>" 
-                alt="Photo suivante">
-        </a>
-        <div class="nav-thumbnail next-thumb">
-            <?php echo get_the_post_thumbnail($next_post->ID, 'thumbnail'); ?>
-        </div>
-    <?php endif; ?>
-        </div> <!-- .interactions-singlephoto -->
 
-    </div> <!-- .tailleecran -->
 
-</div> <!-- .container-singlephoto -->
+        <?php
+            $prev_post = get_previous_post();
+            $next_post = get_next_post();
+        ?>
+
+
+
+
+
+<div class="nav-thumbnail-center">
+    <img id="nav-thumb" src="" alt="" style="display:none;">
+</div>
+
+
+        <div class="photo-navigation">
+
+            
+
+           <?php if ($prev_post): ?>
+    <a class="nav-photo prev"
+       href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>"
+       data-thumb="<?php echo get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Line1.png' ); ?>">
+    </a>
+<?php endif; ?>
+
+<?php if ($next_post): ?>
+    <a class="nav-photo next"
+       href="<?php echo esc_url(get_permalink($next_post->ID)); ?>"
+       data-thumb="<?php echo get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Line2.png' ); ?>">
+    </a>
+<?php endif; ?>
+
+
+        </div> <!-- .photo-navigation -->
+
+    </div> <!-- .nav-right -->
+
+</div> <!-- .interactions-singlephoto -->
+
 
 <?php endwhile; ?>
 
 	<!-- Partie "Vous aimerez aussi" -->
-	<h3 class="related-title">VOUS AIMEREZ AUSSI</h3>
+	<h3 id="text-vousaimerezaussi">VOUS AIMEREZ AUSSI</h3>
 
 	<div class="related-photos">
     	<div class="photo-grid">

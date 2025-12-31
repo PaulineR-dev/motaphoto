@@ -570,7 +570,10 @@ span.wpcf7-form-control-wrap {
 /* Sous-bloc droite */ 
 .nav-right { 
   display: flex; 
-  justify-content: flex-end; }
+  justify-content: flex-end; 
+  gap: 15px;
+  margin-bottom: 15px;
+  }
 
 
 #contact-button-photo {
@@ -593,6 +596,7 @@ span.wpcf7-form-control-wrap {
   animation-duration: 0ms;
   transition: background-color 1s ease, color 1s ease;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 #contact-button-photo:hover {
@@ -604,8 +608,7 @@ span.wpcf7-form-control-wrap {
   position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 3rem;
-  margin-top: 50px;
+  gap: 29px;
 }
 
 .nav-thumbnail {
@@ -621,7 +624,7 @@ span.wpcf7-form-control-wrap {
 }
 
 .nav-right {
-  flex: 1 1 50%;
+  /* flex: 1 1 50%; */
   max-width: 50%;
   display: flex;
   flex-direction: column;
@@ -677,6 +680,7 @@ span.wpcf7-form-control-wrap {
 .related-photos .photo-grid {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 /* .related-photos .photo-block {
@@ -755,7 +759,7 @@ h2 {
   margin-bottom: 10px;
 }
 
-#text-aimerezaussi {
+#text-vousaimerezaussi {
   font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: normal;
@@ -944,7 +948,7 @@ ul.photo-infos {
   .related-photos {
     order: 4;
     width: 100%;
-    margin-top: 40px;
+    /* margin-top: 40px; */
   }
 
   .related-photos .photo-grid {
@@ -1046,7 +1050,7 @@ ul.photo-infos {
 
   .related-photos {
     order: 4;
-    width: 90vw;
+    width: 90vw; /* A VERIRIER ! */
     /* margin-top: 40px; */
     margin: 0 auto;
   }
@@ -1170,7 +1174,7 @@ ul.photo-infos {
     width: 100vw;
     max-width: 1148px;
     margin-bottom: 105px;
-    margin-top: 110px;
+    /* margin-top: 110px; */
     justify-content: center;
     display: flex;
     /* gap: 20px; */
@@ -1219,4 +1223,34 @@ ul.photo-infos {
 .interactions-singlephoto {
   height: 118px;       
   flex-shrink: 0;       /* ne se compresse pas */
+}
+
+
+/* Bloc centré pour les miniatures au-dessus des flèches dans la partie contact de single-photo */
+.nav-thumbnail-center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-thumbnail-center img {
+    max-height: 120px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-thumbnail-center {
+    width: 81px;
+    height: 71px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* important pour couper ce qui dépasse */
+}
+
+.nav-thumbnail-center img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* remplit le cadre */
+    display: block;
 }

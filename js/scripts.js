@@ -260,6 +260,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterFormat = document.getElementById("filter-format");
   const filterOrder = document.getElementById("sort-date");
 
+  // Si le bouton n'existe pas sur cette page, arrêt du script
+  if (!chargerPlusbtn) return;
+
   // Récupération de la page actuelle depuis le bouton
   let currentOpenedPage = parseInt(chargerPlusbtn.dataset.currentPage);
   // Nombre total de pages (récupéré depuis le bouton)
@@ -352,3 +355,33 @@ document.addEventListener("DOMContentLoaded", () => {
   filterOrder.addEventListener("change", onFilterChange);
 
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const thumb = document.getElementById("nav-thumb");
+    const prev = document.querySelector(".nav-photo.prev");
+    const next = document.querySelector(".nav-photo.next");
+
+    if (!thumb) return;
+
+    function showThumb(url) {
+        thumb.src = url;
+        thumb.style.display = "block";
+    }
+
+    function hideThumb() {
+        thumb.style.display = "none";
+        thumb.src = "";
+    }
+
+    if (prev) {
+        prev.addEventListener("mouseenter", () => showThumb(prev.dataset.thumb));
+        prev.addEventListener("mouseleave", hideThumb);
+    }
+
+    if (next) {
+        next.addEventListener("mouseenter", () => showThumb(next.dataset.thumb));
+        next.addEventListener("mouseleave", hideThumb);
+    }
+});
+
