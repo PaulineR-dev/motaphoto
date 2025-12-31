@@ -9,6 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevBtnLightbox = document.querySelector('.lightbox__prev');
     const nextBtnLightbox = document.querySelector('.lightbox__next');
 
+    // Si par sur la page d'accueil, display: none pour éviter affichage des flèches sur la lightbox quand single-photo
+    if (!document.body.classList.contains('home')) { 
+        prevBtnLightbox.style.display = 'none'; 
+        nextBtnLightbox.style.display = 'none'; 
+    }
+
+
     // Tableau contenant toutes les photos
     let photosLightbox = [];
     let currentIndexLightbox = 0; // Index de la photo affichée actuellement dans le tableau
