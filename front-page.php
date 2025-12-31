@@ -31,39 +31,44 @@ get_template_part('template-parts/hero-header');
         <!-- ICI : les filtres, en dehors du PHP -->
         <div class="photo-filters">
 
-            <!-- Filtre catégorie -->
-            <select id="filter-categorie">
-                <option value="">Catégories</option>
-                <?php
+        <!-- Filtre catégorie -->
+          <select id="filter-categorie">
+            <option value="" disabled selected hidden>CATÉGORIES</option>
+            <?php
                 $categories = get_terms(array(
-                    'taxonomy'   => 'categorie',
-                    'hide_empty' => true,
+                'taxonomy'   => 'categorie',
+                'hide_empty' => true,
                 ));
                 foreach ($categories as $cat) {
                     echo '<option value="' . esc_attr($cat->slug) . '">' . esc_html($cat->name) . '</option>';
                 }
-                ?>
-            </select>
+            ?>
+        </select>
 
-            <!-- Filtre format -->
-            <select id="filter-format">
-                <option value="">Formats</option>
-                <?php
+
+        <!-- Filtre format -->
+        <select id="filter-format">
+            <option value="" disabled selected hidden>FORMATS</option>
+            <?php
                 $formats = get_terms(array(
-                    'taxonomy'   => 'format',
-                    'hide_empty' => true,
+                'taxonomy'   => 'format',
+                'hide_empty' => true,
                 ));
                 foreach ($formats as $format) {
-                    echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
+                echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
                 }
-                ?>
-            </select>
+            ?>
+        </select>
 
-            <!-- Tri par date -->
-            <select id="sort-date">
-                <option value="desc">Plus récentes</option>
-                <option value="asc">Plus anciennes</option>
-            </select>
+
+        <!-- Tri par date -->
+        <select id="sort-date">
+            <option value="" disabled selected hidden>TRIER PAR</option>
+            <option value="desc">À partir des plus récentes</option>
+            <option value="asc">À partir des plus anciennes</option>
+        </select>
+
+
 
         </div>
 

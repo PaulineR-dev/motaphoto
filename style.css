@@ -1254,3 +1254,53 @@ ul.photo-infos {
     object-fit: cover; /* remplit le cadre */
     display: block;
 }
+
+
+/* Bouton Charger Plus de la page d'accueil */
+#load-more-photos {
+  width: 272px;
+  height: 50px;
+  border-radius: 2px;
+  padding: 8px 15px;
+  background: #D8D8D8;
+  box-shadow: 0px 2px 1px 0px #00000005;
+  opacity: 1;
+  border: none;
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+  display: block;
+  margin: 40px auto 40px auto;
+  transition: transform 500ms ease-out; /* A revoir pour les animations au clic */
+  opacity: 1;
+}
+
+/* Filtres de la page d'accueil */
+.photo-filters select {
+  width: 260px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1.3px solid #B8BBC2;
+  padding: 11px 18px; 
+  background: #FFFFFF;
+  opacity: 1;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.03em; 
+  vertical-align: middle;
+}
+
+
+#filter-categorie option,
+#filter-format option {
+  text-transform: uppercase;
+}
+
+
