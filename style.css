@@ -232,6 +232,7 @@ span.wpcf7-form-control-wrap {
 
 .related-photos .photo-grid {
     flex-direction: column;
+
 }
 
 
@@ -1057,7 +1058,7 @@ ul.photo-infos {
 
   /* Conteneur principal */
   .related-photos {
-    width: 85vw !important;
+    width: 85vw !important; /* Revoir le !important */
     margin: 25px auto 30px auto;
     padding: 0;
  
@@ -1187,6 +1188,7 @@ ul.photo-infos {
     flex-wrap: wrap;          /* permet de passer à la ligne */
     justify-content: center;  /* centre les éléments */
     gap: 20px;                /* espace entre les photos */
+    margin-bottom: 160px;
 }
 
 /* Chaque photo doit prendre 50% - 20px pour faire 2 par ligne */
@@ -1200,7 +1202,7 @@ ul.photo-infos {
 /* .photo-list .photo-thumb {
     /* width: 100%; */
     /* height: auto;
-} */ */
+} */
 
 .photo-list .photo-thumb img {
     /* width: 100%; */
@@ -1256,6 +1258,9 @@ ul.photo-infos {
 }
 
 
+
+
+
 /* Bouton Charger Plus de la page d'accueil */
 #load-more-photos {
   width: 272px;
@@ -1264,43 +1269,133 @@ ul.photo-infos {
   padding: 8px 15px;
   background: #D8D8D8;
   box-shadow: 0px 2px 1px 0px #00000005;
-  opacity: 1;
   border: none;
+
   font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: normal;
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 0;
-  vertical-align: middle;
+
   display: block;
-  margin: 40px auto 40px auto;
-  transition: transform 500ms ease-out; /* A revoir pour les animations au clic */
+  margin: 40px auto;
+
+  /* État initial stable pour l’animation JS */
   opacity: 1;
+  transform: translateY(0);
+  will-change: opacity, transform;
+
+  /* Hover uniquement */
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-/* Filtres de la page d'accueil */
-.photo-filters select {
+#load-more-photos:hover {
+  background: black;
+  color: white;
+}
+
+
+
+/* CONTENEUR DES FILTRES */
+.photo-filters {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 75px;
+  margin-bottom: 40px;
+}
+
+
+.photo-filters-left {
+   display: flex;
+   gap: 80px;
+}
+
+/* CUSTOM SELECT (remplace les <select>) */
+.custom-select {
+  position: relative;
   width: 260px;
+  cursor: pointer;
+  user-select: none;
+  font-family: "Poppins", sans-serif;
+}
+
+
+/* Zone visible (équivalent du <select>) */
+.custom-select-trigger {
+  width: 100%;
   height: 42px;
   border-radius: 8px;
   border: 1.3px solid #B8BBC2;
-  padding: 11px 18px; 
+  padding: 11px 18px;
   background: #FFFFFF;
-  opacity: 1;
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-style: normal;
   font-size: 12px;
   line-height: 18px;
-  letter-spacing: 0.03em; 
-  vertical-align: middle;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
 }
 
 
-#filter-categorie option,
-#filter-format option {
+/* LISTE DÉROULANTE */
+.custom-options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border: 1.3px solid #B8BBC2;
+  border-radius: 8px;
+  display: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+
+/* Chaque ligne */
+.custom-option {
+  padding: 12px 18px;
+  background: #FFFFFF;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
 
+/* Hover → rose clair */
+.custom-option:hover {
+  background: #FFD6D6;
+}
+
+
+/* Sélection → rouge */
+.custom-option.selected {
+  background: #E00000;
+  color: #FFFFFF;
+}
+
+/* Quand le menu est ouvert */
+.custom-select.open .custom-options {
+  display: block;
+}
+
+.custom-option:active {
+  background: #E00000;
+  color: white;
+}
+
+.custom-options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* PHOTOS : ÉTAT INITIAL POUR ANIMATION FADE‑IN */
+.photo-block {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: opacity, transform;
+}

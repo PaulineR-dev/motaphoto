@@ -1,6 +1,6 @@
+// QUAND LA PAGE EST CHARGEE
 document.addEventListener('DOMContentLoaded', function () {
-
-    // Sélection des éléments principaux de la lightbox
+    // RECUPERATION ELEMENTS DE LA LIGHTBOX
     const lightbox = document.getElementById('lightbox');
     const imageLightbox = document.querySelector('.lightbox__image');
     const refLightbox = document.querySelector('.lightbox__ref');
@@ -9,45 +9,59 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevBtnLightbox = document.querySelector('.lightbox__prev');
     const nextBtnLightbox = document.querySelector('.lightbox__next');
 
-    // Si par sur la page d'accueil, display: none pour éviter affichage des flèches sur la lightbox quand single-photo
+    // SI PAS SUR LA PAGE D'ACCUEIL
     if (!document.body.classList.contains('home')) { 
+        // Cache les flèches sur les côtés
         prevBtnLightbox.style.display = 'none'; 
         nextBtnLightbox.style.display = 'none'; 
+
+        // Décakllage de la croix en haut à droite de l'image
+        closeBtnLightbox.style.top = "-5px";
+        closeBtnLightbox.style.right = "-65px";
     }
 
-
-    // Tableau contenant toutes les photos
+    // TABLEAU DES PHOTOS
     let photosLightbox = [];
     let currentIndexLightbox = 0; // Index de la photo affichée actuellement dans le tableau
 
-    // Sélectionne toutes les icônes fullscreen présentes dans la page -> en cours de MODIFICATION CAR DOIT ETRE PAR RAPPORT AUX CATEGORIES
+    // FONCTION D'INITIALISATION DE LA LIGHTBOX AVEC RECUPERATION DE TOUS LES ICONES FULLSCREEN DE LA PAGE POUR EVITER ABSENCE DE FONCTIONNEMENT AU CLIC
+    window.initLightbox = function () {
+    // Vide le tableau qui va contenir toutes les images du lightbox
+    photosLightbox = [];
+
+    // Trouve toutes les icônes fullscreen dans la page
     document.querySelectorAll('.icon-fullscreen').forEach((icon, index) => {
 
-        // Ajout de chaque photo dans le tableau avec son URL, sa ref et sa catégorie
+        // Ajout dans le tableau les infos de chaque image
         photosLightbox.push({
-            url: icon.dataset.image, // data-image=""
-            ref: icon.dataset.ref, // data-ref=""
-            cat: icon.dataset.cat // data-cat=""
+            url: icon.dataset.image, // URL de l’image
+            ref: icon.dataset.ref,   // Référence
+            cat: icon.dataset.cat    // Catégorie
         });
 
-        // Clic sur l'event fullscreen pour ouvrir la lightbox
+        // Quand clic sur l'icône
         icon.addEventListener('click', function (event) {
-            event.preventDefault();
-            openLightbox(index); 
+
+            event.preventDefault(); // empêche le clic normal
+
+            // Ouverture de la lightbox sur cette image
+            openLightbox(index);
         });
     });
+}
 
-    // Fonction d'ouverture de la lightbox et affichage de l'index de la photo ouverte
+    // FONCTION d'ouverture de la lightbox et affichage de l'index de la photo ouverte
     function openLightbox(index) {
-        currentIndexLightbox = index; 
-
+        currentIndexLightbox = index; // Pour savoir quelle image on affiche
+        // Mise à jour de l'image, référence et catégorie
         imageLightbox.src = photosLightbox[index].url; 
         refLightbox.textContent = "Référence : " + photosLightbox[index].ref;
         catLightbox.textContent = "Catégorie : " + photosLightbox[index].cat;
 
-        lightbox.classList.remove('hidden'); // Pour en css, est retiré display: none
+        lightbox.classList.remove('hidden'); // Pour qu'en css, soit retiré le display: none, et donc affichage lightbox
     }
 
+    // NAVIGATION
     // Navigation vers la photo précédente
     prevBtnLightbox.addEventListener('click', () => {
         // Tant que pas à la première image (index > 0)
@@ -66,10 +80,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Fermeture via la croix
+    // FERMETURE VIA LA CROIX
     closeBtnLightbox.addEventListener('click', () => {
-        // Remet la classe css hidden donc display: none
+        // Remet la classe en css hidden donc display: none
         lightbox.classList.add('hidden');
     });
 
+    // LANCEMENT DE L'INITIALISATION AU CHARGEMENT
+    initLightbox();
 });

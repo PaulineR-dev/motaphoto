@@ -177,7 +177,8 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       menuToggle.checked = false;
     } else {
       fadeInContactModale();
-  }}
+    }
+  }
 
   // Réinitialisation du champ Référence photo : sélectionne la modale, trouve le champ de la ref. photo et vide la valeur
   function resetRefPhoto() {
@@ -253,108 +254,194 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
 
 
 
+/* CUSTOM SELECTS */
 document.addEventListener("DOMContentLoaded", () => {
-  const chargerPlusbtn = document.getElementById("load-more-photos");
-  const photosGrid = document.querySelector(".photo-grid");
-  const filterCategorie = document.getElementById("filter-categorie");
-  const filterFormat = document.getElementById("filter-format");
-  const filterOrder = document.getElementById("sort-date");
 
-  // Si le bouton n'existe pas sur cette page, arrêt du script
-  if (!chargerPlusbtn) return;
+    /* MARQUER LES PHOTOS INITIALES COMME "ANIMEES" */
+    document.querySelectorAll(".photo-block").forEach(photo => {
+        photo.classList.add("animated");
+    });
 
-  // Récupération de la page actuelle depuis le bouton
-  let currentOpenedPage = parseInt(chargerPlusbtn.dataset.currentPage);
-  // Nombre total de pages (récupéré depuis le bouton)
-  let maxPages = parseInt(chargerPlusbtn.dataset.maxPages);
-  
-  // Empêche de lancer plusieurs requêtes AJAX en même temps
-  let loadingAjax = false;
+    /* CUSTOM SELECT LOGIC */
+    document.querySelectorAll(".custom-select").forEach(select => {
 
-  // Fonction qui récupère les valeurs des filtres
-  function getFilters() {
-    return {
-      categorie: filterCategorie.value,
-      format: filterFormat.value,
-      order: filterOrder.value
-    };
-  }
+        const trigger = select.querySelector(".custom-select-trigger");
+        const hiddenInput = document.getElementById(select.dataset.target);
+        const placeholder = select.dataset.placeholder;
 
-  // Fonction qui charge les photos via AJAX avec nextPage pour le numéro de page à chager, append true pour ajout des photos et si false remplacement de la grille
-  function loadPhotos(nextPage, append = true) {
-  if (loadingAjax) return;// Si éventuelllement une requête est déjà en cours : ne fait rien
+        /* OUVERTURE / RESET DU SELECT */
+        trigger.addEventListener("click", (e) => {
+            e.stopPropagation();
 
-  // Indique requête en cours à l'exécution de la fonction
-  loadingAjax = true;
-        
-  // Récupération des valeurs des filtres
-  const filters = getFilters();
+            const selected = select.querySelector(".custom-option.selected");
 
-  // Ensemble des données à envoyer à WordPress
-  const formData = new FormData();
-  formData.append("action", "load_more_photos");
-  formData.append("nonce", motaphotoInfinite.nonce);
-  formData.append("page", nextPage);
-  formData.append("categorie", filters.categorie);
-  formData.append("format", filters.format);
-  formData.append("order", filters.order);
+            if (selected && trigger.textContent !== placeholder) {
+                trigger.textContent = placeholder;
+                select.classList.add("open");
+                return;
+            }
 
-  // Envoi de la requête AJAX
-  fetch(motaphotoInfinite.ajax_url, {
-    method: "POST",
-    body: formData
-  })
-    .then(res => res.text()) // Récupération de la réponse traduite en HTML
-    .then(html => {
-      // Créateur d'un conteneur temporaire pour traiter le HTML reçu
-      const temp = document.createElement("div");
-      temp.innerHTML = html;
+            if (trigger.textContent === placeholder && hiddenInput.value !== "") {
+                select.querySelectorAll(".custom-option").forEach(o => o.classList.remove("selected"));
+                hiddenInput.value = "";
+                hiddenInput.dispatchEvent(new Event("change"));
+                select.classList.add("open");
+                return;
+            }
 
-      // Récupération de la balise contenant le nombre total de pages
-      const meta = temp.querySelector(".ajax-meta");
+            select.classList.toggle("open");
+        });
 
-      // Si WordPress renvoie un nombre de pages, on le met à jour
-      if (meta) {
-        maxPages = parseInt(meta.dataset.maxPages);
-        meta.remove(); // On retire cette balise du HTML
-      }
+        /* FERMETURE SI CLIC EN DEHORS */
+        document.addEventListener("click", (e) => {
+            if (!select.contains(e.target)) {
+                select.classList.remove("open");
+            }
+        });
 
-      // Ajoute ou remplace les photos en fonction de si bouton cliqué pour charger plus ou si filtre(s) activé(s)
-    if (append) {
-      photosGrid.insertAdjacentHTML("beforeend", temp.innerHTML);
-    } else {
-      photosGrid.innerHTML = temp.innerHTML;
-    }
+        /* CHOIX D’UNE OPTION */
+        select.querySelectorAll(".custom-option").forEach(option => {
+            option.addEventListener("click", () => {
 
-      // Mise à jour de la page actuelle
-      currentOpenedPage = nextPage;
+                select.querySelectorAll(".custom-option").forEach(o => o.classList.remove("selected"));
+                option.classList.add("selected");
 
-      // Si on est à la dernière page alors le bouton est caché
-      chargerPlusbtn.style.display = (currentOpenedPage >= maxPages) ? "none" : "block";
-    })
-    
-      .finally(() => {
-        // Indication de fin de requête pour en permettre éventuellement une autre
-        loadingAjax = false;
-      });
-  }
+                trigger.textContent = option.textContent.toUpperCase();
+                hiddenInput.value = option.dataset.value;
 
-  // Quand clic sur le bouton "Charger plus"
-  chargerPlusbtn.addEventListener("click", () => {
-    loadPhotos(currentOpenedPage + 1, true); // Charge la page suivante (true)
-  });
-    
-  // Fonction appelée quand un filtre change
-  function onFilterChange() {
-    loadPhotos(1, false); // Rechargement depuis la page 1 et remplacement de la grille (false)
-  }
+                select.classList.remove("open");
+                hiddenInput.dispatchEvent(new Event("change"));
+            });
+        });
 
-  // Écoute les changements sur les filtres
-  filterCategorie.addEventListener("change", onFilterChange);
-  filterFormat.addEventListener("change", onFilterChange);
-  filterOrder.addEventListener("change", onFilterChange);
+    });
 
 });
+
+/* AJAX : CHARGEMENT DES PHOTOS */
+const chargerPlusbtn = document.getElementById("load-more-photos");
+const photosGrid = document.querySelector(".photo-grid");
+const filterCategorie = document.getElementById("filter-categorie");
+const filterFormat = document.getElementById("filter-format");
+const filterOrder = document.getElementById("sort-date");
+
+let currentOpenedPage = chargerPlusbtn ? parseInt(chargerPlusbtn.dataset.currentPage) : 1;
+let maxPages = chargerPlusbtn ? parseInt(chargerPlusbtn.dataset.maxPages) : 1;
+let loadingAjax = false;
+
+function getFilters() {
+    return {
+        categorie: filterCategorie ? filterCategorie.value : "",
+        format: filterFormat ? filterFormat.value : "",
+        order: filterOrder ? filterOrder.value : ""
+    };
+}
+
+function loadPhotos(nextPage, append = true) {
+    if (loadingAjax) return;
+    if (nextPage > maxPages) return;
+
+    loadingAjax = true;
+
+    const filters = getFilters();
+
+    const formData = new FormData();
+    formData.append("action", "load_more_photos");
+    formData.append("nonce", motaphotoInfinite.nonce);
+    formData.append("page", nextPage);
+    formData.append("categorie", filters.categorie);
+    formData.append("format", filters.format);
+    formData.append("order", filters.order);
+
+    fetch(motaphotoInfinite.ajax_url, {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(html => {
+
+        const temp = document.createElement("div");
+        temp.innerHTML = html;
+
+        const meta = temp.querySelector(".ajax-meta");
+
+        if (meta) {
+            maxPages = parseInt(meta.dataset.maxPages);
+            currentOpenedPage = parseInt(meta.dataset.currentPage);
+            meta.remove();
+        } else {
+            console.warn("Pas de .ajax-meta dans la réponse AJAX");
+            if (chargerPlusbtn) chargerPlusbtn.style.display = "none";
+            return;
+        }
+
+        if (append) {
+            photosGrid.insertAdjacentHTML("beforeend", temp.innerHTML);
+        } else {
+            photosGrid.innerHTML = temp.innerHTML;
+        }
+
+        initLightbox();
+
+        /* FADE-IN DES NOUVELLES PHOTOS */
+        const newPhotos = photosGrid.querySelectorAll(".photo-block:not(.animated)");
+        newPhotos.forEach(photo => {
+            photo.classList.add("animated");
+            photo.animate([
+                { opacity: 0, transform: 'translateY(20px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+            ], {
+                duration: 350,
+                easing: 'ease-out',
+                fill: 'forwards'
+            });
+        });
+
+        /* GESTION DU BOUTON CHARGER PLUS */
+        if (currentOpenedPage >= maxPages) {
+
+            const fadeOut = chargerPlusbtn.animate([
+                { opacity: 1, transform: 'translateY(0)' },
+                { opacity: 0, transform: 'translateY(10px)' }
+            ], {
+                duration: 300,
+                easing: 'ease-out',
+                fill: 'forwards'
+            });
+
+            fadeOut.finished.then(() => {
+                chargerPlusbtn.style.display = "none";
+            });
+
+        } else {
+            chargerPlusbtn.style.display = "block";
+            chargerPlusbtn.style.opacity = "1";
+            chargerPlusbtn.style.transform = "translateY(0)";
+        }
+
+    })
+    .finally(() => {
+        loadingAjax = false;
+    });
+}
+
+
+/* RESET + RECHARGEMENT */
+function onFilterChange() {
+    loadPhotos(1, false);
+}
+
+/* LISTENERS */
+if (filterCategorie) filterCategorie.addEventListener("change", onFilterChange);
+if (filterFormat) filterFormat.addEventListener("change", onFilterChange);
+if (filterOrder) filterOrder.addEventListener("change", onFilterChange);
+
+if (chargerPlusbtn) {
+    chargerPlusbtn.addEventListener("click", () => {
+        loadPhotos(currentOpenedPage + 1, true);
+    });
+}
+
 
 
 document.addEventListener("DOMContentLoaded", () => {

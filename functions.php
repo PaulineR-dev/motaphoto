@@ -98,18 +98,21 @@ function motaphoto_load_more_photos() {
 
     $photos = new WP_Query($args);
 
-    if ($photos->have_posts()) {
+ if ($photos->have_posts()) {
 
-        // Renvoie le nombre total de pages pour le JS
-        echo '<div class="ajax-meta" data-max-pages="' . esc_attr($photos->max_num_pages) . '"></div>';
+    echo '<div class="ajax-meta" 
+            data-max-pages="' . esc_attr($photos->max_num_pages) . '" 
+            data-current-page="' . esc_attr($paged) . '">
+          </div>';
 
-        while ($photos->have_posts()) {
-            $photos->the_post();
-            get_template_part('template-parts/photo-block');
-        }
-
-        wp_reset_postdata();
+    while ($photos->have_posts()) {
+        $photos->the_post();
+        get_template_part('template-parts/photo-block');
     }
+
+    wp_reset_postdata();
+}
+
 
     wp_die();
 }
