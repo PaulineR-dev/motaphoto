@@ -25,6 +25,25 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/Icon_fullscreen.png" alt="Plein écran">
             </a>
 
+        <?php if ( is_front_page() || is_home() ) : ?>
+
+    <!-- Référence en bas à gauche -->
+    <div class="photo-ref">
+        <?php the_field('reference'); ?>
+    </div>
+
+    <!-- Catégorie en bas à droite -->
+    <div class="photo-cat">
+        <?php 
+            $cats = get_the_terms(get_the_ID(), 'categorie');
+            if ($cats) echo esc_html($cats[0]->name);
+        ?>
+    </div>
+
+<?php endif; ?>
+
+
+
         </div>
     </div>
 </article>

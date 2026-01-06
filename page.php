@@ -10,7 +10,7 @@ get_header();
 /* Start the Loop */
 while ( have_posts() ) :
 	the_post();
-	 echo '<h2>Texte' . get_the_title() . '</h2>';
+	 echo '<h2>' . get_the_title() . '</h2>';
     the_content(); // Vérifier utilisation nécessaire ou non 
 
 	// If comments are open or there is at least one comment, load up the comment template.

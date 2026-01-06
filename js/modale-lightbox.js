@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
         currentIndexLightbox = index; // Pour savoir quelle image on affiche
         // Mise à jour de l'image, référence et catégorie
         imageLightbox.src = photosLightbox[index].url; 
-        refLightbox.textContent = "Référence : " + photosLightbox[index].ref;
-        catLightbox.textContent = "Catégorie : " + photosLightbox[index].cat;
+        refLightbox.textContent = photosLightbox[index].ref;
+        catLightbox.textContent = photosLightbox[index].cat;
 
         lightbox.classList.remove('hidden'); // Pour qu'en css, soit retiré le display: none, et donc affichage lightbox
     }

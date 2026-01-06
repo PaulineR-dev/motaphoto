@@ -742,23 +742,29 @@ span.wpcf7-form-control-wrap {
 .icon-fullscreen img {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 15px;
+  width: 34px;
+  height: 34px;
 }
 
 
 
 
-h2 {
-  font-family: "Space Mono", monospace;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 66px;
-  line-height: 58px;
-  letter-spacing: 0;
-  vertical-align: middle;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+.single-photo h2 {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 66px;
+    line-height: 58px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+    display: inline-block;
+    max-width: 397px;
+    white-space: normal;
 }
+
 
 #text-vousaimerezaussi {
   font-family: "Space Mono", monospace;
@@ -1110,7 +1116,7 @@ ul.photo-infos {
 .lightbox__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.7);
+    /* background: rgba(0,0,0,0.8); */
     z-index: 10; 
 }
 
@@ -1122,6 +1128,7 @@ ul.photo-infos {
     gap: 40px;
     z-index: 20;
 }
+
 
 .lightbox__image {
     max-width: 100vw;
@@ -1161,6 +1168,8 @@ ul.photo-infos {
     color: white;
     margin-top: 15px;
     font-size: 16px;
+    font-family: 'SpaceMono';
+    text-transform: uppercase;
 }
 
 .hidden { 
@@ -1361,16 +1370,19 @@ ul.photo-infos {
   line-height: 18px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 
-/* Hover → rose clair */
+/* Hover = rose clair */
 .custom-option:hover {
   background: #FFD6D6;
 }
 
 
-/* Sélection → rouge */
+/* Sélection = rouge */
 .custom-option.selected {
   background: #E00000;
   color: #FFFFFF;
@@ -1386,16 +1398,452 @@ ul.photo-infos {
   color: white;
 }
 
-.custom-options {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 
-
-/* PHOTOS : ÉTAT INITIAL POUR ANIMATION FADE‑IN */
+/* PHOTOS : ÉTAT INITIAL POUR ANIMATION FADE‑IN : EN COURS*/
 .photo-block {
   opacity: 1;
   transform: translateY(0);
   will-change: opacity, transform;
 }
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-thumb:hover .photo-overlay {
+  opacity: 1;
+}
+
+/* Référence en bas à gauche */
+.photo-ref {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: 'SpaceMono';
+  text-transform: uppercase;
+}
+
+/* Catégorie en bas à droite */
+.photo-cat {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: 'SpaceMono';
+  text-transform: uppercase;
+}
+
+/* Apparition au survol */
+.photo-thumb:hover .photo-ref,
+.photo-thumb:hover .photo-cat {
+  opacity: 1;
+}
+
+.lightbox__close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 50;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.lightbox__prev,
+.lightbox__next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    z-index: 50;
+}
+
+.lightbox__prev {
+  left: 30px;
+}
+
+.lightbox__next {
+  right: 30px;
+}
+
+.lightbox__image {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
+}
+.lightbox__content {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.lightbox__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox__image {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 10px;
+  right: -55px;
+  z-index: 20;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.lightbox__prev {
+  left: -85px;
+}
+
+.lightbox__next {
+  right: -85px;
+}
+
+
+.arrow {
+  font-size: 40px;
+  transition: transform 0.2s ease;
+}
+
+.lightbox__label {
+  font-size: 18px;
+  font-weight: 400;
+  transition: font-weight 0.2s ease;
+}
+
+.lightbox__prev:hover .arrow,
+.lightbox__next:hover .arrow {
+  transform: scale(1.2);
+}
+
+.lightbox__prev:hover .lightbox__label,
+.lightbox__next:hover .lightbox__label {
+  font-weight: 700;
+}
+
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 20;
+}
+
+.lightbox__prev {
+  left: -80px;
+}
+
+.lightbox__next {
+  right: -80px;
+}
+
+/* Style de base */
+.arrow {
+  font-size: 40px;
+  transition: transform 0.2s ease;
+}
+
+/* Texte */
+.lightbox__label {
+  font-size: 18px;
+  font-weight: 400;
+  transition: font-weight 0.2s ease;
+}
+
+/* HOVER : texte en gras */
+.lightbox__prev:hover .lightbox__label,
+.lightbox__next:hover .lightbox__label {
+  font-weight: 700;
+}
+
+/* HOVER : flèche plus grande */
+.lightbox__prev:hover .arrow,
+.lightbox__next:hover .arrow {
+  transform: scale(1.2);
+}
+
+/* HOVER : remplacer l’icône par la version longue */
+.lightbox__prev:hover .arrow::before {
+  content: "\f177"; /* arrow-left-long */
+}
+
+.lightbox__next:hover .arrow::before {
+  content: "\f178"; /* arrow-right-long */
+}
+
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 20;
+  font-family: "SpaceMono";
+}
+.lightbox__prev {
+  left: -165px; 
+}
+
+.lightbox__next {
+  right: -165px;
+}
+
+.lightbox__label {
+  font-family: "Space Mono", monospace;
+  font-weight: 400; /* Regular */
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+  transition: font-weight 0.2s ease;
+}
+
+.lightbox__prev:hover .lightbox__label,
+.lightbox__next:hover .lightbox__label {
+  font-weight: 700; /* Bold */
+}
+
+.lightbox__prev:hover .arrow,
+.lightbox__next:hover .arrow {
+  font-size: 34px;
+}
+
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 20;
+}
+
+/* Flèches */
+.arrow {
+  font-family: "Font Awesome 6 Free"; /* OBLIGATOIRE */
+  font-weight: 900; /* solid */
+  font-size: 25px;
+  transition: font-size 0.2s ease;
+}
+
+/* Taille au survol */
+.lightbox__prev:hover .arrow,
+.lightbox__next:hover .arrow {
+  font-size: 34px;
+}
+
+/* Version longue au survol */
+.lightbox__prev:hover .arrow::before {
+  content: "\f177"; /* arrow-left-long */
+}
+
+.lightbox__next:hover .arrow::before {
+  content: "\f178"; /* arrow-right-long */
+}
+
+/* Texte */
+.lightbox__label {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  transition: font-weight 0.2s ease;
+}
+
+/* Texte bold au hover */
+.lightbox__prev:hover .lightbox__label,
+.lightbox__next:hover .lightbox__label {
+  font-weight: 700;
+}
+
+
+/* BOUTONS */
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.lightbox__prev { 
+  left: -120px; 
+}
+
+.lightbox__next { 
+  right: -120px; 
+}
+
+/* FLÈCHES — état normal */
+.arrow {
+  font-family: "Font Awesome 6 Free"; /* OBLIGATOIRE */
+  font-weight: 900; /* solid */
+  font-size: 25px !;
+  line-height: 1;
+  transition: font-size 0.2s ease;
+}
+
+/* FLÈCHES — hover */
+.lightbox__prev:hover .arrow,
+.lightbox__next:hover .arrow {
+  font-size: 34px;
+}
+
+/* VERSION LONGUE AU SURVOL */
+.lightbox__prev:hover .arrow::before {
+  content: "\f177"; /* arrow-left-long */
+}
+
+.lightbox__next:hover .arrow::before {
+  content: "\f178"; /* arrow-right-long */
+}
+
+/* TEXTE */
+.lightbox__label {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  transition: font-weight 0.2s ease;
+}
+
+/* TEXTE BOLD AU SURVOL */
+.lightbox__prev:hover .lightbox__label,
+.lightbox__next:hover .lightbox__label {
+  font-weight: 700;
+}
+
+.arrow {
+  width: 25px;
+  display: inline-block;
+  text-align: center;
+  font-size: 25px;
+  transition: transform 0.2s ease;
+}
+
+.lightbox__prev .arrow {
+  transform-origin: left center;
+}
+.lightbox__next .arrow {
+  transform-origin: right center;
+}
+
+.lightbox__prev:hover .arrow,
+.lightbox__next:hover .arrow {
+  transform: scale(1.36); /* De 25px à 34px comme sur la maquette Figma */
+}
+
+/* Boutons (rappel) */
+.lightbox__prev,
+.lightbox__next {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Flèches */
+.arrow {
+  width: 34px;
+  display: inline-flex;
+  justify-content: center;
+  font-size: 25px;
+  line-height: 1;
+  transform: scale(1) translateX(0);
+  transition: transform 0.2s ease;
+}
+
+/* Origine de transformation */
+.lightbox__prev .arrow {
+  transform-origin: left center;
+}
+
+.lightbox__next .arrow {
+  transform-origin: right center;
+}
+
+/* Hover : agrandissement + décalage visuel, sans toucher à la mise en page */
+.lightbox__prev:hover .arrow {
+  transform: scale(1.36) translateX(-9px);
+}
+
+.lightbox__next:hover .arrow {
+  transform: scale(1.36) translateX(9px);
+}
+
+
