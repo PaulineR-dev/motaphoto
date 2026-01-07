@@ -1332,7 +1332,7 @@ ul.photo-infos {
 
 /* Zone visible (équivalent du <select>) */
 .custom-select-trigger {
-  width: 100%;
+
   height: 42px;
   border-radius: 8px;
   border: 1.3px solid #B8BBC2;
@@ -1359,6 +1359,8 @@ ul.photo-infos {
   display: none;
   z-index: 50;
   overflow: hidden;
+  width: 100%;
+  padding: 0;
 }
 
 
@@ -1384,8 +1386,8 @@ ul.photo-infos {
 
 /* Sélection = rouge */
 .custom-option.selected {
-  background: #E00000;
-  color: #FFFFFF;
+    background: #E00000;
+  color: white;
 }
 
 /* Quand le menu est ouvert */
@@ -1394,8 +1396,8 @@ ul.photo-infos {
 }
 
 .custom-option:active {
-  background: #E00000;
-  color: white;
+  background: #FE5858;
+
 }
 
 
@@ -1847,3 +1849,53 @@ ul.photo-infos {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+#load-more-photos {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.custom-select-trigger i {
+    font-size: 14px;
+    pointer-events: none; /* évite que le clic touche l’icône */
+    /* transition: transform 0.3s ease; */
+}
+
+/* Quand le menu est ouvert : flèche vers le haut comme sur maquette Figma */
+.custom-select.open .custom-select-trigger i {
+    transform: rotate(180deg);
+}
+
+.custom-option {
+  display: block;        /* ← obligatoire */
+  width: 100%;           /* ← obligatoire */
+  padding: 12px 18px;    /* ←  padding réel */
+  background: #FFFFFF;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  list-style: none;
+  margin: 0;
+
+}

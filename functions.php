@@ -8,7 +8,6 @@ function motaphoto_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
 
 
-
 // Charger le SCRIPT principal
 function motaphoto_enqueue_scripts() {
     // Charge le fichier scripts.js situé dans /js/
@@ -24,15 +23,34 @@ function motaphoto_enqueue_scripts() {
     wp_localize_script(
         'motaphoto-scripts', // Script recevant les variables
         'motaphotoInfinite', // Nom de l'objet JS créé
-            array(
+        array(
             'ajax_url' => admin_url('admin-ajax.php'), // URL AJAX
             'nonce'    => wp_create_nonce('load_more_photos'), // Sécurité
-            )
+        )
+    );
+
+    // Charger le fichier filters.js
+    wp_enqueue_script(
+        'motaphoto-filters',
+        get_template_directory_uri() . '/js/filters.js',
+        array(), // Pas de dépendance
+        '1.0',
+        true
+    );
+
+    // Envoyer les variables AJAX à filters.js
+    wp_localize_script(
+        'motaphoto-filters',
+        'motaphotoInfinite',
+        array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('load_more_photos'),
+        )
     );
 }
+
 // Exécution de la fonction au moment du chargement des scripts
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_scripts');
-
 
 
 // Déclaration d'un emplacement pour les MENUS pour le thème enfant "motaphoto_menu"
@@ -139,7 +157,6 @@ function motaphoto_load_more_photos() {
 add_action('wp_ajax_load_more_photos', 'motaphoto_load_more_photos');
 // Déclare l'action AJAX pour visiteurs non connectés
 add_action('wp_ajax_nopriv_load_more_photos', 'motaphoto_load_more_photos');
-
 
 
 function pm_fix_punctuation_in_titles( $title ) {

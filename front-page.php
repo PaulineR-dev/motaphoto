@@ -51,7 +51,10 @@ get_template_part('template-parts/hero-header');
 
                 <!-- Sélections personnalisées pour les catégories -->
                 <div class="custom-select" data-target="filter-categorie" data-placeholder="CATÉGORIES">
-                    <div class="custom-select-trigger">CATÉGORIES</div>
+                    <div class="custom-select-trigger">
+                        <span class="custom-select-label">CATÉGORIES</span>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
                     <ul class="custom-options">
                     <?php foreach ($categories as $cat): ?>
                         <li class="custom-option" data-value="<?php echo esc_attr($cat->slug); ?>">
@@ -65,7 +68,10 @@ get_template_part('template-parts/hero-header');
 
                 <!-- Sélections personnalisées pour les formats -->
                 <div class="custom-select" data-target="filter-format" data-placeholder="FORMATS">
-                    <div class="custom-select-trigger">FORMATS</div>
+                    <div class="custom-select-trigger">
+                        FORMATS
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
                     <ul class="custom-options">
                         <?php foreach ($formats as $format): ?>
                             <li class="custom-option" data-value="<?php echo esc_attr($format->slug); ?>">
@@ -84,7 +90,10 @@ get_template_part('template-parts/hero-header');
             <div class="photo-filters-right">
 
                 <div class="custom-select" data-target="sort-date" data-placeholder="TRIER PAR">
-                    <div class="custom-select-trigger">TRIER PAR</div>
+                    <div class="custom-select-trigger">
+                        TRIER PAR
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
                     <ul class="custom-options">
                         <li class="custom-option" data-value="desc">À partir des plus récentes</li>
                         <li class="custom-option" data-value="asc">À partir des plus anciennes</li>
