@@ -1,147 +1,129 @@
-
-/******* CUSTOM SELECTS ********/
+// *** CUSTOM SELECTS ***
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".photo-block").forEach(photo => {
+    document.querySelectorAll(".photo-block").forEach(photo => { // Sélectionne tous les éléments ayant la classe .photo-block
         photo.classList.add("photo-already-loaded"); // Sert de marqueur afin de ne pas appliquer par la suite de fade in aux images déjà chargées
     });
 
-
-    document.querySelectorAll(".custom-select").forEach(select => {
-
+    document.querySelectorAll(".custom-select").forEach(select => { // Sélectionne chaque composant custom-select de la page
         const trigger = select.querySelector(".custom-select-trigger"); // Élément cliquable qui ouvre/ferme le menu
-        const hiddenInput = document.getElementById(select.dataset.target); // Input caché qui stocke la vraie valeur du filtre
+        const hiddenInput = document.getElementById(select.dataset.target); // Input caché qui stocke la valeur du filtre
         const placeholder = select.dataset.placeholder; // Texte affiché quand aucune option n’est sélectionnée
 
-        /* OUVERTURE / REINITIALISATION DU SELECT */
+        // OUVERTURE / REINITIALISATION DU SELECT 
         trigger.addEventListener("click", (e) => {
             e.stopPropagation(); // Empêche la fermeture immédiate par le clic global sinon s'ouvrirait et se refermerait aussitôt
 
             // Récupère l'option actuellement sélectionnée (s'il y en a une)
             const selected = select.querySelector(".custom-option.selected");
 
-            /* CAS 1 : si une option est déjà sélectionnée ET le trigger n'affiche pas le placeholder
-            Si l'utilisateur reclique, on remet le placeholder (ex : "Catégorie")
-            Puis ouverture pour lui permettre de choisir autre chose */
-            if (selected && trigger.textContent !== placeholder) {
-                trigger.textContent = placeholder; // Réaffiche le placeholder
-                trigger.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-angle-down"></i>');
+            // * CAS 1 : si une option est déjà sélectionnée ET le trigger n'affiche pas le placeholder, si l'utilisateur reclique, on remet le placeholder (ex : "Catégorie") puis ouverture pour lui permettre nouveau choix
+            if (selected && trigger.textContent !== placeholder) { // Si une option est sélectionnée et que le texte du trigger n’est pas le placeholder
+                trigger.textContent = placeholder; // Remet le texte du trigger au placeholder (ex : "Catégorie")
+                trigger.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-angle-down"></i>'); // Réinjecte l’icône de flèche, supprimée par le textContent
                 select.classList.add("open"); // Ouvre le menu
-                return;
+                return; // Sort de la fonction pour ne pas exécuter la suite
             }
 
-            /* CAS 2 : le trigger affiche le placeholder MAIS un filtre est actif
-            Cela signifie que l'utilisateur a déjà choisi une option auparavant (hiddenInput.value !== "")
-            → Réinitialise complètement le select : retire la classe "selected", vide la valeur du filtre, déclenche un "change" pour relancer l'AJAX, rouvre le menu */
-            if (trigger.textContent === placeholder && hiddenInput.value !== "") {
-                select.querySelectorAll(".custom-option").forEach(o => o.classList.remove("selected"));
-                hiddenInput.value = ""; // Reset du filtre
-                hiddenInput.dispatchEvent(new Event("change")); // Recharge AJAX
+            // * CAS 2 : le trigger affiche le placeholder MAIS un filtre est actif
+            if (trigger.textContent === placeholder && hiddenInput.value !== "") { // Si le texte du trigger est le placeholder mais que l’input caché contient une valeur
+                select.querySelectorAll(".custom-option").forEach(o => o.classList.remove("selected")); // Retire la classe "selected" de toutes les options pour réinitialiser l’état visuel
+                hiddenInput.value = ""; // Vide la valeur du filtre dans l’input caché
+                hiddenInput.dispatchEvent(new Event("change")); // Déclenche un événement "change" sur l’input pour relancer l’AJAX
                 select.classList.add("open"); // Ouvre le menu
-                return;
+                return; // Sort de la fonction
             }
 
-            /* Si aucun cas particulier ci-dessus (pas de filtre, trigger affiche placeholder): ouverture/fermeture simplement du menu */
+            // * CAS 3 : Si aucun cas particulier ci-dessus (pas de filtre, trigger affiche placeholder): ouverture/fermeture du menu
             select.classList.toggle("open");
         });
 
-        /* FERMETURE SI CLIC EN DEHORS */
-        document.addEventListener("click", (e) => {
-            if (!select.contains(e.target)) {
-                select.classList.remove("open");
-            }
-        });
 
-        /* CHOIX D’UNE OPTION */
-        select.querySelectorAll(".custom-option").forEach(option => {
-            option.addEventListener("click", () => {
+        // CHOIX D’UNE OPTION
+        select.querySelectorAll(".custom-option").forEach(option => { // Sélectionne toutes les options du select personnalisé
+            option.addEventListener("click", () => { // Ajoute un écouteur de clic sur chaque option
 
-                // Retire la sélection précédente
-                select.querySelectorAll(".custom-option").forEach(o => o.classList.remove("selected"));
-                // Marque cette option comme sélectionnée
-                option.classList.add("selected");
+                select.querySelectorAll(".custom-option").forEach(o => o.classList.remove("selected")); // Retire la classe "selected" de toutes les options pour effacer la sélection précédente
+                option.classList.add("selected"); // Ajoute la classe "selected" à l’option cliquée pour marquer la nouvelle sélection
 
-                // Affiche le texte choisi dans le trigger
-                trigger.textContent = option.textContent.toUpperCase();
+                trigger.textContent = option.textContent.toUpperCase(); // Met à jour le texte du trigger avec le texte de l’option choisie, en majuscules
 
-                // Réinjecte la flèche à droite 
-                trigger.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-angle-down"></i>');
+                trigger.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-angle-down"></i>'); // Réinjecte l’icône de flèche dans le trigger
           
-                // Met à jour la valeur réelle du filtre (input caché)
-                hiddenInput.value = option.dataset.value;
+                hiddenInput.value = option.dataset.value; // Met à jour la valeur réelle du filtre (input caché : la valeur provient de l’attribut data-value de l’option)
 
-                // Ferme le menu
-                select.classList.remove("open");
-                // Déclenche l'événement "change" donc recharge AJAX
-                hiddenInput.dispatchEvent(new Event("change"));
+                select.classList.remove("open"); // Ferme le menu
+                
+                hiddenInput.dispatchEvent(new Event("change")); // Déclenche l'événement "change" donc recharge AJAX
             });
+        });
+    });
+
+    // FERMETURE GLOBALE DES SELECTS AU CLIC EN DEHORS
+    document.addEventListener("click", (e) => { // Ajoute un écouteur de clic global sur le document
+        document.querySelectorAll(".custom-select.open").forEach(select => { // Sélectionne tous les selects personnalisés actuellement ouverts
+            if (!select.contains(e.target)) { // Si l’élément cliqué n’est pas à l’intérieur de ce select
+                select.classList.remove("open"); // Ferme ce select
+            }
         });
     });
 });
 
-/* AJAX : CHARGEMENT DES PHOTOS */
-const chargerPlusbtn = document.getElementById("load-more-photos");
-const photosGrid = document.querySelector(".photo-grid");
-const filterCategorie = document.getElementById("filter-categorie");
-const filterFormat = document.getElementById("filter-format");
-const filterOrder = document.getElementById("sort-date");
+
+// *** AJAX : CHARGEMENT DES PHOTOS ***
+const chargerPlusbtn = document.getElementById("load-more-photos"); // Récupère le bouton "Charger plus" par son ID
+const photosGrid = document.querySelector(".photo-grid"); // Récupère le conteneur principal de la grille de photos
+const filterCategorie = document.getElementById("filter-categorie"); // Récupère l’input caché ou le champ lié au filtre de catégorie
+const filterFormat = document.getElementById("filter-format"); // Récupère l’input caché ou le champ lié au filtre de format
+const filterOrder = document.getElementById("sort-date"); // Récupère l’input caché ou le champ lié au tri (ordre par date)
 
 // Page actuelle et nombre total de pages (valeurs envoyées par PHP)
-let currentOpenedPage = chargerPlusbtn ? parseInt(chargerPlusbtn.dataset.currentPage) : 1;
-let maxPages = chargerPlusbtn ? parseInt(chargerPlusbtn.dataset.maxPages) : 1;
-// Empêche plusieurs requêtes AJAX simultanées
-let loadingAjax = false;
+let currentOpenedPage = chargerPlusbtn ? parseInt(chargerPlusbtn.dataset.currentPage) : 1; // Si le bouton existe, lecture de la page actuelle dans data-current-page, sinon met 1 par défaut
+let maxPages = chargerPlusbtn ? parseInt(chargerPlusbtn.dataset.maxPages) : 1; // Si le bouton existe, lecture du nombre total de pages dans data-max-pages, sinon met 1 par défaut
+let loadingAjax = false; // Indicateur booléen pour empêcher plusieurs requêtes AJAX simultanées
 
 // Fonction pour récupérer les valeurs des filtres sélectionnés
 function getFilters() {
-    return {
-        categorie: filterCategorie ? filterCategorie.value : "",
-        format: filterFormat ? filterFormat.value : "",
-        order: filterOrder ? filterOrder.value : ""
+    return { // Retourne un objet contenant les valeurs actuelles des filtres
+        categorie: filterCategorie ? filterCategorie.value : "", // Si l’input de catégorie existe, renvoie sa valeur, sinon chaîne vide
+        format: filterFormat ? filterFormat.value : "", // Si l’input de format existe, renvoie sa valeur, sinon chaîne vide
+        order: filterOrder ? filterOrder.value : "" // Si l’input de tri existe, renvoie sa valeur, sinon chaîne vide
     };
 }
 
-// Fonction principale : chargement des photos via AJAX
-function loadPhotos(nextPage, append = true) {
-    // Empêche un double clic ou un spam de requêtes
-    if (loadingAjax) return;
-    // Si dépasse le nombre total de pages, stop
-    if (nextPage > maxPages) return;
+// Fonction de chargement des photos via AJAX
+function loadPhotos(nextPage, append = true) { // nextPage : numéro de la page à charger et append : si true, ajoute les nouvelles photos à la suite mais si false, remplace la grille
+    if (loadingAjax) return; // Si une requête est déjà en cours, stop
+    if (nextPage > maxPages) return; // Si dépasse le nombre total de pages, stop
 
-    loadingAjax = true;
+    loadingAjax = true; // Passe en mode "requête en cours"
 
-    const filters = getFilters();
+    const filters = getFilters(); // Récupère les valeurs actuelles des filtres
 
     // Préparation des données envoyées à WordPress
-    const formData = new FormData();
-    formData.append("action", "load_more_photos");
-    formData.append("nonce", motaphotoInfinite.nonce); // Sécurité
-    formData.append("page", nextPage);
-    formData.append("categorie", filters.categorie);
-    formData.append("format", filters.format);
-    formData.append("order", filters.order);
+    const formData = new FormData(); // Crée un objet FormData pour envoyer les données en POST
+    formData.append("action", "load_more_photos"); // Ajoute le paramètre "action" pour que WP appelle la fonction associée à l'action load_more_photos
+    formData.append("nonce", motaphotoInfinite.nonce); // Ajoute le nonce de sécurité généré côté PHP pour vérifier l’authenticité de la requête
+    formData.append("page", nextPage); // Ajoute le numéro de page à charger
+    formData.append("categorie", filters.categorie); // Ajoute la valeur du filtre de catégorie
+    formData.append("format", filters.format); // Ajoute la valeur du filtre de format
+    formData.append("order", filters.order); // Ajoute la valeur du tri (ordre)
 
-    // ENVOI de la requête AJAX à WordPress
-    fetch(motaphotoInfinite.ajax_url, {
-        method: "POST",
-        body: formData
+    // ** ENVOI de la requête AJAX à WordPress
+    fetch(motaphotoInfinite.ajax_url, { // Envoie la requête à l’URL AJAX de WordPress
+        method: "POST", // Utilise la méthode POST
+        body: formData // Envoie les données préparées dans formData
     })
-    .then(res => res.text())
-    .then(html => {
+    .then(res => res.text()) // Quand la réponse arrive, la convertit en texte (HTML)
+    .then(html => { // Callback exécuté avec le HTML renvoyé par le serveur
         // Réponse dans un conteneur temporaire
-        const temp = document.createElement("div");
-        temp.innerHTML = html;
+        const temp = document.createElement("div"); // Crée un élément div temporaire
+        temp.innerHTML = html; // Injecte le HTML de la réponse dans ce conteneur temporaire
+        const meta = temp.querySelector(".ajax-meta"); // Récupère les infos de pagination envoyées par PHP
 
-        // Récupère les infos de pagination envoyées par PHP
-        const meta = temp.querySelector(".ajax-meta");
-
-        // Si la réponse AJAX contient le bloc .ajax-meta (infos de pagination)
-        if (meta) {
-            // Mise à jour du nombre total de pages disponibles
-            maxPages = parseInt(meta.dataset.maxPages);
-            // Mise à jour de la page actuellement chargée
-            currentOpenedPage = parseInt(meta.dataset.currentPage);
-            // Supprime le div .ajax-meta
-            meta.remove();
+        if (meta) { // Si .ajax-meta est présent dans la réponse
+            maxPages = parseInt(meta.dataset.maxPages); // Mise à jour du nombre total de pages disponibles
+            currentOpenedPage = parseInt(meta.dataset.currentPage); // Mise à jour de la page actuellement chargée
+            meta.remove(); // Supprime le div .ajax-meta
         } else {
             console.warn("Pas de .ajax-meta dans la réponse AJAX");
             // Si le bouton existe, le cache
@@ -151,34 +133,35 @@ function loadPhotos(nextPage, append = true) {
 
     // Si ajout ou remplacement des photos dans la grille
     if (append) {
-      // append = true :  ajout des nouvelles photos à la suite dans le conteneur temporaire
-      photosGrid.insertAdjacentHTML("beforeend", temp.innerHTML);
+        // append = true : ajout des nouvelles photos à la suite dans le conteneur temporaire
+        photosGrid.insertAdjacentHTML("beforeend", temp.innerHTML);
     } else {
-      // append = false : remplacement du contenu (cas du changement de filtre)
-      photosGrid.innerHTML = temp.innerHTML;
+        // append = false : remplacement du contenu (cas du changement de filtre)
+        photosGrid.innerHTML = temp.innerHTML;
     }
 
     // Réinitialisation de la lightbox pour inclure les nouvelles photos ajoutées
     initLightbox();
 
-    /* FADE-IN DES NOUVELLES PHOTOS */
-    const newPhotos = photosGrid.querySelectorAll(".photo-block:not(.photo-already-loaded)");
+    // FADE-IN DES NOUVELLES PHOTOS
+    const newPhotos = photosGrid.querySelectorAll(".photo-block:not(.photo-already-loaded)"); // Sélectionne toutes les photos qui n’ont pas encore la classe .photo-already-loaded = les nouvelles ajoutées par la requête
 
     newPhotos.forEach(photo => {
+        // Marque la photo comme déjà animée pour éviter de réappliquer le fade-in plus tard
         photo.classList.add("photo-already-loaded");
+        // Animation d’apparition progressive (fade-in)
         photo.animate([
             { opacity: 0 },
             { opacity: 1 }
         ], {
             duration: 500,
             easing: 'ease-out',
-            fill: 'forwards'
+            fill: 'forwards' // Conservation de l’état final (opacity: 1)
         });
     });
 
     /* GESTION DU BOUTON CHARGER PLUS */
-    if (currentOpenedPage >= maxPages) {
-
+    if (currentOpenedPage >= maxPages) { // Si la page acutelle ouverte est supérieure ou égale au nombre de pages maxi
     const fadeOut = chargerPlusbtn.animate([
         { opacity: 1 },
         { opacity: 0 }
@@ -188,13 +171,11 @@ function loadPhotos(nextPage, append = true) {
         fill: 'forwards'
     });
 
-    fadeOut.finished.then(() => {
+    fadeOut.finished.then(() => { // Alors une fois l'animation de fade out terminée, cache bouton
         chargerPlusbtn.style.display = "none";
     });
 
     } else {
-
-        // Le bouton reste visible, mais on lui applique une petite animation d'apparition
         chargerPlusbtn.style.display = "block";
 
         chargerPlusbtn.animate([
@@ -208,14 +189,14 @@ function loadPhotos(nextPage, append = true) {
     }
 })
 .finally(() => {
-    loadingAjax = false;
+    loadingAjax = false; // Pour libérer possibilité de refaire requête AJAX
   });
 }
 
-if (chargerPlusbtn) {
-  chargerPlusbtn.addEventListener("click", () => {
+if (chargerPlusbtn) { // Si le bouton Charger Plus existe
+  chargerPlusbtn.addEventListener("click", () => { // Quand clic
 
-    // Fade-out immédiat à chaque clic
+    // Animation fade out à chaque clic
     chargerPlusbtn.animate([
       { opacity: 1 },
       { opacity: 0 }
@@ -225,15 +206,17 @@ if (chargerPlusbtn) {
       fill: 'forwards'
     });
 
-    // Puis on charge la page suivante
+    // Et chargement de la page suivante
     loadPhotos(currentOpenedPage + 1, true);
   });
 }
 
-/* RESET + RECHARGEMENT : fonction appelée quand changement d'un filtre*/
+// RESET + RECHARGEMENT : fonction appelée quand changement d'un filtre
 function onFilterChange() {
-    loadPhotos(1, false);
+    photosGrid.innerHTML = ""; // Vide la grille
+    loadPhotos(1, false); // La grille depuis la page 1 avec les filtres rechargée (et non ajoutée)
 }
+
 // Quand la catégorie change = recharge la grille
 if (filterCategorie) filterCategorie.addEventListener("change", onFilterChange);
 // Quand le format change = recharge la grille

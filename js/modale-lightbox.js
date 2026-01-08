@@ -9,13 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevBtnLightbox = document.querySelector('.lightbox__prev');
     const nextBtnLightbox = document.querySelector('.lightbox__next');
 
-    // SI PAS SUR LA PAGE D'ACCUEIL
+    // SI PAS SUR LA PAGE D'ACCUEIL (ex: single-photo)
     if (!document.body.classList.contains('home')) { 
         // Cache les flèches sur les côtés
         prevBtnLightbox.style.display = 'none'; 
         nextBtnLightbox.style.display = 'none'; 
-
-        // Décakllage de la croix en haut à droite de l'image
+        // Décallage de la croix en haut à droite de l'image
         closeBtnLightbox.style.top = "-5px";
         closeBtnLightbox.style.right = "-65px";
     }
@@ -36,16 +35,14 @@ document.addEventListener('DOMContentLoaded', function () {
         photosLightbox.push({
             url: icon.dataset.image, // URL de l’image
             ref: icon.dataset.ref,   // Référence
-            cat: icon.dataset.cat    // Catégorie
+            cat: icon.dataset.cat,    // Catégorie
+            alt: icon.dataset.alt
         });
 
         // Quand clic sur l'icône
         icon.addEventListener('click', function (event) {
-
-            event.preventDefault(); // empêche le clic normal
-
-            // Ouverture de la lightbox sur cette image
-            openLightbox(index);
+            event.preventDefault(); // Empêche le clic normal
+            openLightbox(index); // Ouverture de la lightbox sur cette image
         });
     });
 }
@@ -57,7 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
         imageLightbox.src = photosLightbox[index].url; 
         refLightbox.textContent = photosLightbox[index].ref;
         catLightbox.textContent = photosLightbox[index].cat;
+        imageLightbox.alt = photosLightbox[index].alt;
 
+        
         lightbox.classList.remove('hidden'); // Pour qu'en css, soit retiré le display: none, et donc affichage lightbox
     }
 

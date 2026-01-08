@@ -15,7 +15,7 @@
             </button>
 
             <!-- IMAGE -->
-            <img class="lightbox__image" src="" alt="">
+            <img class="lightbox__image" src="">
 
             <!-- FLÈCHE DROITE -->
             <button class="lightbox__next" type="button">

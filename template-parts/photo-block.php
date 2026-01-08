@@ -21,25 +21,25 @@
                     $cats = get_the_terms(get_the_ID(), 'categorie');
                     if ($cats) echo esc_html($cats[0]->name);
                ?>"
+               data-alt="<?php echo esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ); ?>"
                title="Voir en plein écran">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/Icon_fullscreen.png" alt="Plein écran">
             </a>
 
-        <!-- Condition pour affichage référence et catégorie : pas sur single-photo -->
-        <?php if ( ! is_singular('photo') ) : ?> 
-            <!-- Référence en bas à gauche -->
-            <div class="photo-ref">
-                <?php the_field('reference'); ?>
-            </div>
-            <!-- Catégorie en bas à droite -->
-            <div class="photo-cat">
-                <?php 
-                    $cats = get_the_terms(get_the_ID(), 'categorie');
-                    if ($cats) echo esc_html($cats[0]->name);
-                ?>
-            </div>
-        <?php endif; ?>
-
+            <!-- Condition pour affichage référence et catégorie : pas sur single-photo -->
+            <?php if ( ! is_singular('photo') ) : ?> 
+                <!-- Référence en bas à gauche -->
+                <div class="photo-ref">
+                    <?php the_field('reference'); ?>
+                </div>
+                <!-- Catégorie en bas à droite -->
+                <div class="photo-cat">
+                    <?php 
+                        $cats = get_the_terms(get_the_ID(), 'categorie');
+                        if ($cats) echo esc_html($cats[0]->name);
+                    ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </article>

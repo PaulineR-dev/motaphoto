@@ -55,7 +55,7 @@ Text Domain: motaphoto
   margin: 0 auto;
 }
 
-/* HEADER et FOOTER dont MENUS */
+/*** HEADER et FOOTER dont MENUS ***/
 .menu {
   display: flex;
   list-style: none;
@@ -80,7 +80,7 @@ Text Domain: motaphoto
   color: #000000;
 }
 
-/*Header*/
+/* HEADER */
 .header-container {
   display: flex;
   justify-content: space-between; 
@@ -101,7 +101,7 @@ Text Domain: motaphoto
   display: flex;
 }
 
-/*Footer*/
+/* FOOTER */
 .footer-container {
   display: flex;
   justify-content: center; 
@@ -121,7 +121,7 @@ Text Domain: motaphoto
 }
 
 
-/* MODALE */
+/*** MODALE ***/
 .modale {
   display: none;
   position: fixed;
@@ -221,197 +221,6 @@ span.wpcf7-form-control-wrap {
   left: 5px;
 }
 
-
-/* Version mobile HEADER, FOOTER dont menus et modale */
-@media (max-width: 768px) {
-   
-/* Single-photo */
-.infoimg-top {
-    flex-direction: column-reverse;
-}
-
-.related-photos .photo-grid {
-    flex-direction: column;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.header-container {
-  position: relative;
-}
-
-  /* Menu principal caché par défaut */
-  .site-header .site-navigation .menu {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #E00000;
-    pointer-events: none;
-    opacity: 0;
-    gap: 20px;
-    transform: translateX(100%); 
-  }
-
-  .modale {
-    display: none;
-    background-color: rgba(0,0,0,0.9);
-  }
-    
-  /* Affichage du menu burger quand activé */
-  .menu-toggle:checked ~ .site-navigation .menu {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0); /* Revient en place */
-  }
-
-  /* Input checkbox invisible */
-  .menu-toggle {
-    position: absolute;   
-    opacity: 0;           
-    width: 0;             
-    height: 0;            
-    pointer-events: none; 
-    appearance: none;
-  }
-
-  .menu-toggle:checked ~ .site-navigation .menu li a {
-    font-family: 'Space Mono', monospace;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 44px;
-    line-height: 100%;
-    letter-spacing: 0;
-    text-align: center;
-    vertical-align: middle;
-    text-transform: uppercase;
-    color: #FFFFFF;
-  }
-
-  /* Bouton burger */
-  .menu-toggle,
-  .menu-btn {
-    display: block;
-  }
-
-  .menu-btn {
-    position: absolute;
-    top: 6px;
-    right: 15px;
-    z-index: 1000;
-    width: 27px;
-    height: 19px;
-    cursor: pointer;
-    margin-right: 30px;
-  }
-
-  .menu-btn span {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 1.5px;
-    background: #000;
-    border-radius: 1px;
-    left: 0;
-  }
-
-  /* Position initiale des éléments de la croix du menu */
-  .menu-btn span:nth-child(1) { top: 10px; }
-  .menu-btn span:nth-child(2) { top: 18px; }
-  .menu-btn span:nth-child(3) { top: 26px; }
-
-  #menu-motaphoto_menu {
-    gap: 42px;
-  }
-
-  #logo_nmota {
-    position: static;     
-    margin-top: 7px;
-    margin-left: 20px;       
-    width: 138px;        
-    height: 9px;
-    align-self: flex-start; 
-  }
-
-  .header-container {
-    padding: 16px;        
-    justify-content: space-between; 
-  }
-
-  .footer-container #menu-motaphoto_footer_menu {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    margin-top: 44px;
-  }
-
-  /* Possibilité de cliquer sur les liens du menu du footer */
-  .menu-toggle:checked ~ .site-navigation .menu {
-    pointer-events: auto;
-    opacity: 1;
-  }
-
-  /* Etat spécial quand clic sur Contact en mobile : pas de transition -> EN COURS A REVOIR */
-  .no-transition .site-header .site-navigation .menu {
-    transition: none !important;
-  }
-
-  .modale-content {
-    width: 90%;          
-    margin: 20px;       
-    max-height: calc(100% - 40px);
-  }
-
-  .contact-header img {
-    width: 122%;
-  }
-  
-  /* Formulaire */
-  #wpcf7-f28-o1 {
-    margin-top: -25px;
-}
-}
-
 /* Overlay mobile */
 #mobile-header-overlay {
   position: fixed;
@@ -484,10 +293,9 @@ span.wpcf7-form-control-wrap {
 }
 
 
-/* SINGLE-PHOTO */
+/*** SINGLE-PHOTO ***/
 /* Partie haute de la single-photo */
 .single-photo { 
-  /* min-height: calc(100vh - 80px - 80px); header + footer : EN COURS REVOIR ICI LES TAILLES exactes des 2  */
   display: flex; 
   flex-direction: column; 
   justify-content: flex-start; 
@@ -496,10 +304,6 @@ span.wpcf7-form-control-wrap {
 .container-singlephoto {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: stretch; Pour que les 2 colonnes prennent la même hauteur */
-  /* gap: 21px; */
-  /* flex : 1; Pour occuper tout l’espace vertical disponible */
   max-width: 1148px;
   margin: 0 auto;
 }
@@ -525,18 +329,13 @@ span.wpcf7-form-control-wrap {
 #image-singlephoto {
   flex: 1 1 50%;
   max-width: 50%;
-  /* display: flex;
-  align-items: flex-end; image alignée en bas */
 }
 
 #image-singlephoto img {
   width: 100%;
   height: auto;
   max-width: 563px;
-  /* max-height: 80vh; */
   object-fit: contain; /* Adaptation de l’image au conteneur sans déformation */
-  /* display: block; */
-  /* height: calc(100vh - 118px); */
 }
 
 .interactions-singlephoto {
@@ -577,15 +376,65 @@ span.wpcf7-form-control-wrap {
   }
 
 
+/* Chaque photo doit prendre 50% - 20px pour faire 2 par ligne - EN COURS DE REVISION */
+.photo-list .photo-block {
+  flex: 0 1 calc(50% - 20px);
+  display: flex;
+  justify-content: center;
+}
+
+.photo-list .photo-thumb img {
+  object-fit: cover;
+}
+
+.tailleecran {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoimg-top {
+  flex: 1;
+  display: flex;
+  gap: 21px;
+}
+
+.interactions-singlephoto {
+  height: 118px;       
+  flex-shrink: 0;
+}
+
+/* Bloc centré pour les miniatures au-dessus des flèches dans la partie contact de single-photo */
+.nav-thumbnail-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-thumbnail-center img {
+    max-height: 120px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-thumbnail-center {
+    width: 81px;
+    height: 71px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.nav-thumbnail-center img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplir le cadre */
+    display: block;
+}
+
 #contact-button-photo {
   width: 272px;
   height: 50px;
-  /* transform: rotate(0deg);   angle */
-  /* opacity: 1; */
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px; */
   border: 0;
   border-radius: 2px;
   padding-top: 8px;
@@ -612,6 +461,10 @@ span.wpcf7-form-control-wrap {
   gap: 29px;
 }
 
+#nav-thumb {
+  display: none;
+}
+
 .nav-thumbnail {
     display: none;
     position: absolute;
@@ -625,7 +478,6 @@ span.wpcf7-form-control-wrap {
 }
 
 .nav-right {
-  /* flex: 1 1 50%; */
   max-width: 50%;
   display: flex;
   flex-direction: column;
@@ -634,9 +486,9 @@ span.wpcf7-form-control-wrap {
 }
 
 .nav-thumbnail img {
-    width: 87px;
-    height: 71px;
-    object-fit: cover;
+  width: 87px;
+  height: 71px;
+  object-fit: cover;
 }
 
 .nav-photo.prev:hover ~ .nav-thumbnail-wrapper .prev-thumb {
@@ -662,7 +514,6 @@ span.wpcf7-form-control-wrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   font-family: 'SpaceMono', monospace;
   font-weight: 400;
   font-style: normal;
@@ -684,20 +535,11 @@ span.wpcf7-form-control-wrap {
   gap: 20px;
 }
 
-/* .related-photos .photo-block {
-  flex: 1 1 50%;
-  position: relative;
-} */
-
 .related-photos .photo-thumb {
-  /* width: 50vw; 50% de la largeur de l’écran */
-  /* height: 40vh; */
   overflow: hidden;
 }
 
 .related-photos .photo-thumb img {
-  /* width: 100%;
-  height: 100%; */
   object-fit: cover;
 }
 
@@ -747,22 +589,18 @@ span.wpcf7-form-control-wrap {
   height: 34px;
 }
 
-
-
-
 .single-photo h2 {
-    font-family: "Space Mono", monospace;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 66px;
-    line-height: 58px;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-
-    display: inline-block;
-    max-width: 397px;
-    white-space: normal;
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 66px;
+  line-height: 58px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: inline-block;
+  max-width: 397px;
+  white-space: normal;
 }
 
 
@@ -804,7 +642,6 @@ ul.photo-infos {
   line-height: 2.5;
 }
 
-
 .photo-thumb-img {
   object-fit: cover;
   display: block;
@@ -812,39 +649,34 @@ ul.photo-infos {
   height: 100%;
 }
 
-
 .tailleecran {
-  /* height: calc(100vh - 118px); */
   display: flex;
   flex-direction: column;
 }
 
 .infoimg-top {
-  flex: 1; /* prend tout l’espace restant */
+  flex: 1;
   align-items: flex-end;
 }
 
 .interactions-singlephoto {
-  height: 118px; /* fixe */
-  flex-shrink: 0; /* ne se compresse jamais */
+  height: 118px; 
+  flex-shrink: 0;
 }
-
 
 .infoimg-top {
   display: flex;
   min-height: calc(100vh - 218px);
 }
 
-
 #image-singlephoto img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; 
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
 }
 
 
-
- /*Hero header */
+ /*** HERO HEARDER ***/
 .hero {
   max-height: 962px;
   height: 100vh;
@@ -860,7 +692,6 @@ ul.photo-infos {
   margin-left: -50vw; 
   margin-right: -50vw;
 }
-
 
 .hero__overlay {
   position: absolute;
@@ -892,383 +723,99 @@ ul.photo-infos {
 }
 
 
-@media (max-width: 768px) {
-
-  /* --- ORDRE DES BLOCS --- */
-  .infoimg-top {
-    flex-direction: column; /* image en haut, infos en dessous */
-    order: 1;
-    width: 100%;
-  }
-
-  #image-singlephoto {
-    order: 1;
-    width: calc(100% - 20px);
-    margin: 0 auto 20px auto;
-  }
-
-  #image-singlephoto img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-  }
-
-  #infophoto-singlephoto {
-    order: 2;
-    width: calc(100% - 20px);
-    margin: 0 auto;
-    border-bottom: 1px solid #000;
-    padding-bottom: 20px;
-  }
-
-  /* --- INTERACTIONS --- */
-  .interactions-singlephoto {
-    order: 3;
-    flex-direction: column;
-    align-items: flex-start;
-    width: calc(100% - 20px);
-    margin: 20px auto;
-    border-bottom: 1px solid #000;
-    padding-bottom: 20px;
-  }
-
-  .contact-left {
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  #contact-button-photo {
-    width: 100%;
-  }
-
-  /* Navigation supprimée ou placée en dessous - A REVOIR */
-  .nav-right {
-    width: 100%;
-    margin-top: 20px;
-    align-items: flex-start;
-  }
-
-  /* --- VOUS AIMEREZ AUSSI --- */
-  .related-photos {
-    order: 4;
-    width: 100%;
-    /* margin-top: 40px; */
-  }
-
-  .related-photos .photo-grid {
-    flex-direction: column;
-    gap: 20px;
-    width: calc(100% - 20px);
-    margin: 0 auto;
-  }
-
-  .photo-thumb {
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-  }
-
-  .photo-thumb img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-}
-
-@media (max-width: 768px) {
-
-  /* Neutralise toutes les largeurs limitées */
-  .container-singlephoto,
-  .infoimg-top,
-  #infophoto-singlephoto,
-  #image-singlephoto {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Supprime les hauteurs forcées */
-  /* .infoimg-top,
-  .tailleecran {
-    height: auto;
-  } */
-
-  /* L'image prend toute la largeur */
-  #image-singlephoto img {
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* Les infos prennent toute la largeur */
-  #infophoto-singlephoto {
-    border-bottom: 1px solid #000;
-    margin-top: -50px;
-    padding-bottom: 35px;
-  }
-
-  #titre-singlephoto {
-    font-family: "Space Mono", monospace;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 46px;
-    line-height: 48px;
-    letter-spacing: 0;
-    text-transform: uppercase;
-  }
-
-  ul.photo-infos {
-    font-family: "Space Mono", monospace;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
-    letter-spacing: 0.1em; 
-    text-transform: uppercase;
-  }
-
-  .infoimg-top, .tailleecran {
-    /* height: auto; */
-    gap: 20px;
-    width: 70vw;
-    margin: 0 auto;
-  }
-
-  .interactions-singlephoto {
-    width: 100%;
-  }
-
-  .contact-left {
-    gap: 25px;
-  }
-
-  .photo-navigation {
-    display: none;
-  }
-
-
-  #text-aimerezaussi {
-    margin: 0 auto;
-}
-
-  .related-photos {
-    order: 4;
-    width: 90vw; /* A VERIRIER ! */
-    /* margin-top: 40px; */
-    margin: 0 auto;
-  }
-
-  /* Conteneur principal */
-  .related-photos {
-    width: 85vw !important; /* Revoir le !important */
-    margin: 25px auto 30px auto;
-    padding: 0;
- 
-  }
-
-  /* Grille en colonne */
-  .related-photos .photo-grid {
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  /* Chaque vignette */
-  .photo-thumb {
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-  }
-
-  /* Image réduite en hauteur */
-  .photo-thumb img {
-    width: 100%;
-    height: auto;
-    max-height: 278px;
-    object-fit: cover; 
-    display: block;
-  }
-}
-
-
-
-
-/* Lightbox globale*/
+/*** LIGHTBOX ***/
 .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 30;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
 }
 
 .lightbox.hidden {
-    display: none;
+  display: none;
 }
 
 .lightbox__overlay {
-    position: absolute;
-    inset: 0;
-    /* background: rgba(0,0,0,0.8); */
-    z-index: 10; 
+  position: absolute;
+  inset: 0;
+  z-index: 10; 
 }
 
 /* Contenu avec images, flèches et croix de fermeture */
 .lightbox__content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    z-index: 20;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  z-index: 20;
 }
 
-
 .lightbox__image {
-    max-width: 100vw;
-    max-height: calc(100vh - 80px); /* Espace pour les infos */
-    height: auto;
-    object-fit: contain;
+  max-width: 100vw;
+  max-height: calc(100vh - 80px);
+  height: auto;
+  object-fit: contain;
 }
 
 /* Flèches de navigation */
 .lightbox__prev,
 .lightbox__next {
-    background: none;
-    border: none;
-    font-size: 50px;
-    color: white;
-    cursor: pointer;
-    user-select: none;
-    z-index: 30; 
+  background: none;
+  border: none;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  z-index: 30; 
 }
 
 .lightbox__close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 40; 
-    background: none;
-    border: none;
-    color: white;
-    font-size: 32px;
-    cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 40; 
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
 }
 
 .lightbox__bottom {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    color: white;
-    margin-top: 15px;
-    font-size: 16px;
-    font-family: 'SpaceMono';
-    text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: white;
+  margin-top: 15px;
+  font-size: 16px;
+  font-family: 'SpaceMono';
+  text-transform: uppercase;
 }
 
 .hidden { 
-    display: none; 
+  display: none; 
 }
 
 
-
-/* Affichage sur la page d'accueil  */
-
+/*** PAGE d'ACCUEIL ***/
 .related-photos {
-    width: 100vw;
-    max-width: 1148px;
-    margin-bottom: 105px;
-    /* margin-top: 110px; */
-    justify-content: center;
-    display: flex;
-    /* gap: 20px; */
+  width: 100vw;
+  max-width: 1148px;
+  margin-bottom: 105px;
+  justify-content: center;
+  display: flex;
 }
-
-/* --- PAGE D'ACCUEIL : affichage en flex --- */
 
 .photo-list .photo-grid {
-    display: flex;
-    flex-wrap: wrap;          /* permet de passer à la ligne */
-    justify-content: center;  /* centre les éléments */
-    gap: 20px;                /* espace entre les photos */
-    margin-bottom: 160px;
-}
-
-/* Chaque photo doit prendre 50% - 20px pour faire 2 par ligne */
-.photo-list .photo-block {
-    flex: 0 1 calc(50% - 20px);
-    display: flex;
-    justify-content: center;
-}
-
-/* Les vignettes doivent s'adapter */
-/* .photo-list .photo-thumb {
-    /* width: 100%; */
-    /* height: auto;
-} */
-
-.photo-list .photo-thumb img {
-    /* width: 100%; */
-    /* height: auto; */
-    object-fit: cover;
-}
-
-
-.tailleecran {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 160px;
 }
-
-.infoimg-top {
-  flex: 1;              /* prend tout l’espace dispo */
-  display: flex;
-  gap: 21px;
-}
-
-.interactions-singlephoto {
-  height: 118px;       
-  flex-shrink: 0;       /* ne se compresse pas */
-}
-
-
-/* Bloc centré pour les miniatures au-dessus des flèches dans la partie contact de single-photo */
-.nav-thumbnail-center {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.nav-thumbnail-center img {
-    max-height: 120px;
-    width: auto;
-    object-fit: contain;
-}
-
-.nav-thumbnail-center {
-    width: 81px;
-    height: 71px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* important pour couper ce qui dépasse */
-}
-
-.nav-thumbnail-center img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* remplit le cadre */
-    display: block;
-}
-
-
-
-
 
 /* Bouton Charger Plus de la page d'accueil */
 #load-more-photos {
@@ -1305,7 +852,6 @@ ul.photo-infos {
 }
 
 
-
 /* CONTENEUR DES FILTRES */
 .photo-filters {
   display: flex;
@@ -1316,8 +862,8 @@ ul.photo-infos {
 
 
 .photo-filters-left {
-   display: flex;
-   gap: 80px;
+  display: flex;
+  gap: 80px;
 }
 
 /* CUSTOM SELECT (remplace les <select>) */
@@ -1332,7 +878,6 @@ ul.photo-infos {
 
 /* Zone visible (équivalent du <select>) */
 .custom-select-trigger {
-
   height: 42px;
   border-radius: 8px;
   border: 1.3px solid #B8BBC2;
@@ -1363,7 +908,6 @@ ul.photo-infos {
   padding: 0;
 }
 
-
 /* Chaque ligne */
 .custom-option {
   padding: 12px 18px;
@@ -1377,16 +921,14 @@ ul.photo-infos {
   padding: 0;
 }
 
-
 /* Hover = rose clair */
 .custom-option:hover {
   background: #FFD6D6;
 }
 
-
 /* Sélection = rouge */
 .custom-option.selected {
-    background: #E00000;
+  background: #E00000;
   color: white;
 }
 
@@ -1397,9 +939,7 @@ ul.photo-infos {
 
 .custom-option:active {
   background: #FE5858;
-
 }
-
 
 /* PHOTOS : ÉTAT INITIAL POUR ANIMATION FADE‑IN : EN COURS*/
 .photo-block {
@@ -1467,15 +1007,15 @@ ul.photo-infos {
 
 .lightbox__prev,
 .lightbox__next {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 50px;
-    color: white;
-    cursor: pointer;
-    z-index: 50;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  z-index: 50;
 }
 
 .lightbox__prev {
@@ -1547,7 +1087,6 @@ ul.photo-infos {
 .lightbox__next {
   right: -85px;
 }
-
 
 .arrow {
   font-size: 40px;
@@ -1848,37 +1387,23 @@ ul.photo-infos {
   transform: scale(1.36) translateX(9px);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 #load-more-photos {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .custom-select-trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    padding: 0 20px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 0 20px;
+  cursor: pointer;
 }
 
 .custom-select-trigger i {
-    font-size: 14px;
-    pointer-events: none; /* évite que le clic touche l’icône */
-    /* transition: transform 0.3s ease; */
+  font-size: 14px;
+  pointer-events: none; /* Evite que le clic touche l’icône */
 }
 
 /* Quand le menu est ouvert : flèche vers le haut comme sur maquette Figma */
@@ -1887,9 +1412,9 @@ ul.photo-infos {
 }
 
 .custom-option {
-  display: block;        /* ← obligatoire */
-  width: 100%;           /* ← obligatoire */
-  padding: 12px 18px;    /* ←  padding réel */
+  display: block; 
+  width: 100%;
+  padding: 12px 18px;
   background: #FFFFFF;
   font-size: 12px;
   line-height: 18px;
@@ -1897,5 +1422,352 @@ ul.photo-infos {
   text-transform: uppercase;
   list-style: none;
   margin: 0;
+}
 
+
+
+/* Version mobile HEADER, FOOTER dont menus et modale */
+@media (max-width: 768px) {
+   
+  /* Single-photo */
+  .infoimg-top {
+    flex-direction: column-reverse;
+  }
+
+  .related-photos .photo-grid {
+    flex-direction: column;
+  }
+
+  .header-container {
+    position: relative;
+  }
+
+  /* Menu principal caché par défaut */
+  .site-header .site-navigation .menu {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #E00000;
+    pointer-events: none;
+    opacity: 0;
+    gap: 20px;
+    transform: translateX(100%); 
+  }
+
+  .modale {
+    display: none;
+    background-color: rgba(0,0,0,0.9);
+  }
+    
+  /* Affichage du menu burger quand activé */
+  .menu-toggle:checked ~ .site-navigation .menu {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0); /* Revient en place */
+  }
+
+  /* Input checkbox invisible */
+  .menu-toggle {
+    position: absolute;   
+    opacity: 0;           
+    width: 0;             
+    height: 0;            
+    pointer-events: none; 
+    appearance: none;
+  }
+
+  .menu-toggle:checked ~ .site-navigation .menu li a {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 44px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+
+  /* Bouton burger */
+  .menu-toggle,
+  .menu-btn {
+    display: block;
+  }
+
+  .menu-btn {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+    z-index: 1000;
+    width: 27px;
+    height: 19px;
+    cursor: pointer;
+    margin-right: 30px;
+  }
+
+  .menu-btn span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    background: #000;
+    border-radius: 1px;
+    left: 0;
+  }
+
+  /* Position initiale des éléments de la croix du menu */
+  .menu-btn span:nth-child(1) { top: 10px; }
+  .menu-btn span:nth-child(2) { top: 18px; }
+  .menu-btn span:nth-child(3) { top: 26px; }
+
+  #menu-motaphoto_menu {
+    gap: 42px;
+  }
+
+  #logo_nmota {
+    position: static;     
+    margin-top: 7px;
+    margin-left: 20px;       
+    width: 138px;        
+    height: 9px;
+    align-self: flex-start; 
+  }
+
+  .header-container {
+    padding: 16px;        
+    justify-content: space-between; 
+  }
+
+  .footer-container #menu-motaphoto_footer_menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 44px;
+  }
+
+  /* Possibilité de cliquer sur les liens du menu du footer */
+  .menu-toggle:checked ~ .site-navigation .menu {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  /* Etat spécial quand clic sur Contact en mobile : pas de transition -> EN COURS A REVOIR */
+  .no-transition .site-header .site-navigation .menu {
+    transition: none !important;
+  }
+
+  .modale-content {
+    width: 90%;          
+    margin: 20px;       
+    max-height: calc(100% - 40px);
+  }
+
+  .contact-header img {
+    width: 122%;
+  }
+  
+  /* Formulaire */
+  #wpcf7-f28-o1 {
+    margin-top: -25px;
+  } 
+
+  /* --- ORDRE DES BLOCS --- */
+  .infoimg-top {
+    flex-direction: column; /* image en haut, infos en dessous */
+    order: 1;
+    width: 100%;
+  }
+
+  #image-singlephoto {
+    order: 1;
+    width: calc(100% - 20px);
+    margin: 0 auto 20px auto;
+  }
+
+  #image-singlephoto img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  #infophoto-singlephoto {
+    order: 2;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+  }
+
+  /* --- INTERACTIONS --- */
+  .interactions-singlephoto {
+    order: 3;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(100% - 20px);
+    margin: 20px auto;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+  }
+
+  .contact-left {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  #contact-button-photo {
+    width: 100%;
+  }
+
+  /* Navigation supprimée ou placée en dessous - A REVOIR */
+  .nav-right {
+    width: 100%;
+    margin-top: 20px;
+    align-items: flex-start;
+  }
+
+  /* --- VOUS AIMEREZ AUSSI --- */
+  .related-photos {
+    order: 4;
+    width: 100%;
+    /* margin-top: 40px; */
+  }
+
+  .related-photos .photo-grid {
+    flex-direction: column;
+    gap: 20px;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+  }
+
+  .photo-thumb {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .photo-thumb img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Neutralise toutes les largeurs limitées */
+  .container-singlephoto,
+  .infoimg-top,
+  #infophoto-singlephoto,
+  #image-singlephoto {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* L'image prend toute la largeur */
+  #image-singlephoto img {
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Les infos prennent toute la largeur */
+  #infophoto-singlephoto {
+    border-bottom: 1px solid #000;
+    margin-top: -50px;
+    padding-bottom: 35px;
+  }
+
+  #titre-singlephoto {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 46px;
+    line-height: 48px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  ul.photo-infos {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    letter-spacing: 0.1em; 
+    text-transform: uppercase;
+  }
+
+  .infoimg-top, .tailleecran {
+    /* height: auto; */
+    gap: 20px;
+    width: 70vw;
+    margin: 0 auto;
+  }
+
+  .interactions-singlephoto {
+    width: 100%;
+  }
+
+  .contact-left {
+    gap: 25px;
+  }
+
+  .photo-navigation {
+    display: none;
+  }
+
+
+  #text-aimerezaussi {
+    margin: 0 auto;
+}
+
+  .related-photos {
+    order: 4;
+    width: 90vw; /* A VERIRIER ! */
+    margin: 0 auto;
+  }
+
+  /* Conteneur principal */
+  .related-photos {
+    width: 85vw !important; /* Revoir le !important */
+    margin: 25px auto 30px auto;
+    padding: 0;
+ 
+  }
+
+  /* Grille en colonne */
+  .related-photos .photo-grid {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Chaque vignette */
+  .photo-thumb {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  /* Image réduite en hauteur */
+  .photo-thumb img {
+    width: 100%;
+    height: auto;
+    max-height: 278px;
+    object-fit: cover; 
+    display: block;
+  }
 }

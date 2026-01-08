@@ -1,27 +1,31 @@
 document.addEventListener('DOMContentLoaded', function () { // Chargement du script après que tout le DOM soit chargé
-  // Récupération des éléments nécessaires
-  const contactModale = document.querySelector('.modale');
-  const contactLink = document.querySelector('.modale-contact');
-  const menuToggle = document.querySelector('.menu-toggle'); 
-  const mobileHeaderOverlay = document.getElementById('mobile-header-overlay');
-  const closeBtn = document.querySelector('.overlay-close');
-  const menuHeader = document.getElementById('menu-motaphoto_menu');
+  // Récupération des éléments nécessaires pour la modale et le menu
+  const contactModale = document.querySelector('.modale'); // Conteneur de la modale de contact
+  const contactLink = document.querySelector('.modale-contact'); // Lien "Contact" dans le header
+  const menuToggle = document.querySelector('.menu-toggle'); // Checkbox / toggle du menu burger
+  const mobileHeaderOverlay = document.getElementById('mobile-header-overlay'); // Barre haute overlay en mobile
+  const closeBtn = document.querySelector('.overlay-close'); // Bouton croix pour fermer le menu mobile
+  const menuHeader = document.getElementById('menu-motaphoto_menu'); // Conteneur du menu principal
 
-  // Vérifie si on est en version mobile ou pas
+  // Navigation photo (single-photo)
+  const thumb = document.getElementById("nav-thumb"); // Miniature affichée au survol des flèches
+  const prev = document.querySelector(".nav-photo.prev"); // Lien vers la photo précédente
+  const next = document.querySelector(".nav-photo.next"); // Lien vers la photo suivante
+
+  // *** VERIFICATION SI VERSION MOBILE *** 
   function isMobileScreen() {
-    return window.matchMedia("(max-width: 768px)").matches;
+    return window.matchMedia("(max-width: 768px)").matches; // Retourne true si la largeur d’écran est inférieure ou égale à 768px
   }
 
-
-  // ***** ANIMATIONS POUR VERSION DESKTOP ***** //
+  // *** ANIMATIONS POUR VERSION DESKTOP ***
 
   // MODALE DESKTOP
   // Animation d'apparition Fade in de la modale (desktop)
   function fadeInContactModale() {
-    contactModale.style.display = 'flex';
+    contactModale.style.display = 'flex'; // Pour afficher la modale
     contactModale.animate([
-      { opacity: 0, transform: 'none' },
-      { opacity: 1, transform: 'none' }
+      { opacity: 0 },
+      { opacity: 1 }
     ], {
       duration: 300,
       easing: 'ease-out',
@@ -32,31 +36,28 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   // Animation de disparition Fade out de la modale (desktop)
   function fadeOutContactModale() {
     const animationFadeOutContactModale  = contactModale.animate([
-      { opacity: 1, transform: 'none' },
-      { opacity: 0, transform: 'none' }
+      { opacity: 1 },
+      { opacity: 0 }
     ], {
       duration: 300,
       easing: 'ease-out',
       fill: 'forwards'
     });
 
-    animationFadeOutContactModale.onfinish = () => {
-      contactModale.style.display = 'none';
-      resetRefPhoto();
+    animationFadeOutContactModale.onfinish = () => { // Une fois l'animation terminée
+      contactModale.style.display = 'none'; // Permet de cacher la modale de contact
+      resetRefPhoto(); // Réinitialisation de la référence de la photo
     };
   }
 
-
-  // ANIMATIONS POUR VERSION MOBILE
-  // MENU
-
+  // *** ANIMATIONS POUR VERSION MOBILE ***
   // Animation ouverture du menu burger (liste des liens)
   function openBurgerMenu() {
-    menuHeader.style.display = 'flex';
-    menuHeader.style.pointerEvents = 'auto';
+    menuHeader.style.display = 'flex'; // Pour afficher le menu
+    menuHeader.style.pointerEvents = 'auto'; // Pour réactiver les interactions
     menuHeader.animate([
-      { transform: 'translateX(100%)', opacity: 0 },
-      { transform: 'translateX(0)', opacity: 1 }
+      { transform: 'translateX(100%)', opacity: 0 }, // Menu hors écran à droite
+      { transform: 'translateX(0)', opacity: 1 } // Menu visible
     ], {
       duration: 300,
       easing: 'ease-out',
@@ -64,19 +65,20 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     });
   }
 
+  // Animation de fermeture du menu burger
   function closeBurgerMenu() { 
     const animationcloseBurgerMenu = menuHeader.animate([
-      { transform: 'translateX(0)', opacity: 1 },
-      { transform: 'translateX(100%)', opacity: 0 }
+      { transform: 'translateX(0)', opacity: 1 }, // Menu visible
+      { transform: 'translateX(100%)', opacity: 0 } // Menu coulisse vers la droite et opacité 0
     ], {
       duration: 300,
       easing: 'ease-out',
       fill: 'forwards'
     });
 
-    animationcloseBurgerMenu.onfinish = () => {
-      menuHeader.style.pointerEvents = 'none';
-      menuHeader.style.display = 'none';
+    animationcloseBurgerMenu.onfinish = () => { // A la fin de l'animation
+      menuHeader.style.pointerEvents = 'none'; // Désactive les interactions sur le menu
+      menuHeader.style.display = 'none'; // Cache le menu
     };
   }
 
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   // Animation d'apparition de droite à gauche pour le MENU OVERLAY (mobile))
   function openMenuMobileOverlay() {
     if (!mobileHeaderOverlay) return;
-    mobileHeaderOverlay.style.display = 'flex';
+    mobileHeaderOverlay.style.display = 'flex'; // Affiche l’overlay
     mobileHeaderOverlay.animate([
       { transform: 'translateX(100%)', opacity: 0, backgroundColor: 'transparent' },
       { transform: 'translateX(0)', opacity: 1, backgroundColor: '#fff' }
@@ -107,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       fill: 'forwards'
     });
 
-    animationHideMenuMobile.onfinish = () => {
-      mobileHeaderOverlay.style.display = 'none';
+    animationHideMenuMobile.onfinish = () => { // A la fin de l'animation
+      mobileHeaderOverlay.style.display = 'none'; // Permet de cacher l'overlay
     };
   }
 
@@ -136,37 +138,32 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       fill: 'forwards'
     });
 
-    animationSlideOutContact.onfinish = () => {
-      contactModale.style.display = 'none';
-      resetRefPhoto();
+    animationSlideOutContact.onfinish = () => { // A la fin de l'animation
+      contactModale.style.display = 'none'; // Cache la modale
+      resetRefPhoto(); // Réinitialisation de la référence photo
     };
   }
 
 
-  // GESTION DES EVENEMENTS
-  // Ouverture de la MODALE au clic sur "Contact"
+  // ** Ouverture de la MODALE au clic sur "Contact" **
   contactLink.addEventListener('click', function (eventClicContact) {
-  eventClicContact.preventDefault();
+  eventClicContact.preventDefault(); // Empêche la navigation par défaut
 
-    if (isMobileScreen()) {
-      slideInContactModale();
- 
+    if (isMobileScreen()) { // Si mobile : slide de la modale, fermeture du menu et de l’overlay
+      slideInContactModale(); 
       menuHeader.style.display = 'none';
       menuHeader.style.pointerEvents = 'none';
-
       mobileHeaderOverlay.style.display = 'none';
       menuToggle.checked = false;
-
       // Désactive les transitions du menu temporairement
       menuHeader.style.transition = 'none';
       setTimeout(() => {
         menuHeader.style.transition = '';
-      }, 50);
+      }, 50); // Réactivation des transitions CSS après court délai (50 ms).
     } else {
-      fadeInContactModale(); // Desktop
+      fadeInContactModale(); // Desktop : fade in
     }
   });
-
 
   // Fonction commune aux différents boutons de contact
   function openContactModale() {
@@ -190,10 +187,10 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   jQuery(function () {
     // Ecoute le clic sur le bouton contact du single-photo
     jQuery('#contact-button-photo').on('click', function (e) {
-    e.preventDefault();
-    openContactModale();
-    const refPhoto = jQuery(this).attr('data-ref-photo'); // Récupère la référence de la photo 
-    // Et injecte cette référence dans le champ du formulaire de la modale
+    e.preventDefault(); 
+    openContactModale(); // Ouverture de la modale (mobile ou desktop)
+    const refPhoto = jQuery(this).attr('data-ref-photo'); // Récupération de la référence de la photo 
+    // Et injection de cette référence dans le champ du formulaire de la modale
     jQuery('.modale').find('input[name="ref_photo"]').val(refPhoto); // Sélectionne la modale, trouve le input[name="ref_photo"] et remplit avec la référence
     });
   });
@@ -201,21 +198,23 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
 
   // Fermeture de la modale en cliquant sur l’overlay
   window.addEventListener('click', function (event) {
-    if (contactModale && event.target === contactModale) {
+    if (contactModale && event.target === contactModale) { // Si clic exactement sur la modale
       if (isMobileScreen()) {
-        slideOutContactModale();
+        slideOutContactModale(); // Mobile : slide-out
       } else {
-        fadeOutContactModale();
+        fadeOutContactModale(); // Desktop : fade-out
       }
     }
   });
 
-  // Ouverture et fermeture du menu burger
+  // Ouverture et fermeture du menu burger au changement d’état du toggle
   menuToggle.addEventListener('change', () => {
-    if (menuToggle.checked) {
+    if (menuToggle.checked) { 
+      // Si coché : ouverture overlay + menu
       openMenuMobileOverlay();
       openBurgerMenu()
     } else {
+      // Si décoché : fermeture overlay + menu
       closeMenuMobileOverlay();
       closeBurgerMenu();
     }
@@ -223,9 +222,9 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
 
   // Fermeture du menu burger au clic sur la croix
   closeBtn.addEventListener('click', () => {
-    menuToggle.checked = false;
-    closeMenuMobileOverlay();
-    closeBurgerMenu();
+    menuToggle.checked = false; // Décoche le toggle
+    closeMenuMobileOverlay(); // Ferme l’overlay
+    closeBurgerMenu(); // Ferme le menu
   });
 
   // Passage mobile à desktop
@@ -245,42 +244,37 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     menuToggle.checked = false;
   }
 
-  // Resize si version desktop
+ // Vérification de redimensionnement de la fenêtre
   window.addEventListener('resize', () => {
-    if (window.matchMedia("(min-width: 769px)").matches) {
+    if (window.matchMedia("(min-width: 769px)").matches) { // Si passe en desktop 
       resetMenuForDesktop(); // Pas d’animation, juste reset menu quand passe de mobile à desktop
     }
   });
-});
 
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const thumb = document.getElementById("nav-thumb");
-    const prev = document.querySelector(".nav-photo.prev");
-    const next = document.querySelector(".nav-photo.next");
-
-    if (!thumb) return;
-
+  // ** NAVIGATION PHOTO SUR PAGE SINGLE-PHOTO
+  if (thumb) { // Si la miniature existe (donc sur single-photo)
+    // Afficher la miniature avec l’URL donnée
     function showThumb(url) {
-        thumb.src = url;
-        thumb.style.display = "block";
+      thumb.src = url;
+      thumb.style.display = "block";
     }
 
+    // Cacher la miniature
     function hideThumb() {
-        thumb.style.display = "none";
-        thumb.src = "";
+      thumb.style.display = "none";
+      thumb.src = "";
     }
 
+    // Survoler de la flèche "précédent" : affiche la miniature correspondante
     if (prev) {
-        prev.addEventListener("mouseenter", () => showThumb(prev.dataset.thumb));
-        prev.addEventListener("mouseleave", hideThumb);
+      prev.addEventListener("mouseenter", () => showThumb(prev.dataset.thumb));
+      prev.addEventListener("mouseleave", hideThumb);
     }
 
+    // Survoler de la flèche "suivant" : affiche la miniature correspondante
     if (next) {
-        next.addEventListener("mouseenter", () => showThumb(next.dataset.thumb));
-        next.addEventListener("mouseleave", hideThumb);
+      next.addEventListener("mouseenter", () => showThumb(next.dataset.thumb));
+      next.addEventListener("mouseleave", hideThumb);
     }
+  }
 });
-

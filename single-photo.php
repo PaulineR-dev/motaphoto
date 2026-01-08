@@ -71,10 +71,8 @@
         ?>
 
 
-
-
 	<div class="nav-thumbnail-center">
-    	<img id="nav-thumb" src="" alt="" style="display:none;">
+    	<img id="nav-thumb" src="" alt="Miniature de la photo" >
 	</div>
 
         <div class="photo-navigation">
