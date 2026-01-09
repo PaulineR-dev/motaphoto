@@ -1,14 +1,22 @@
 <?php
-// Charger le STYLE principal
+// Charger les styles
 function motaphoto_enqueue_styles() {
     // Charge le fichier style.css du thème (get_stylesheet_uri() pointe vers style.css du thème enfant)
     wp_enqueue_style('motaphoto-style', get_stylesheet_uri());
+
+    // Font Awesome (chargé via WordPress) 
+    wp_enqueue_style( 
+        'fontawesome', 
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css', 
+         array(), 
+        '6.5.0'
+    );
 }
 // Exécution de la fonction au moment où WP charge les scripts et les styles
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
 
 
-// Charger le SCRIPT principal
+// Charger le script principal
 function motaphoto_enqueue_scripts() {
     // Charge le fichier scripts.js situé dans /js/
     wp_enqueue_script(

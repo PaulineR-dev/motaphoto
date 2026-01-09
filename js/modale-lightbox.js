@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
         catLightbox.textContent = photosLightbox[index].cat;
         imageLightbox.alt = photosLightbox[index].alt;
 
-        
         lightbox.classList.remove('hidden'); // Pour qu'en css, soit retiré le display: none, et donc affichage lightbox
     }
 

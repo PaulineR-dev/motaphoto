@@ -7,6 +7,10 @@ Version: 1.0
 Text Domain: motaphoto
 */
 
+
+/******************************************
+*** FONTS *** 
+*******************************************/
 @font-face {
   font-family: 'SpaceMono';
   src: url('assets/fonts/SpaceMono-Regular.ttf') format('truetype');
@@ -50,12 +54,48 @@ Text Domain: motaphoto
 }
 
 
+/******************************************
+*** GLOBAL *** 
+*******************************************/
 .page {
   max-width: 1440px;
   margin: 0 auto;
 }
 
-/*** HEADER et FOOTER dont MENUS ***/
+p {
+ font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+
+/******************************************
+*** HEADER dont navigation desktop *** 
+*******************************************/
+.header-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  padding: 0px 146px; 
+  height: 80px;               
+}
+
+#logo_nmota {
+  width: 216px;
+  height: 14px;
+  top: 31px;
+  left: 146px;
+}
+
+#menu-motaphoto_menu {
+  gap: 55px;
+  display: flex;
+}
+
 .menu {
   display: flex;
   list-style: none;
@@ -80,148 +120,10 @@ Text Domain: motaphoto
   color: #000000;
 }
 
-/* HEADER */
-.header-container {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;            
-  padding: 0px 146px; 
-  height: 80px;               
-}
 
-#logo_nmota {
-  width: 216px;
-  height: 14px;
-  top: 31px;
-  left: 146px;
-}
-
-#menu-motaphoto_menu {
-  gap: 55px;
-  display: flex;
-}
-
-/* FOOTER */
-.footer-container {
-  display: flex;
-  justify-content: center; 
-  align-items: center;            
-  padding-top: 10px;
-  border-top: 1px solid #000;
-}
-
-#menu-motaphoto_footer_menu {
-  gap: 75px;
-}
-
-/*Menu burger*/
-.menu-toggle,
-.menu-btn {
-  display: none; /* Caché en desktop */
-}
-
-
-/*** MODALE ***/
-.modale {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background-color: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-}
-
-.modale-content {
-  background: #fff;
-  margin: 10% auto;
-  padding: 25px;
-  border: 4px solid #000;
-  width: 541px;
-  height: 600px;
-  padding-top: 124px;
-  overflow: hidden;
-}
-
-.contact-header {
-  position: relative;
-}
-
-.contact-header img {
-  position: absolute;
-  left: -26px;
-  top: -114px;
-}
-
-
-/* Bouton "Envoyer" du formulaire */
-.wpcf7-form-control.wpcf7-submit.has-spinner {
-  display: block;             
-  margin: 20px auto;          
-  padding: 12px 24px;         
-  background-color: #ccc;      
-  color: #000;                 
-  border: none;                
-  border-radius: 2px;          
-  font-family: 'Space Mono', monospace;
-  font-weight: 400; 
-  font-size: 12px; 
-  cursor: pointer;
-  transition: background-color 1s ease, color 1s ease;
-  width: 100%;
-  height: 50px;
-}
-
-.wpcf7-form-control.wpcf7-submit.has-spinner:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-/* Police d'écriture appliquée aux labels du formulaire de contact */
-.wpcf7 form label {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 12px;
-}
-
-#wpcf7-f28-o1 > form > p:nth-child(2) > label > span > input,
-#wpcf7-f28-o1 > form > p:nth-child(3) > label > span > input,
-#wpcf7-f28-o1 > form > p:nth-child(4) > label > span > input,
-#wpcf7-f28-o1 > form > p:nth-child(5) > label > span > textarea {
-  width: 100% ;
-  margin-top: 6px;
-  border-radius: 12px;
-  border: solid 1px #B8BBC2;
-}
-
-#wpcf7-f28-o1 > form > p:nth-child(2) > label > span > input,
-#wpcf7-f28-o1 > form > p:nth-child(3) > label > span > input,
-#wpcf7-f28-o1 > form > p:nth-child(4) > label > span > input {
-  height: 40px;
-}
-
-#wpcf7-f28-o1 > form > p:nth-child(5) > label > span > textarea {
-  height: 210px;
-}
-
-/* Fomulaire */
-#wpcf7-f28-o1 {
-  width: 263px ;
-  margin: 0 auto;
-}
-
-/* Messages d'erreur ne provoquant pas de dépassement de la modale */
-span.wpcf7-form-control-wrap {
-  position: relative;
-}
-
-.wpcf7-not-valid-tip {
-  position: absolute;
-  top: 14px;        
-  left: 5px;
-}
-
-/* Overlay mobile */
+/******************************************
+*** HEADER mobile *** 
+*******************************************/
 #mobile-header-overlay {
   position: fixed;
   top: 0;
@@ -293,7 +195,133 @@ span.wpcf7-form-control-wrap {
 }
 
 
-/*** SINGLE-PHOTO ***/
+/******************************************
+*** MENU BURGER *** 
+*******************************************/
+.menu-toggle,
+.menu-btn {
+  display: none; /* Caché en desktop */
+}
+
+
+/******************************************
+*** MODALE CONTACT *** 
+*******************************************/
+.modale {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modale-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 25px;
+  border: 4px solid #000;
+  width: 541px;
+  height: 600px;
+  padding-top: 124px;
+  overflow: hidden;
+}
+
+.contact-header {
+  position: relative;
+}
+
+.contact-header img {
+  position: absolute;
+  left: -26px;
+  top: -114px;
+}
+
+/* Bouton "Envoyer" du formulaire */
+.wpcf7-form-control.wpcf7-submit.has-spinner {
+  display: block;             
+  margin: 20px auto;          
+  padding: 12px 24px;         
+  background-color: #ccc;      
+  color: #000;                 
+  border: none;                
+  border-radius: 2px;          
+  font-family: 'Space Mono', monospace;
+  font-weight: 400; 
+  font-size: 12px; 
+  cursor: pointer;
+  transition: background-color 1s ease, color 1s ease;
+  width: 100%;
+  height: 50px;
+}
+
+.wpcf7-form-control.wpcf7-submit.has-spinner:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Police d'écriture appliquée aux labels du formulaire de contact */
+.wpcf7 form label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+#wpcf7-f28-o1 > form > p:nth-child(2) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(3) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(4) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(5) > label > span > textarea {
+  width: 100% ;
+  margin-top: 6px;
+  border-radius: 12px;
+  border: solid 1px #B8BBC2;
+}
+
+#wpcf7-f28-o1 > form > p:nth-child(2) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(3) > label > span > input,
+#wpcf7-f28-o1 > form > p:nth-child(4) > label > span > input {
+  height: 40px;
+}
+
+#wpcf7-f28-o1 > form > p:nth-child(5) > label > span > textarea {
+  height: 210px;
+}
+
+#wpcf7-f28-o1 { /* Id du fomulaire */
+  width: 263px ;
+  margin: 0 auto;
+}
+
+span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépassement de la modale */
+  position: relative;
+}
+
+.wpcf7-not-valid-tip {
+  position: absolute;
+  top: 14px;        
+  left: 5px;
+}
+
+/******************************************
+*** FOOTER *** 
+*******************************************/
+.footer-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;            
+  padding-top: 10px;
+  border-top: 1px solid #000;
+}
+
+#menu-motaphoto_footer_menu {
+  gap: 75px;
+}
+
+
+/******************************************
+*** SINGLE-PHOTO *** 
+*******************************************/
 /* Partie haute de la single-photo */
 .single-photo { 
   display: flex; 
@@ -311,7 +339,11 @@ span.wpcf7-form-control-wrap {
 .infoimg-top { 
   display: flex; 
   flex-direction: row; 
-  gap: 21px; }
+  gap: 21px; 
+  flex: 1;
+  align-items: flex-end;
+  min-height: calc(100vh - 218px);
+}
 
 /* Bloc de gauche avec les informations */
 #infophoto-singlephoto {
@@ -333,9 +365,9 @@ span.wpcf7-form-control-wrap {
 
 #image-singlephoto img {
   width: 100%;
-  height: auto;
+  height: 100%;
   max-width: 563px;
-  object-fit: contain; /* Adaptation de l’image au conteneur sans déformation */
+  object-fit: contain;
 }
 
 .interactions-singlephoto {
@@ -348,13 +380,16 @@ span.wpcf7-form-control-wrap {
   margin: 0 auto;
   margin-bottom: 1rem;
   border-bottom: 1px solid #000; 
-  gap: 21px; 
-  /* padding: 0 10px; */
+  gap: 21px;
+  flex-shrink: 0; /* Pour empêcher de rétrécir */
 }
 
 .contact-left {
   display: flex;
   margin-top: -1rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
 }
 
 /* Partie contact de la single-photo */
@@ -376,7 +411,7 @@ span.wpcf7-form-control-wrap {
   }
 
 
-/* Chaque photo doit prendre 50% - 20px pour faire 2 par ligne - EN COURS DE REVISION */
+/* Chaque photo doit prendre 50% - 20px pour faire 2 par ligne - EN COURS DE REVISION---------------------------- */
 .photo-list .photo-block {
   flex: 0 1 calc(50% - 20px);
   display: flex;
@@ -390,17 +425,6 @@ span.wpcf7-form-control-wrap {
 .tailleecran {
   display: flex;
   flex-direction: column;
-}
-
-.infoimg-top {
-  flex: 1;
-  display: flex;
-  gap: 21px;
-}
-
-.interactions-singlephoto {
-  height: 118px;       
-  flex-shrink: 0;
 }
 
 /* Bloc centré pour les miniatures au-dessus des flèches dans la partie contact de single-photo */
@@ -447,6 +471,16 @@ span.wpcf7-form-control-wrap {
   transition: background-color 1s ease, color 1s ease;
   cursor: pointer;
   margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'SpaceMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
 }
 
 #contact-button-photo:hover {
@@ -499,34 +533,16 @@ span.wpcf7-form-control-wrap {
   display: block;
 }
 
-.contact-left {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 50%;
-}
-
 .contact-left p {
   margin: 0;
-}
-
-#contact-button-photo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'SpaceMono', monospace;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 12px;
-  line-height: 100%;
-  letter-spacing: 0;
-  vertical-align: middle;
 }
 
 .related-photos {
   width: 100vw;
   max-width: 1148px;
   margin-bottom: 105px;
+  display: flex;
+  justify-content: center;
 }
 
 .related-photos .photo-grid {
@@ -564,6 +580,7 @@ span.wpcf7-form-control-wrap {
   justify-content: center;
   align-items: center;
   transition: opacity 0.3s ease;
+  inset: 0;
 }
 
 /* Apparition du voile noir au survol */
@@ -603,7 +620,6 @@ span.wpcf7-form-control-wrap {
   white-space: normal;
 }
 
-
 #text-vousaimerezaussi {
   font-family: "Space Mono", monospace;
   font-weight: 400;
@@ -615,17 +631,6 @@ span.wpcf7-form-control-wrap {
   text-transform: uppercase;
   margin-top: 60px;
   margin-bottom: 50px;
-}
-
-p {
- font-family: 'Poppins', sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0;
-  vertical-align: middle;
-  margin-bottom: 10px;
 }
 
 ul.photo-infos {
@@ -649,34 +654,10 @@ ul.photo-infos {
   height: 100%;
 }
 
-.tailleecran {
-  display: flex;
-  flex-direction: column;
-}
 
-.infoimg-top {
-  flex: 1;
-  align-items: flex-end;
-}
-
-.interactions-singlephoto {
-  height: 118px; 
-  flex-shrink: 0;
-}
-
-.infoimg-top {
-  display: flex;
-  min-height: calc(100vh - 218px);
-}
-
-#image-singlephoto img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; 
-}
-
-
- /*** HERO HEARDER ***/
+/******************************************
+*** HERO HEADER *** 
+*******************************************/
 .hero {
   max-height: 962px;
   height: 100vh;
@@ -723,7 +704,9 @@ ul.photo-infos {
 }
 
 
-/*** LIGHTBOX ***/
+/******************************************
+*** LIGHTBOX *** 
+*******************************************/
 .lightbox {
   position: fixed;
   inset: 0;
@@ -749,6 +732,7 @@ ul.photo-infos {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 40px;
   z-index: 20;
 }
@@ -800,7 +784,9 @@ ul.photo-infos {
 }
 
 
-/*** PAGE d'ACCUEIL ***/
+/******************************************
+*** PAGE D'ACCUEIL *** 
+*******************************************/
 .related-photos {
   width: 100vw;
   max-width: 1148px;
@@ -817,7 +803,7 @@ ul.photo-infos {
   margin-bottom: 160px;
 }
 
-/* Bouton Charger Plus de la page d'accueil */
+/* Bouton CHARGER PLUS */
 #load-more-photos {
   width: 272px;
   height: 50px;
@@ -921,12 +907,10 @@ ul.photo-infos {
   padding: 0;
 }
 
-/* Hover = rose clair */
 .custom-option:hover {
   background: #FFD6D6;
 }
 
-/* Sélection = rouge */
 .custom-option.selected {
   background: #E00000;
   color: white;
@@ -941,22 +925,10 @@ ul.photo-infos {
   background: #FE5858;
 }
 
-/* PHOTOS : ÉTAT INITIAL POUR ANIMATION FADE‑IN : EN COURS*/
 .photo-block {
   opacity: 1;
   transform: translateY(0);
   will-change: opacity, transform;
-}
-
-.photo-overlay {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.photo-thumb:hover .photo-overlay {
-  opacity: 1;
 }
 
 /* Référence en bas à gauche */
@@ -1028,31 +1000,16 @@ ul.photo-infos {
 
 .lightbox__image {
   max-width: 90vw;
-  max-height: 80vh;
+  max-height: 92vh;
   object-fit: contain;
   display: block;
 }
-.lightbox__content {
-  position: relative;
-  z-index: 20;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 
 .lightbox__inner {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.lightbox__image {
-  max-width: 90vw;
-  max-height: 80vh;
-  object-fit: contain;
-  display: block;
 }
 
 .lightbox__close {
@@ -1145,7 +1102,6 @@ ul.photo-infos {
   transition: font-weight 0.2s ease;
 }
 
-/* HOVER : texte en gras */
 .lightbox__prev:hover .lightbox__label,
 .lightbox__next:hover .lightbox__label {
   font-weight: 700;
@@ -1181,6 +1137,7 @@ ul.photo-infos {
   z-index: 20;
   font-family: "SpaceMono";
 }
+
 .lightbox__prev {
   left: -165px; 
 }
@@ -1261,7 +1218,6 @@ ul.photo-infos {
 .lightbox__next:hover .lightbox__label {
   font-weight: 700;
 }
-
 
 /* BOUTONS */
 .lightbox__prev,
@@ -1387,6 +1343,21 @@ ul.photo-infos {
   transform: scale(1.36) translateX(9px);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #load-more-photos {
   opacity: 1;
   transform: translateY(0);
@@ -1423,6 +1394,109 @@ ul.photo-infos {
   list-style: none;
   margin: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1642,7 +1716,6 @@ ul.photo-infos {
   .related-photos {
     order: 4;
     width: 100%;
-    /* margin-top: 40px; */
   }
 
   .related-photos .photo-grid {
