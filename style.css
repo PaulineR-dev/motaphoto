@@ -1514,6 +1514,7 @@ ul.photo-infos {
 
   .header-container {
     position: relative;
+    margin-top: 8px;    
   }
 
   /* Menu principal caché par défaut */
@@ -1545,6 +1546,7 @@ ul.photo-infos {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(0); /* Revient en place */
+    z-index: 20;
   }
 
   /* Input checkbox invisible */
@@ -1627,6 +1629,11 @@ ul.photo-infos {
     align-items: center;
     gap: 24px;
     margin-top: 44px;
+  }
+
+  .footer-container {
+    padding-top: 35px;
+    padding-bottom: 65px;
   }
 
   /* Possibilité de cliquer sur les liens du menu du footer */
@@ -1843,4 +1850,54 @@ ul.photo-infos {
     object-fit: cover; 
     display: block;
   }
+
+  /* Wrap pour les filters de la page d'accueil et gap adapté à la version mobile */
+    .photo-filters,
+    .photo-filters-left {
+    gap: 7px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+ /* Marges avec le hero header et la grille des photos  */
+  .photo-filters {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  /* Ajustements hero header avec titre */
+  .hero {
+    height: 253px;
+  }
+
+  .hero__content h1 {
+    font-size: 27.59px;
+  }
+
+  /* Ajustements grilles photos de la page d'accueil */
+  .photo-list .photo-block {
+    flex: initial;
+    width: 85vw;
+  }
+
+  /* Marge entre la fin de la grille et le bouton Charge Plus de la page d'accueil */
+  .photo-list .photo-grid {
+    margin-bottom: 80px;
+  }
+
+  /* Hauteur images */
+  .photo-thumb img {
+    height: 278px;
+  }
+
+  /* Réajustements lightbox */
+  .lightbox__inner {
+    width: 36vw;
+  }
+
+  .lightbox__close {
+    top: -60px;
+    right: -106px;
+  }
+
 }
