@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () { // Chargement du script après que tout le DOM soit chargé
   // Récupération des éléments nécessaires pour la modale et le menu
-  const contactModale = document.querySelector('.modale'); // Conteneur de la modale de contact
-  const contactLink = document.querySelector('.modale-contact'); // Lien "Contact" dans le header
-  const menuToggle = document.querySelector('.menu-toggle'); // Checkbox / toggle du menu burger
-  const mobileHeaderOverlay = document.getElementById('mobile-header-overlay'); // Barre haute overlay en mobile
-  const closeBtn = document.querySelector('.overlay-close'); // Bouton croix pour fermer le menu mobile
-  const menuHeader = document.getElementById('menu-motaphoto_menu'); // Conteneur du menu principal
+  const contactModale = document.querySelector('.modale');
+  const contactLink = document.querySelector('.modale-contact');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileHeaderOverlay = document.getElementById('mobile-header-overlay');
+  const closeBtn = document.querySelector('.overlay-close');
+  const menuHeader = document.getElementById('menu-motaphoto_menu');
 
   // Navigation photo (single-photo)
-  const thumb = document.getElementById("nav-thumb"); // Miniature affichée au survol des flèches
-  const prev = document.querySelector(".nav-photo.prev"); // Lien vers la photo précédente
-  const next = document.querySelector(".nav-photo.next"); // Lien vers la photo suivante
+  const thumb = document.getElementById("nav-thumb");
+  const prev = document.querySelector(".nav-photo.prev");
+  const next = document.querySelector(".nav-photo.next");
 
   // *** VERIFICATION SI VERSION MOBILE *** 
   function isMobileScreen() {
@@ -45,19 +45,19 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     });
 
     animationFadeOutContactModale.onfinish = () => { // Une fois l'animation terminée
-      contactModale.style.display = 'none'; // Permet de cacher la modale de contact
-      resetRefPhoto(); // Réinitialisation de la référence de la photo
+      contactModale.style.display = 'none';
+      resetRefPhoto();
     };
   }
 
   // *** ANIMATIONS POUR VERSION MOBILE ***
   // Animation ouverture du menu burger (liste des liens)
   function openBurgerMenu() {
-    menuHeader.style.display = 'flex'; // Pour afficher le menu
-    menuHeader.style.pointerEvents = 'auto'; // Pour réactiver les interactions
+    menuHeader.style.display = 'flex';
+    menuHeader.style.pointerEvents = 'auto';
     menuHeader.animate([
-      { transform: 'translateX(100%)', opacity: 0 }, // Menu hors écran à droite
-      { transform: 'translateX(0)', opacity: 1 } // Menu visible
+      { transform: 'translateX(100%)', opacity: 0 },
+      { transform: 'translateX(0)', opacity: 1 }
     ], {
       duration: 300,
       easing: 'ease-out',
@@ -68,17 +68,17 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   // Animation de fermeture du menu burger
   function closeBurgerMenu() { 
     const animationcloseBurgerMenu = menuHeader.animate([
-      { transform: 'translateX(0)', opacity: 1 }, // Menu visible
-      { transform: 'translateX(100%)', opacity: 0 } // Menu coulisse vers la droite et opacité 0
+      { transform: 'translateX(0)', opacity: 1 },
+      { transform: 'translateX(100%)', opacity: 0 }
     ], {
       duration: 300,
       easing: 'ease-out',
       fill: 'forwards'
     });
 
-    animationcloseBurgerMenu.onfinish = () => { // A la fin de l'animation
-      menuHeader.style.pointerEvents = 'none'; // Désactive les interactions sur le menu
-      menuHeader.style.display = 'none'; // Cache le menu
+    animationcloseBurgerMenu.onfinish = () => {
+      menuHeader.style.pointerEvents = 'none';
+      menuHeader.style.display = 'none';
     };
   }
 
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   // Animation d'apparition de droite à gauche pour le MENU OVERLAY (mobile))
   function openMenuMobileOverlay() {
     if (!mobileHeaderOverlay) return;
-    mobileHeaderOverlay.style.display = 'flex'; // Affiche l’overlay
+    mobileHeaderOverlay.style.display = 'flex';
     mobileHeaderOverlay.animate([
       { transform: 'translateX(100%)', opacity: 0, backgroundColor: 'transparent' },
       { transform: 'translateX(0)', opacity: 1, backgroundColor: '#fff' }
@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       fill: 'forwards'
     });
 
-    animationHideMenuMobile.onfinish = () => { // A la fin de l'animation
-      mobileHeaderOverlay.style.display = 'none'; // Permet de cacher l'overlay
+    animationHideMenuMobile.onfinish = () => {
+      mobileHeaderOverlay.style.display = 'none';
     };
   }
 
@@ -138,16 +138,16 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       fill: 'forwards'
     });
 
-    animationSlideOutContact.onfinish = () => { // A la fin de l'animation
-      contactModale.style.display = 'none'; // Cache la modale
-      resetRefPhoto(); // Réinitialisation de la référence photo
+    animationSlideOutContact.onfinish = () => {
+      contactModale.style.display = 'none';
+      resetRefPhoto();
     };
   }
 
 
   // ** Ouverture de la MODALE au clic sur "Contact" **
   contactLink.addEventListener('click', function (eventClicContact) {
-  eventClicContact.preventDefault(); // Empêche la navigation par défaut
+  eventClicContact.preventDefault();
 
     if (isMobileScreen()) { // Si mobile : slide de la modale, fermeture du menu et de l’overlay
       slideInContactModale(); 
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
 
   // Fermeture de la modale en cliquant sur l’overlay
   window.addEventListener('click', function (event) {
-    if (contactModale && event.target === contactModale) { // Si clic exactement sur la modale
+    if (contactModale && event.target === contactModale) {
       if (isMobileScreen()) {
         slideOutContactModale(); // Mobile : slide-out
       } else {
@@ -223,8 +223,8 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   // Fermeture du menu burger au clic sur la croix
   closeBtn.addEventListener('click', () => {
     menuToggle.checked = false; // Décoche le toggle
-    closeMenuMobileOverlay(); // Ferme l’overlay
-    closeBurgerMenu(); // Ferme le menu
+    closeMenuMobileOverlay(); 
+    closeBurgerMenu(); 
   });
 
   // Passage mobile à desktop

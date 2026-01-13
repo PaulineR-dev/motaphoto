@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevBtnLightbox = document.querySelector('.lightbox__prev');
     const nextBtnLightbox = document.querySelector('.lightbox__next');
 
+    function isMobile() {
+    return window.innerWidth <= 768; // Seuil mobile
+    }
+
     // SI PAS SUR LA PAGE D'ACCUEIL (ex: single-photo)
     if (!document.body.classList.contains('home')) { 
         // Cache les flèches sur les côtés
@@ -41,8 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Quand clic sur l'icône
         icon.addEventListener('click', function (event) {
-            event.preventDefault(); // Empêche le clic normal
-            openLightbox(index); // Ouverture de la lightbox sur cette image
+
+            // MOBILE → redirection vers la single-photo
+            if (isMobile()) {
+                window.location.href = icon.dataset.single;
+            return;
+            }
+
+            // DESKTOP → ouverture de la lightbox
+            event.preventDefault();
+            openLightbox(index);
         });
     });
 }
@@ -60,23 +72,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // NAVIGATION
-    // Navigation vers la photo précédente
+    // Navigation vers la photo précédente (boucle infinie)
     prevBtnLightbox.addEventListener('click', () => {
-        // Tant que pas à la première image (index > 0)
-        if (currentIndexLightbox > 0) {
-            // Alors ouverture de la photo précédente
-            openLightbox(currentIndexLightbox - 1);
-        }
+        currentIndexLightbox =
+            (currentIndexLightbox - 1 + photosLightbox.length) % photosLightbox.length;
+
+        openLightbox(currentIndexLightbox);
     });
 
-    // Navigation vers la photo suivante
+    // Navigation vers la photo suivante (boucle infinie)
     nextBtnLightbox.addEventListener('click', () => {
-        // Tant que pas à la dernière photo
-        if (currentIndexLightbox < photosLightbox.length - 1) {
-            // Alors ouverture de la photo suivante
-            openLightbox(currentIndexLightbox + 1);
-        }
+        currentIndexLightbox =
+            (currentIndexLightbox + 1) % photosLightbox.length;
+
+        openLightbox(currentIndexLightbox);
     });
+
 
     // FERMETURE VIA LA CROIX
     closeBtnLightbox.addEventListener('click', () => {

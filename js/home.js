@@ -1,10 +1,10 @@
-// *** CUSTOM SELECTS ***
+// Eléments de la page d'accueil
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".photo-block").forEach(photo => { // Sélectionne tous les éléments ayant la classe .photo-block
         photo.classList.add("photo-already-loaded"); // Sert de marqueur afin de ne pas appliquer par la suite de fade in aux images déjà chargées
     });
 
-    document.querySelectorAll(".custom-select").forEach(select => { // Sélectionne chaque composant custom-select de la page
+    document.querySelectorAll(".custom-select").forEach(select => {
         const trigger = select.querySelector(".custom-select-trigger"); // Élément cliquable qui ouvre/ferme le menu
         const hiddenInput = document.getElementById(select.dataset.target); // Input caché qui stocke la valeur du filtre
         const placeholder = select.dataset.placeholder; // Texte affiché quand aucune option n’est sélectionnée
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 hiddenInput.value = ""; // Vide la valeur du filtre dans l’input caché
                 hiddenInput.dispatchEvent(new Event("change")); // Déclenche un événement "change" sur l’input pour relancer l’AJAX
                 select.classList.add("open"); // Ouvre le menu
-                return; // Sort de la fonction
+                return;
             }
 
             // * CAS 3 : Si aucun cas particulier ci-dessus (pas de filtre, trigger affiche placeholder): ouverture/fermeture du menu
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // CHOIX D’UNE OPTION
         select.querySelectorAll(".custom-option").forEach(option => { // Sélectionne toutes les options du select personnalisé
-            option.addEventListener("click", () => { // Ajoute un écouteur de clic sur chaque option
+            option.addEventListener("click", () => { 
 
                 select.querySelectorAll(".custom-option").forEach(o => o.classList.remove("selected")); // Retire la classe "selected" de toutes les options pour effacer la sélection précédente
                 option.classList.add("selected"); // Ajoute la classe "selected" à l’option cliquée pour marquer la nouvelle sélection
@@ -59,10 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // FERMETURE GLOBALE DES SELECTS AU CLIC EN DEHORS
-    document.addEventListener("click", (e) => { // Ajoute un écouteur de clic global sur le document
-        document.querySelectorAll(".custom-select.open").forEach(select => { // Sélectionne tous les selects personnalisés actuellement ouverts
-            if (!select.contains(e.target)) { // Si l’élément cliqué n’est pas à l’intérieur de ce select
-                select.classList.remove("open"); // Ferme ce select
+    document.addEventListener("click", (e) => {
+        document.querySelectorAll(".custom-select.open").forEach(select => {
+            if (!select.contains(e.target)) {
+                select.classList.remove("open");
             }
         });
     });
@@ -70,11 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // *** AJAX : CHARGEMENT DES PHOTOS ***
-const chargerPlusbtn = document.getElementById("load-more-photos"); // Récupère le bouton "Charger plus" par son ID
-const photosGrid = document.querySelector(".photo-grid"); // Récupère le conteneur principal de la grille de photos
-const filterCategorie = document.getElementById("filter-categorie"); // Récupère l’input caché ou le champ lié au filtre de catégorie
-const filterFormat = document.getElementById("filter-format"); // Récupère l’input caché ou le champ lié au filtre de format
-const filterOrder = document.getElementById("sort-date"); // Récupère l’input caché ou le champ lié au tri (ordre par date)
+const chargerPlusbtn = document.getElementById("load-more-photos"); 
+const photosGrid = document.querySelector(".photo-grid");
+const filterCategorie = document.getElementById("filter-categorie");
+const filterFormat = document.getElementById("filter-format");
+const filterOrder = document.getElementById("sort-date");
 
 // Page actuelle et nombre total de pages (valeurs envoyées par PHP)
 let currentOpenedPage = chargerPlusbtn ? parseInt(chargerPlusbtn.dataset.currentPage) : 1; // Si le bouton existe, lecture de la page actuelle dans data-current-page, sinon met 1 par défaut
@@ -85,8 +85,8 @@ let loadingAjax = false; // Indicateur booléen pour empêcher plusieurs requêt
 function getFilters() {
     return { // Retourne un objet contenant les valeurs actuelles des filtres
         categorie: filterCategorie ? filterCategorie.value : "", // Si l’input de catégorie existe, renvoie sa valeur, sinon chaîne vide
-        format: filterFormat ? filterFormat.value : "", // Si l’input de format existe, renvoie sa valeur, sinon chaîne vide
-        order: filterOrder ? filterOrder.value : "" // Si l’input de tri existe, renvoie sa valeur, sinon chaîne vide
+        format: filterFormat ? filterFormat.value : "", 
+        order: filterOrder ? filterOrder.value : "" 
     };
 }
 
@@ -110,13 +110,13 @@ function loadPhotos(nextPage, append = true) { // nextPage : numéro de la page 
 
     // ** ENVOI de la requête AJAX à WordPress
     fetch(motaphotoInfinite.ajax_url, { // Envoie la requête à l’URL AJAX de WordPress
-        method: "POST", // Utilise la méthode POST
+        method: "POST", 
         body: formData // Envoie les données préparées dans formData
     })
     .then(res => res.text()) // Quand la réponse arrive, la convertit en texte (HTML)
     .then(html => { // Callback exécuté avec le HTML renvoyé par le serveur
         // Réponse dans un conteneur temporaire
-        const temp = document.createElement("div"); // Crée un élément div temporaire
+        const temp = document.createElement("div");
         temp.innerHTML = html; // Injecte le HTML de la réponse dans ce conteneur temporaire
         const meta = temp.querySelector(".ajax-meta"); // Récupère les infos de pagination envoyées par PHP
 
@@ -160,55 +160,35 @@ function loadPhotos(nextPage, append = true) { // nextPage : numéro de la page 
         });
     });
 
-    /* GESTION DU BOUTON CHARGER PLUS */
-    if (currentOpenedPage >= maxPages) { // Si la page acutelle ouverte est supérieure ou égale au nombre de pages maxi
-    const fadeOut = chargerPlusbtn.animate([
-        { opacity: 1 },
-        { opacity: 0 }
-    ], {
-        duration: 500,
-        easing: 'ease-out',
-        fill: 'forwards'
+        /* GESTION DU BOUTON CHARGER PLUS (animation 100% CSS) */
+        if (chargerPlusbtn) {
+            if (currentOpenedPage >= maxPages) {
+                // Plus de pages → fade-out CSS puis hide
+                chargerPlusbtn.classList.add("fade-out");
+                setTimeout(() => {
+                    chargerPlusbtn.style.display = "none";
+                }, 500); // même durée que la transition CSS
+            } else {
+                // Il reste des pages → on réaffiche le bouton
+                chargerPlusbtn.style.display = "block";
+                chargerPlusbtn.classList.remove("fade-out");
+            }
+        }
+    })
+    .finally(() => {
+        loadingAjax = false;
     });
-
-    fadeOut.finished.then(() => { // Alors une fois l'animation de fade out terminée, cache bouton
-        chargerPlusbtn.style.display = "none";
-    });
-
-    } else {
-        chargerPlusbtn.style.display = "block";
-
-        chargerPlusbtn.animate([
-            { opacity: 0 },
-            { opacity: 1 }
-        ], {
-            duration: 500,
-            easing: 'ease-out',
-            fill: 'forwards'
-        });
-    }
-})
-.finally(() => {
-    loadingAjax = false; // Pour libérer possibilité de refaire requête AJAX
-  });
 }
 
-if (chargerPlusbtn) { // Si le bouton Charger Plus existe
-  chargerPlusbtn.addEventListener("click", () => { // Quand clic
+// Clic sur le bouton "Charger plus"
+if (chargerPlusbtn) {
+    chargerPlusbtn.addEventListener("click", () => {
+        // Fade-out CSS au clic
+        chargerPlusbtn.classList.add("fade-out");
 
-    // Animation fade out à chaque clic
-    chargerPlusbtn.animate([
-      { opacity: 1 },
-      { opacity: 0 }
-    ], {
-      duration: 500,
-      easing: 'ease-out',
-      fill: 'forwards'
+        // Charger la page suivante
+        loadPhotos(currentOpenedPage + 1, true);
     });
-
-    // Et chargement de la page suivante
-    loadPhotos(currentOpenedPage + 1, true);
-  });
 }
 
 // RESET + RECHARGEMENT : fonction appelée quand changement d'un filtre
@@ -217,9 +197,10 @@ function onFilterChange() {
     loadPhotos(1, false); // La grille depuis la page 1 avec les filtres rechargée (et non ajoutée)
 }
 
-// Quand la catégorie change = recharge la grille
+// Recharge la grille quand :
+// La catégorie change
 if (filterCategorie) filterCategorie.addEventListener("change", onFilterChange);
-// Quand le format change = recharge la grille
+// Le format change
 if (filterFormat) filterFormat.addEventListener("change", onFilterChange);
-// Quand le tri change = recharge la grille
+// Le tri change
 if (filterOrder) filterOrder.addEventListener("change", onFilterChange);

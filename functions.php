@@ -37,18 +37,18 @@ function motaphoto_enqueue_scripts() {
         )
     );
 
-    // Charger le fichier filters.js
+    // Charger le fichier home.js
     wp_enqueue_script(
-        'motaphoto-filters',
-        get_template_directory_uri() . '/js/filters.js',
+        'motaphoto-home',
+        get_template_directory_uri() . '/js/home.js',
         array(), // Pas de dépendance
         '1.0',
         true
     );
 
-    // Envoyer les variables AJAX à filters.js
+    // Envoyer les variables AJAX à home.js
     wp_localize_script(
-        'motaphoto-filters',
+        'motaphoto-home',
         'motaphotoInfinite',
         array(
             'ajax_url' => admin_url('admin-ajax.php'),
