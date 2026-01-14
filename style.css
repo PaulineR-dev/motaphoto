@@ -309,6 +309,7 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
   left: 5px;
 }
 
+
 /******************************************
 *** FOOTER *** 
 *******************************************/
@@ -376,9 +377,11 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
 
 #image-singlephoto img {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 563px;
   object-fit: contain;
+  display: block;
+  margin: 0;
 }
 
 .interactions-singlephoto {
@@ -410,7 +413,7 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
   justify-content: flex-start;
   align-items: center;
   gap: 21px;
-  flex-wrap: wrap; /* Permet de repasser en colonne sur mobile */
+  flex-wrap: wrap;
   max-width: 1148px;
 }
 
@@ -421,6 +424,13 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
   gap: 15px;
   margin-bottom: 15px;
   padding-top: 15px;
+  max-width: 50%;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+:where(figure) {
+  margin: 0;
 }
 
 .photo-list .photo-block {
@@ -498,23 +508,15 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
 }
 
 .nav-thumbnail {
-    display: none;
-    position: absolute;
-    top: -80px;
-    left: -6px;
-    z-index: 10;
+  display: none;
+  position: absolute;
+  top: -80px;
+  left: -6px;
+  z-index: 10;
 }
 
 .nav-photo:hover + .nav-thumbnail {
-    display: block;
-}
-
-.nav-right {
-  max-width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
+  display: block;
 }
 
 .nav-thumbnail img {
@@ -538,7 +540,7 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
 .related-photos {
   width: 100vw;
   max-width: 1148px;
-  margin-bottom: 105px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
 }
@@ -554,8 +556,8 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
 .photo-thumb {
   position: relative;
   overflow: hidden;
-  width:564px; 
-  height:495px
+  width: 564px; 
+  height: 495px;
 }
 
 /* Overlay noir invisible par défaut */
@@ -688,8 +690,6 @@ ul.photo-infos {
   font-size: 96px;
   line-height: 1;
   text-transform: uppercase;
-
-  /* Effet outline */
   color: transparent;
   -webkit-text-stroke: 3px #FFF;
   text-stroke: 3px #FFF;
@@ -729,7 +729,6 @@ ul.photo-infos {
   z-index: 20;
 }
 
-
 .lightbox__bottom {
   display: flex;
   justify-content: space-between;
@@ -745,18 +744,119 @@ ul.photo-infos {
   display: none; 
 }
 
+.lightbox__image {
+  max-width: 80vw;
+  max-height: 92vh;
+  object-fit: contain;
+  display: block;
+  height: auto;
+}
+
+.lightbox__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 10px;
+  right: -55px;
+  z-index: 20;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.lightbox__prev:hover .arrow,
+.lightbox__next:hover .arrow {
+  transform: scale(1.15);
+  font-size: 27px;
+}
+
+.lightbox__label {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+  transition: font-weight 0.2s ease;
+}
+
+.lightbox__prev:hover .arrow::before {
+  content: "\f177";
+}
+
+.lightbox__next:hover .arrow::before {
+  content: "\f178";
+}
+
+.lightbox__prev:hover .lightbox__label,
+.lightbox__next:hover .lightbox__label {
+  font-weight: 700;
+}
+
+.lightbox__prev { 
+  left: -130px; 
+}
+
+.lightbox__next { 
+  right: -120px; 
+}
+
+.lightbox__prev .arrow {
+  transform-origin: left center;
+}
+
+.lightbox__next .arrow {
+  transform-origin: right center;
+}
+
+.arrow {
+  width: 34px;
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 25px;
+  line-height: 1;
+  transform: scale(1) translateX(0);
+  transition: transform 0.2s ease;
+}
+
+.lightbox__prev:hover .arrow {
+  transform: scale(1.36) translateX(-9px);
+}
+
+.lightbox__next:hover .arrow {
+  transform: scale(1.36) translateX(9px);
+}
+
+.lightbox__prev,
+.lightbox__next {
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  font-family: "SpaceMono";
+  position: absolute;
+  display: flex;
+  gap: 10px;
+}
+
 
 /******************************************
 *** PAGE D'ACCUEIL *** 
 *******************************************/
-.related-photos {
-  width: 100vw;
-  max-width: 1148px;
-  margin-bottom: 105px;
-  justify-content: center;
-  display: flex;
-}
-
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -766,10 +866,10 @@ ul.photo-infos {
 }
 
 .photo-list.container {
-    max-width: 1148px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
+  max-width: 1148px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
 }
 
 /* Bouton CHARGER PLUS */
@@ -811,8 +911,7 @@ ul.photo-infos {
   pointer-events: none;
 }
 
-
-/* CONTENEUR DES FILTRES */
+/* Filtres */
 .photo-filters {
   display: flex;
   justify-content: space-between;
@@ -825,7 +924,6 @@ ul.photo-infos {
   gap: 42px;
 }
 
-/* CUSTOM SELECT (remplace les <select>) */
 .custom-select {
   position: relative;
   width: 260px;
@@ -834,7 +932,6 @@ ul.photo-infos {
   font-family: "Poppins", sans-serif;
 }
 
-/* Zone visible (équivalent du <select>) */
 .custom-select-trigger {
   height: 42px;
   border-radius: 8px;
@@ -851,7 +948,16 @@ ul.photo-infos {
   cursor: pointer;
 }
 
-/* LISTE DÉROULANTE */
+.custom-select-trigger i {
+  font-size: 14px;
+  pointer-events: none;
+}
+
+/* Quand le menu est ouvert : flèche vers le haut comme sur maquette Figma */
+.custom-select.open .custom-select-trigger i {
+  transform: rotate(180deg);
+}
+
 .custom-options {
   position: absolute;
   top: calc(100% + 4px);
@@ -894,7 +1000,6 @@ ul.photo-infos {
   color: white;
 }
 
-/* Quand le menu est ouvert */
 .custom-select.open .custom-options {
   display: block;
 }
@@ -937,201 +1042,24 @@ ul.photo-infos {
   text-transform: uppercase;
 }
 
-/* Apparition au survol */
 .photo-thumb:hover .photo-ref,
 .photo-thumb:hover .photo-cat {
   opacity: 1;
 }
 
-.lightbox__image {
-  max-width: 80vw;
-  max-height: 92vh;
-  object-fit: contain;
-  display: block;
-  height: auto;
-}
 
-.lightbox__inner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.lightbox__close {
-  position: absolute;
-  top: 10px;
-  right: -55px;
-  z-index: 20;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 32px;
-  cursor: pointer;
-}
-
-.lightbox__next {
-  right: -85px;
-}
-
-.lightbox__label {
-  font-size: 18px;
-  font-weight: 400;
-  transition: font-weight 0.2s ease;
-}
-
-.lightbox__next {
-  right: -80px;
-}
-
-/* Texte */
-.lightbox__label {
-  font-size: 18px;
-  font-weight: 400;
-  transition: font-weight 0.2s ease;
-}
-
-/* HOVER : flèche plus grande */
-.lightbox__prev:hover .arrow,
-.lightbox__next:hover .arrow {
-  transform: scale(1.15);
-  font-size: 27px;
-}
-
-.lightbox__next {
-  right: -165px;
-}
-
-.lightbox__label {
-  font-family: "Space Mono", monospace;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 100%;
-  letter-spacing: 0;
-  vertical-align: middle;
-  transition: font-weight 0.2s ease;
-}
-
-/* Version longue au survol */
-.lightbox__prev:hover .arrow::before {
-  content: "\f177"; /* arrow-left-long */
-}
-
-.lightbox__next:hover .arrow::before {
-  content: "\f178"; /* arrow-right-long */
-}
-
-/* Texte bold au hover */
-.lightbox__prev:hover .lightbox__label,
-.lightbox__next:hover .lightbox__label {
-  font-weight: 700;
-}
-
-.lightbox__prev { 
-  left: -130px; 
-}
-
-.lightbox__next { 
-  right: -120px; 
-}
-
-.lightbox__prev .arrow {
-  transform-origin: left center;
-}
-
-/* Flèches */
-.arrow {
-  width: 34px;
-  display: inline-flex;
-  justify-content: center;
-  text-align: center;
-  font-size: 25px;
-  line-height: 1;
-  transform: scale(1) translateX(0);
-  transition: transform 0.2s ease;
-}
-
-.lightbox__next .arrow {
-  transform-origin: right center;
-}
-
-/* Hover : agrandissement + décalage visuel, sans toucher à la mise en page */
-.lightbox__prev:hover .arrow {
-  transform: scale(1.36) translateX(-9px);
-}
-
-.lightbox__next:hover .arrow {
-  transform: scale(1.36) translateX(9px);
-}
-.custom-select-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; 
-  padding: 0 20px;
-  cursor: pointer;
-}
-
-.custom-select-trigger i {
-  font-size: 14px;
-  pointer-events: none; /* Evite que le clic touche l’icône */
-}
-
-/* Quand le menu est ouvert : flèche vers le haut comme sur maquette Figma */
-.custom-select.open .custom-select-trigger i {
-    transform: rotate(180deg);
-}
-
-.lightbox__prev,
-.lightbox__next {
-  align-items: center;
-  gap: 10px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 20;
-  font-family: "SpaceMono";
-  position: absolute;
-  display: flex;
-  gap: 10px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Version mobile HEADER, FOOTER dont menus et modale */
+/******************************************
+*** VERSION MOBILE *** 
+*******************************************/
 @media (max-width: 768px) {
-   
-  /* Single-photo */
-  .infoimg-top {
-    flex-direction: column-reverse;
-  }
-
-  .related-photos .photo-grid {
-    flex-direction: column;
-  }
-
+  /* HEADER ET MENU MOBILE*/
   .header-container {
     position: relative;
     margin-top: 8px;    
+    padding: 16px;        
+    justify-content: space-between; 
   }
 
-  /* Menu principal caché par défaut */
   .site-header .site-navigation .menu {
     position: fixed;
     top: 64px;
@@ -1159,7 +1087,7 @@ ul.photo-infos {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(0); /* Revient en place */
+    transform: translateX(0);
     z-index: 20;
   }
 
@@ -1186,7 +1114,6 @@ ul.photo-infos {
     color: #FFFFFF;
   }
 
-  /* Bouton burger */
   .menu-toggle,
   .menu-btn {
     display: block;
@@ -1214,9 +1141,17 @@ ul.photo-infos {
   }
 
   /* Position initiale des éléments de la croix du menu */
-  .menu-btn span:nth-child(1) { top: 10px; }
-  .menu-btn span:nth-child(2) { top: 18px; }
-  .menu-btn span:nth-child(3) { top: 26px; }
+  .menu-btn span:nth-child(1) { 
+    top: 10px; 
+  }
+
+  .menu-btn span:nth-child(2) { 
+    top: 18px; 
+  }
+
+  .menu-btn span:nth-child(3) { 
+    top: 26px; 
+  }
 
   #menu-motaphoto_menu {
     gap: 42px;
@@ -1230,16 +1165,30 @@ ul.photo-infos {
     height: 9px;
     align-self: flex-start; 
   }
-
-  .header-container {
-    padding: 16px;        
-    justify-content: space-between; 
-  }
   
   .hero {
     margin-top: -55px;
   }
 
+  .no-transition .site-header .site-navigation .menu {
+    transition: none;
+  }
+
+  .modale-content {
+    width: 90%;          
+    margin: 20px;       
+    max-height: calc(100% - 40px);
+  }
+
+  .contact-header img {
+    width: 122%;
+  }
+  
+  #wpcf7-f28-o1 { /* Formulaire */
+    margin-top: -25px;
+  } 
+
+  /* FOOTER */
   .footer-container #menu-motaphoto_footer_menu {
     display: flex;
     flex-direction: column;
@@ -1254,37 +1203,15 @@ ul.photo-infos {
     padding-bottom: 65px;
   }
 
-  /* Possibilité de cliquer sur les liens du menu du footer */
-  .menu-toggle:checked ~ .site-navigation .menu {
-    pointer-events: auto;
-    opacity: 1;
-  }
-
-  /* Etat spécial quand clic sur Contact en mobile : pas de transition -> EN COURS A REVOIR */
-  .no-transition .site-header .site-navigation .menu {
-    transition: none !important;
-  }
-
-  .modale-content {
-    width: 90%;          
-    margin: 20px;       
-    max-height: calc(100% - 40px);
-  }
-
-  .contact-header img {
-    width: 122%;
-  }
-  
-  /* Formulaire */
-  #wpcf7-f28-o1 {
-    margin-top: -25px;
-  } 
-
-  /* --- ORDRE DES BLOCS --- */
+  /* SINGLE-PHOTO */
   .infoimg-top {
-    flex-direction: column; /* image en haut, infos en dessous */
+    flex-direction: column;
     order: 1;
-    width: 100%;
+    min-height: auto;
+  }
+
+  .related-photos .photo-grid {
+    flex-direction: column;
   }
 
   #image-singlephoto {
@@ -1298,6 +1225,7 @@ ul.photo-infos {
     height: auto;
     object-fit: contain;
     display: block;
+    margin: 0 auto;
   }
 
   #infophoto-singlephoto {
@@ -1305,15 +1233,15 @@ ul.photo-infos {
     width: calc(100% - 20px);
     margin: 0 auto;
     border-bottom: 1px solid #000;
-    padding-bottom: 20px;
+    padding-bottom: 35px;
+    margin-top: -50px;
   }
 
-  /* --- INTERACTIONS --- */
   .interactions-singlephoto {
     order: 3;
     flex-direction: column;
     align-items: flex-start;
-    width: calc(100% - 20px);
+    width: 100%;
     margin: 20px auto;
     border-bottom: 1px solid #000;
     padding-bottom: 20px;
@@ -1324,31 +1252,24 @@ ul.photo-infos {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 25px;
   }
 
   #contact-button-photo {
     width: 100%;
   }
 
-  /* Navigation supprimée ou placée en dessous - A REVOIR */
   .nav-right {
     width: 100%;
     margin-top: 20px;
     align-items: flex-start;
   }
 
-  /* --- VOUS AIMEREZ AUSSI --- */
   .related-photos {
     order: 4;
-    width: 100%;
-  }
-
-  .related-photos .photo-grid {
-    flex-direction: column;
-    gap: 20px;
-    width: calc(100% - 20px);
-    margin: 0 auto;
+    margin: 25px auto 30px auto;
+    padding: 0;
+    width: 85vw;
   }
 
   .photo-thumb {
@@ -1359,34 +1280,17 @@ ul.photo-infos {
 
   .photo-thumb img {
     width: 100%;
-    height: auto;
+    height: 278px;
     object-fit: cover;
+    display: block;
   }
 
-  /* Neutralise toutes les largeurs limitées */
   .container-singlephoto,
   .infoimg-top,
   #infophoto-singlephoto,
   #image-singlephoto {
     width: 100%;
     max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* L'image prend toute la largeur */
-  #image-singlephoto img {
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* Les infos prennent toute la largeur */
-  #infophoto-singlephoto {
-    border-bottom: 1px solid #000;
-    margin-top: -50px;
-    padding-bottom: 35px;
   }
 
   #titre-singlephoto {
@@ -1409,44 +1313,19 @@ ul.photo-infos {
   }
 
   .infoimg-top, .tailleecran {
-    /* height: auto; */
     gap: 20px;
     width: 70vw;
     margin: 0 auto;
-  }
-
-  .interactions-singlephoto {
-    width: 100%;
-  }
-
-  .contact-left {
-    gap: 25px;
   }
 
   .photo-navigation {
     display: none;
   }
 
-
-  #text-aimerezaussi {
+  #text-vousaimerezaussi {
     margin: 0 auto;
 }
 
-  .related-photos {
-    order: 4;
-    width: 90vw; /* A VERIRIER ! */
-    margin: 0 auto;
-  }
-
-  /* Conteneur principal */
-  .related-photos {
-    width: 85vw !important; /* Revoir le !important */
-    margin: 25px auto 30px auto;
-    padding: 0;
- 
-  }
-
-  /* Grille en colonne */
  .photo-grid,
  .related-photos .photo-grid {
     display: flex;
@@ -1457,28 +1336,15 @@ ul.photo-infos {
     margin: 0 auto;
   }
 
-  /* Chaque vignette */
-  .photo-thumb {
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-  }
-
-  /* Image réduite en hauteur */
-  .photo-thumb img {
-    width: 100%;
-    height: auto;
-    max-height: 278px;
-    object-fit: cover; 
-    display: block;
-  }
-
-  /* Wrap pour les filters de la page d'accueil et gap adapté à la version mobile */
-    .photo-filters,
-    .photo-filters-left {
+  .photo-filters,
+  .photo-filters-left {
     gap: 7px;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .photo-thumb:hover .photo-overlay {
+    opacity: 0;
   }
 
  /* Marges avec le hero header et la grille des photos  */
@@ -1487,18 +1353,11 @@ ul.photo-infos {
     margin-bottom: 25px;
   }
 
-  /* Ajustements hero header avec titre */
-  .hero {
-    height: 253px;
+  .photo-filters-left {
+    flex-direction: column-reverse;
+    align-items: center;
   }
 
-  .hero__content h1 {
-    font-size: 27.59px;
-    -webkit-text-stroke: 0.5px #FFF;
-    text-stroke: 0.5px #FFF;
-  }
-
-  /* Ajustements grilles photos de la page d'accueil */
   .photo-list .photo-block {
     flex: initial;
     width: 85vw;
@@ -1509,32 +1368,14 @@ ul.photo-infos {
     margin-bottom: 80px;
   }
 
-  /* Hauteur images */
-  .photo-thumb img {
-    height: 278px;
+  /* HERO HEADER avec titre */
+  .hero {
+    height: 253px;
   }
 
-  /* Réajustements lightbox */
-  .lightbox__inner {
-    width: 36vw;
+  .hero__content h1 {
+    font-size: 27.59px;
+    -webkit-text-stroke: 0.5px #FFF;
+    text-stroke: 0.5px #FFF;
   }
-
-  .lightbox__close {
-    top: -60px;
-    right: -106px;
-  }
-
-}
-
-
-#image-singlephoto img {
-    display: block;
-    margin: 0;
-}
-.infoimg-top {
-    display: flex;
-    align-items: flex-end;
-}
-:where(figure) {
-    margin: 0;
 }
