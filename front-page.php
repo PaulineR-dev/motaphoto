@@ -42,7 +42,7 @@ get_template_part('template-parts/hero-header');
 
             $formats = get_terms([
                 'taxonomy'   => 'format',
-                'hide_empty' => true, // N'affiche pas les éventuelles catégories vides
+                'hide_empty' => true,
             ]);
             ?>
 

@@ -29,9 +29,9 @@
 
             <!-- Condition pour affichage référence et catégorie : pas sur single-photo -->
             <?php if ( ! is_singular('photo') ) : ?> 
-                <!-- Référence en bas à gauche -->
+                <!-- Titre photo en bas à gauche -->
                 <div class="photo-ref">
-                    <?php the_field('reference'); ?>
+                    <?php the_title(); ?>
                 </div>
                 <!-- Catégorie en bas à droite -->
                 <div class="photo-cat">

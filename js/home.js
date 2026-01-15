@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Récupère l'option actuellement sélectionnée (s'il y en a une)
             const selected = select.querySelector(".custom-option.selected");
 
-            // * CAS 1 : si une option est déjà sélectionnée ET le trigger n'affiche pas le placeholder, si l'utilisateur reclique, on remet le placeholder (ex : "Catégorie") puis ouverture pour lui permettre nouveau choix
+            // Si une option est déjà sélectionnée ET le trigger n'affiche pas le placeholder, si l'utilisateur reclique, on remet le placeholder (ex : "Catégorie") puis ouverture pour lui permettre nouveau choix
             if (selected && trigger.textContent !== placeholder) { // Si une option est sélectionnée et que le texte du trigger n’est pas le placeholder
                 trigger.textContent = placeholder; // Remet le texte du trigger au placeholder (ex : "Catégorie")
                 trigger.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-angle-down"></i>'); // Réinjecte l’icône de flèche, supprimée par le textContent
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return; // Sort de la fonction pour ne pas exécuter la suite
             }
 
-            // * CAS 2 : le trigger affiche le placeholder MAIS un filtre est actif
+            // Si le trigger affiche le placeholder MAIS un filtre est actif
             if (trigger.textContent === placeholder && hiddenInput.value !== "") { // Si le texte du trigger est le placeholder mais que l’input caché contient une valeur
                 select.querySelectorAll(".custom-option").forEach(o => o.classList.remove("selected")); // Retire la classe "selected" de toutes les options pour réinitialiser l’état visuel
                 hiddenInput.value = ""; // Vide la valeur du filtre dans l’input caché
@@ -33,7 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // * CAS 3 : Si aucun cas particulier ci-dessus (pas de filtre, trigger affiche placeholder): ouverture/fermeture du menu
+            // Fermer tous les autres selects avant d'ouvrir celui-ci
+            document.querySelectorAll(".custom-select.open").forEach(other => {
+                if (other !== select) {
+                    other.classList.remove("open");
+                }
+            });
+            // * Si aucun cas particulier ci-dessus (pas de filtre, trigger affiche placeholder): ouverture/fermeture du menu
             select.classList.toggle("open");
         });
 

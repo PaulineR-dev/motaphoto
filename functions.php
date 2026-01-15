@@ -169,7 +169,7 @@ add_action('wp_ajax_nopriv_load_more_photos', 'motaphoto_load_more_photos');
 
 function pm_fix_punctuation_in_titles( $title ) {
     // Espace insécable avant ! et ? notamment pour les h2 des titres des posts du CPT Photo
-    $title = preg_replace('/\s+([!?])/', '&nbsp;$1', $title);
+    $title = preg_replace('/\s+([!?])/', '$1', $title);
     return $title;
 }
 add_filter( 'the_title', 'pm_fix_punctuation_in_titles' );
