@@ -74,7 +74,7 @@
 								<a class="nav-photo prev"
 									href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>"
 									data-thumb="<?php echo get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Line1.png' ); ?>">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/Line1.png' ); ?>">
 								</a>
 							<?php endif; ?>
 
@@ -82,7 +82,7 @@
 								<a class="nav-photo next"
 									href="<?php echo esc_url(get_permalink($next_post->ID)); ?>"
 									data-thumb="<?php echo get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>">
-									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Line2.png' ); ?>">
+									<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/Line2.png' ); ?>">
 								</a>
 							<?php endif; ?>
 						</div> 

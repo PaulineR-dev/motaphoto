@@ -69,7 +69,7 @@ get_template_part('template-parts/hero-header');
                 <!-- Sélections personnalisées pour les formats -->
                 <div class="custom-select" data-target="filter-format" data-placeholder="FORMATS">
                     <div class="custom-select-trigger">
-                        FORMATS
+                        <span class="custom-select-label">FORMATS</span>
                         <i class="fa-solid fa-angle-down"></i>
                     </div>
                     <ul class="custom-options">
@@ -103,9 +103,7 @@ get_template_part('template-parts/hero-header');
                 <input type="hidden" id="sort-date" value="">
 
             </div>
-
         </div>
-
 
             <?php
                 // Affichage de la grille

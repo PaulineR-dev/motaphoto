@@ -11,7 +11,7 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 	 echo '<h2>' . get_the_title() . '</h2>';
-    the_content(); // Vérifier utilisation nécessaire ou non 
+    the_content();
 
 	// If comments are open or there is at least one comment, load up the comment template.
 	if ( comments_open() || get_comments_number() ) {

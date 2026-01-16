@@ -1,5 +1,5 @@
 <?php
-// Récupération de l'ID de l'image définie dans le champ personnalisé "hero_header" SCF sur la page en cours 
+// Récupération de l'ID de l'image définie dans le champ personnalisé "hero_header" SCF
 $hero_image_id = get_post_meta(get_queried_object_id(), 'hero_header', true);
 
 // Si l'administrateur a choisi une image
@@ -10,14 +10,14 @@ if (!empty($hero_image_id)) {
 } else {
     // Si pas de choix par l'admin alors sélection aléatoire parmi les photos en paysage du CPT "photo"
     $hero_query = new WP_Query([
-        'post_type'      => 'photo', // CPT
-        'posts_per_page' => 1, // Une photo affichée
+        'post_type'      => 'photo',
+        'posts_per_page' => 1,
         'orderby'        => 'rand', // Aléatoire
         'tax_query'      => [
             [
-                'taxonomy' => 'format', // Taxonomie format
+                'taxonomy' => 'format',
                 'field'    => 'slug',
-                'terms'    => 'paysage', // Filtre paysage
+                'terms'    => 'paysage',
             ],
         ],
     ]);

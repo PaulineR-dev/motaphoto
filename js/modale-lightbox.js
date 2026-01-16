@@ -1,6 +1,5 @@
 // QUAND LA PAGE EST CHARGEE
 document.addEventListener('DOMContentLoaded', function () {
-    // RECUPERATION ELEMENTS DE LA LIGHTBOX
     const lightbox = document.getElementById('lightbox');
     const imageLightbox = document.querySelector('.lightbox__image');
     const refLightbox = document.querySelector('.lightbox__ref');
@@ -10,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextBtnLightbox = document.querySelector('.lightbox__next');
 
     function isMobile() {
-    return window.innerWidth <= 768; // Seuil mobile
+        return window.innerWidth <= 768;
     }
 
-    // SI PAS SUR LA PAGE D'ACCUEIL (ex: single-photo)
+    // Si PAS sur la page d'accueil
     if (!document.body.classList.contains('home')) { 
         // Cache les flèches sur les côtés
         prevBtnLightbox.style.display = 'none'; 
@@ -46,13 +45,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Quand clic sur l'icône
         icon.addEventListener('click', function (event) {
 
-            // MOBILE → redirection vers la single-photo
+            // MOBILE : redirection vers la single-photo
             if (isMobile()) {
                 window.location.href = icon.dataset.single;
             return;
             }
 
-            // DESKTOP → ouverture de la lightbox
+            // DESKTOP : ouverture de la lightbox
             event.preventDefault();
             openLightbox(index);
         });
@@ -89,12 +88,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // FERMETURE VIA LA CROIX
+    // Fermeture via la croix
     closeBtnLightbox.addEventListener('click', () => {
         // Remet la classe en css hidden donc display: none
         lightbox.classList.add('hidden');
     });
 
-    // LANCEMENT DE L'INITIALISATION AU CHARGEMENT
+    // Lancement de l'initialisation au chargement
     initLightbox();
 });

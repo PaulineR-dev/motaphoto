@@ -27,21 +27,11 @@ function motaphoto_enqueue_scripts() {
         true // Chargé dans le footer
     );
 
-    // Variables PHP envoyées au JS pour l'AJAX
-    wp_localize_script(
-        'motaphoto-scripts', // Script recevant les variables
-        'motaphotoInfinite', // Nom de l'objet JS créé
-        array(
-            'ajax_url' => admin_url('admin-ajax.php'), // URL AJAX
-            'nonce'    => wp_create_nonce('load_more_photos'), // Sécurité
-        )
-    );
-
     // Charger le fichier home.js
     wp_enqueue_script(
         'motaphoto-home',
         get_template_directory_uri() . '/js/home.js',
-        array(), // Pas de dépendance
+        array(),
         '1.0',
         true
     );
@@ -49,7 +39,7 @@ function motaphoto_enqueue_scripts() {
     // Envoyer les variables AJAX à home.js
     wp_localize_script(
         'motaphoto-home',
-        'motaphotoInfinite',
+        'motaphotoHome',
         array(
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('load_more_photos'),
@@ -79,9 +69,9 @@ function motaphoto_enqueue_lightbox() {
     wp_enqueue_script(
         'motaphoto-lightbox', // Identifiant interne
         get_template_directory_uri() . '/js/modale-lightbox.js', // Chemin vers le fichier JS
-        array(), // Dépendances
-        '1.0',   // Version
-        true     // Charger dans le footer
+        array(),
+        '1.0',
+        true
     );
 }
 // Chargement de la lightbox au moment de chargement des scripts
@@ -147,7 +137,7 @@ function motaphoto_load_more_photos() {
         echo '<div class="ajax-meta" 
                 data-max-pages="' . esc_attr($photos->max_num_pages) . '"
                 data-current-page="' . esc_attr($paged) . '">
-        </div>';
+                </div>';
 
         while ($photos->have_posts()) {
             $photos->the_post();
@@ -161,6 +151,7 @@ function motaphoto_load_more_photos() {
     // Fin de la requête AJAX
     wp_die();
 }
+
 // Déclare l'action AJAX pour utilisateurs connectés
 add_action('wp_ajax_load_more_photos', 'motaphoto_load_more_photos');
 // Déclare l'action AJAX pour visiteurs non connectés

@@ -1,5 +1,5 @@
-    </div><!-- #primary -->
-  </div><!-- #content -->
+        </div><!-- #primary -->
+    </div><!-- #content -->
 
     <footer class="site-footer">
         <div class="footer-container">
@@ -18,11 +18,8 @@
 
         <?php get_template_part('template-parts/modale-contact'); ?>
         <?php get_template_part('template-parts/modale-lightbox'); ?>
-
         
     </footer>
-
-
 
 </div><!-- #page -->
 

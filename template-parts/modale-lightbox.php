@@ -8,7 +8,7 @@
             <!-- CROIX -->
             <button class="lightbox__close" type="button">
                 <img 
-                src="<?php echo get_template_directory_uri(); ?>/assets/images/Croix.png" 
+                src="<?php echo get_template_directory_uri(); ?>/assets/icons/Croix.png" 
                 alt="Fermer" 
                 class="lightbox__close-img">
             </button>

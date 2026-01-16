@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () { // Chargement du script après que tout le DOM soit chargé
+document.addEventListener('DOMContentLoaded', function () {
   // Récupération des éléments nécessaires pour la modale et le menu
   const contactModale = document.querySelector('.modale');
   const contactLink = document.querySelector('.modale-contact');
@@ -12,17 +12,15 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   const prev = document.querySelector(".nav-photo.prev");
   const next = document.querySelector(".nav-photo.next");
 
-  // *** VERIFICATION SI VERSION MOBILE *** 
+  // VERIFICATION SI VERSION MOBILE
   function isMobileScreen() {
-    return window.matchMedia("(max-width: 768px)").matches; // Retourne true si la largeur d’écran est inférieure ou égale à 768px
+    return window.matchMedia("(max-width: 768px)").matches;
   }
 
   // *** ANIMATIONS POUR VERSION DESKTOP ***
-
-  // MODALE DESKTOP
-  // Animation d'apparition Fade in de la modale (desktop)
+  // Animation d'apparition Fade in de la modale
   function fadeInContactModale() {
-    contactModale.style.display = 'flex'; // Pour afficher la modale
+    contactModale.style.display = 'flex';
     contactModale.animate([
       { opacity: 0 },
       { opacity: 1 }
@@ -33,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     });
   }
 
-  // Animation de disparition Fade out de la modale (desktop)
+  // Animation de disparition Fade out de la modale
   function fadeOutContactModale() {
     const animationFadeOutContactModale  = contactModale.animate([
       { opacity: 1 },
@@ -145,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
   }
 
 
-  // ** Ouverture de la MODALE au clic sur "Contact" **
+  // *** OUVERTURE DE LA MODALE au clic sur "Contact" ***
   contactLink.addEventListener('click', function (eventClicContact) {
   eventClicContact.preventDefault();
 
@@ -159,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
       menuHeader.style.transition = 'none';
       setTimeout(() => {
         menuHeader.style.transition = '';
-      }, 50); // Réactivation des transitions CSS après court délai (50 ms).
+      }, 50); // Réactivation des transitions CSS après délai de 50 ms
     } else {
       fadeInContactModale(); // Desktop : fade in
     }
@@ -251,27 +249,28 @@ document.addEventListener('DOMContentLoaded', function () { // Chargement du scr
     }
   });
 
-  // ** NAVIGATION PHOTO SUR PAGE SINGLE-PHOTO
-  if (thumb) { // Si la miniature existe (donc sur single-photo)
-    // Afficher la miniature avec l’URL donnée
+
+  // *** NAVIGATION PHOTO SUR PAGE SINGLE-PHOTO ***
+  if (thumb) { // Si la miniature existe
+    // Affiche la miniature avec l’URL donnée
     function showThumb(url) {
       thumb.src = url;
       thumb.style.display = "block";
     }
 
-    // Cacher la miniature
+    // Cache la miniature
     function hideThumb() {
       thumb.style.display = "none";
       thumb.src = "";
     }
 
-    // Survoler de la flèche "précédent" : affiche la miniature correspondante
+    // Survol de la flèche "précédent" : affiche la miniature correspondante
     if (prev) {
       prev.addEventListener("mouseenter", () => showThumb(prev.dataset.thumb));
       prev.addEventListener("mouseleave", hideThumb);
     }
 
-    // Survoler de la flèche "suivant" : affiche la miniature correspondante
+    // Survol de la flèche "suivant" : affiche la miniature correspondante
     if (next) {
       next.addEventListener("mouseenter", () => showThumb(next.dataset.thumb));
       next.addEventListener("mouseleave", hideThumb);

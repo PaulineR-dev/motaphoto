@@ -7,7 +7,6 @@ Version: 1.0
 Text Domain: motaphoto
 */
 
-
 /******************************************
 *** FONTS *** 
 *******************************************/
@@ -153,7 +152,7 @@ p {
   background: #fff;
 }
 
-/* Logo alternatif*/
+/* Logo alternatif */
 .mobile-header-overlay .overlay-logo {
   position: static;
   margin-top: 31px;
@@ -200,10 +199,6 @@ p {
   transform: rotate(-40deg);
 }
 
-
-/******************************************
-*** MENU BURGER *** 
-*******************************************/
 .menu-toggle,
 .menu-btn {
   display: none; /* Caché en desktop */
@@ -403,7 +398,7 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
   margin: 0 auto;
   border-bottom: 1px solid #000; 
   gap: 21px;
-  flex-shrink: 0; /* Pour empêcher de rétrécir */
+  flex-shrink: 0;
 }
 
 .contact-left {
@@ -425,7 +420,7 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
   max-width: 1148px;
 }
 
-/* Sous-bloc droite */ 
+/* Sous-bloc droit */ 
 .nav-right { 
   display: flex; 
   justify-content: flex-end; 
@@ -456,20 +451,20 @@ span.wpcf7-form-control-wrap { /* Messages d'erreur ne provoquant pas de dépass
 }
 
 .nav-thumbnail-center {
-    width: 81px;
-    height: 71px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  width: 81px;
+  height: 71px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .nav-thumbnail-center img {
   max-height: 120px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Remplir le cadre */
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 #contact-button-photo {
@@ -1210,6 +1205,17 @@ ul.photo-infos {
     padding-bottom: 65px;
   }
 
+  /* HERO HEADER avec titre */
+  .hero {
+    height: 253px;
+  }
+
+  .hero__content h1 {
+    font-size: 27.59px;
+    -webkit-text-stroke: 0.5px #FFF;
+    text-stroke: 0.5px #FFF;
+  }
+
   /* SINGLE-PHOTO */
   .infoimg-top {
     flex-direction: column;
@@ -1374,19 +1380,8 @@ ul.photo-infos {
     width: 85vw;
   }
 
-  /* Marge entre la fin de la grille et le bouton Charge Plus de la page d'accueil */
+  /* Marge entre la fin de la grille et le bouton Charger Plus de la page d'accueil */
   .photo-list .photo-grid {
     margin-bottom: 80px;
-  }
-
-  /* HERO HEADER avec titre */
-  .hero {
-    height: 253px;
-  }
-
-  .hero__content h1 {
-    font-size: 27.59px;
-    -webkit-text-stroke: 0.5px #FFF;
-    text-stroke: 0.5px #FFF;
   }
 }

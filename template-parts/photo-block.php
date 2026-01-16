@@ -23,8 +23,8 @@
                     ?>"
                 data-alt="<?php echo esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ); ?>"
                 data-single="<?php the_permalink(); ?>"
-                title="Voir en plein écran">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/Icon_fullscreen.png" alt="Plein écran">
+                title="Plein écran">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/Icon_fullscreen.png" alt="Icône plein écran">
             </a>
 
             <!-- Condition pour affichage référence et catégorie : pas sur single-photo -->
