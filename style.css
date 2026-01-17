@@ -695,7 +695,6 @@ ul.photo-infos {
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 3px #FFF;
-  text-stroke: 3px #FFF;
 }
 
 
@@ -1213,7 +1212,6 @@ ul.photo-infos {
   .hero__content h1 {
     font-size: 27.59px;
     -webkit-text-stroke: 0.5px #FFF;
-    text-stroke: 0.5px #FFF;
   }
 
   /* SINGLE-PHOTO */
